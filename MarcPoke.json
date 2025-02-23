@@ -1,0 +1,21 @@
+{
+	"id": "MarcPoke",
+	"name": "MarcPoke",
+	"author": ["marcavis"],
+	"description": "A mod of the Pokermon mod, adding Pokémon",
+	"prefix": "marcpoke",
+	"main_file": "marcpoke.lua",
+	"priority": 10,
+	"badge_colour": "ED3A53",
+	"badge_text_colour": "FFFFFF",
+  "display_name": "HordeDeck",
+	"version": "0.0.2",
+	"dependencies": [
+			"Steamodded (>=1.0.0~ALPHA-1303a)",
+      "Lovely (>=0.6)",
+      "Pokermon (>=2.6.0)"
+	],
+  "conflicts": [],
+	"provides": [],
+	"dump_loc": false 
+}
