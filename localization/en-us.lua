@@ -42,6 +42,7 @@ return {
                     "If scoring hand has at least two of",
                     "{C:attention}Stone{}, {C:attention}Steel{} or {C:attention}Glass{} cards, gain {C:money}$#1#{}",
                     "{br:2}text needs to be here to work",
+                    "One-time effects:",
                     "3+ {C:attention}Stone{} cards: Gain +1 Joker slot",
                     "3+ {C:attention}Steel{} cards: Gain +1 consumable slot",
                     "3+ {C:attention}Glass{} cards: Gain +1 booster slot",
