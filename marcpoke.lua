@@ -1,4 +1,11 @@
 SMODS.Atlas({
+  key = "marcPoke2",
+  path = "Pokedex2.png",
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
     key = "marcPoke5",
     path = "Pokedex5.png",
     px = 71,
@@ -8,6 +15,7 @@ SMODS.Atlas({
 --Required by the pokemon family function (right click on a pokemon joker)
 table.insert(family, {"trubbish", "garbodor"})
 table.insert(family, {"timburr", "gurdurr", "conkeldurr"})
+table.insert(family, {"chikorita", "bayleef", "meganium"})
 
 -- Get mod path and load other files
 mod_dir = ''..SMODS.current_mod.path
