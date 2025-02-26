@@ -27,7 +27,8 @@
 -- Archeops 567
 -- Trubbish 568
 local trubbish = {
-        name = "trubbish", 
+        name = "trubbish",
+        poke_custom_prefix = "marcpoke",
         pos = {x = 4, y = 5}, 
         config = {extra = {chips = 10, rounds = 5}},
         loc_vars = function(self, info_queue, center)
@@ -60,7 +61,8 @@ local trubbish = {
       }
 -- Garbodor 569
 local garbodor = {
-    name = "garbodor", 
+    name = "garbodor",
+    poke_custom_prefix = "marcpoke",
     pos = {x = 5, y = 5}, 
     config = {extra = {chips = 25}},
     loc_vars = function(self, info_queue, center)
@@ -94,6 +96,7 @@ local garbodor = {
 
 local timburr = {
     name = "timburr", 
+    poke_custom_prefix = "marcpoke",
     pos = {x = 6, y = 5}, 
     config = {extra = {money = 2, earned = 0, dollars_required = 8}},
     loc_vars = function(self, info_queue, center)
@@ -135,6 +138,7 @@ local timburr = {
 
   local gurdurr = {
     name = "gurdurr", 
+    poke_custom_prefix = "marcpoke",
     pos = {x = 7, y = 5}, 
     config = {extra = {money = 3, earned = 0, dollars_required = 20}},
     loc_vars = function(self, info_queue, center)
@@ -176,6 +180,7 @@ local timburr = {
 
   local conkeldurr = {
     name = "conkeldurr", 
+    poke_custom_prefix = "marcpoke",
     pos = {x = 8, y = 5}, 
     config = {extra = {
         money = 4, earned = 0,
