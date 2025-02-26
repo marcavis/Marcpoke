@@ -5,6 +5,10 @@ SMODS.Atlas({
     py = 95
 }):register()
 
+--Required by the pokemon family function (right click on a pokemon joker)
+table.insert(family, {"trubbish", "garbodor"})
+table.insert(family, {"timburr", "gurdurr", "conkeldurr"})
+
 -- Get mod path and load other files
 mod_dir = ''..SMODS.current_mod.path
 if (SMODS.Mods["Pokermon"] or {}).can_load then
