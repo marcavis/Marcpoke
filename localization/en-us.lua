@@ -76,6 +76,14 @@ return {
                     "3+ {C:attention}Glass{} cards: Gain +1 booster slot",
                 } 
             },
+            j_marcpoke_alolan_muk = {
+                name = "Alolan Muk",
+                text = {
+                    "Destroys the {C:mult}#2#{} weakest",
+                    "out of a random selection of",
+                    "{C:attention}#1#{} cards in the full deck"
+                }
+            }
         }
     }
 }

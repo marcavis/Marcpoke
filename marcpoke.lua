@@ -1,3 +1,5 @@
+assert(SMODS.load_file("functions/marcpokefunctions.lua"))()
+
 SMODS.Atlas({
   key = "marcPoke2",
   path = "Pokedex2.png",
