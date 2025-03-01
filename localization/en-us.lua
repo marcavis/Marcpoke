@@ -76,12 +76,26 @@ return {
                     "3+ {C:attention}Glass{} cards: Gain +1 booster slot",
                 } 
             },
+            j_marcpoke_alolan_grimer = {
+                name = "Alolan Grimer",
+                text = {
+                    "{C:mult}+#2#{} Mult",
+                    "Destroys a random",
+                    "unenhanced card every round",
+                    "{br:2}text needs to be here to work",
+                    "Can't reduce deck size below {C:attention}#3#{}",
+                    "{C:inactive}(Evolves after {C:attention}#1#{}{C:inactive} rounds)"
+                }
+            },
             j_marcpoke_alolan_muk = {
                 name = "Alolan Muk",
                 text = {
-                    "Destroys the {C:mult}#2#{} weakest",
-                    "out of a random selection of",
-                    "{C:attention}#1#{} cards in the full deck"
+                    "{C:mult}+#2#{} Mult",
+                    "Destroys up to {C:mult}#1#{} random",
+                    "unenhanced cards every round,",
+                    "gaining {C:mult}+#3#{} Mult",
+                    "{br:2}text needs to be here to work",
+                    "Can't reduce deck size below {C:attention}#4#{}"
                 }
             },
             j_marcpoke_yungoos = {

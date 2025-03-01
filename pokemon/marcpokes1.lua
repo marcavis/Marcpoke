@@ -275,16 +275,84 @@ local timburr = {
     end
   }
 
-  local alolan_muk={
+  local alolan_grimer={
+    name = "alolan_grimer", 
+    pos = {x = 9, y = 6}, 
+    config = {extra = {mult = 8, minimum_deck_size = 24, rounds = 5}},
+    loc_vars = function(self, info_queue, center)
+        type_tooltip(self, info_queue, center)
+        return {vars = {center.ability.extra.rounds,
+        center.ability.extra.mult, center.ability.extra.minimum_deck_size}}
+    end,
+    rarity = 1, 
+    cost = 4, 
+    stage = "One", 
+    ptype = "Dark",
+    set_sprites = function(self, card, front)
+        card.config.center.atlas = "poke_Pokedex1"
+        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex1']
+        card.children.center:reset()
+    end,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.scoring_hand then
+            if context.joker_main then
+                return {
+                    message = localize{type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult}}, 
+                    colour = G.C.MULT,
+                    mult_mod = card.ability.extra.mult
+                }
+            end
+        end
+        if context.end_of_round and not context.individual and not context.repetition then
+            local targets = {}
+            for _, deckcard in ipairs(G.playing_cards) do
+                if deckcard.ability.effect == "Base" then
+                    table.insert(targets, deckcard)
+                end
+            end
+            --the first Alolan Grimer/Muk will centralize all deletions, to avoid deleting beyond the minimum deck size
+            local alolangrimers = SMODS.find_card(card.config.center.key)
+            alolangrimers = remove_debuffed(alolangrimers)
+            if card == alolangrimers[1] then
+                local actually_removed = {}
+                pseudoshuffle(targets, pseudoseed("grimer"))
+                local amount_to_delete = math.min(#targets, 
+                                                #alolangrimers,
+                                                #G.playing_cards - card.ability.extra.minimum_deck_size)
+                for j = 1, amount_to_delete do
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.2,---mmmmmmmmmmmmmmmmm
+                        func = function()
+                            table.insert(actually_removed, targets[j])
+                            targets[j]:start_dissolve()
+                        return true end }))
+                end
+                delay(0.3)
+                for i = 1, #G.jokers.cards do
+                    for j = 1, #actually_removed do
+                        G.jokers.cards[i]:calculate_joker({remove_playing_cards = true, removed = {actually_removed[j]}})
+                    end
+                end
+                
+                for _, grimer in ipairs(alolangrimers) do
+                    grimer:juice_up()
+                end
+            end
+        end
+        return level_evo(self, card, context, "j_marcpoke_alolan_muk")
+    end,
+}
+
+local alolan_muk={
     name = "alolan_muk", 
     pos = {x = 10, y = 6}, 
-    --will delete the weakest <targets> out of the <choices>; e.g. 2 weakest out of 7 random cards
-    config = {extra = {mult = 2, Xmult = 1.5, choices = 7, targets = 2}},
+    config = {extra = {mult = 0, mult_mod = 4, targets = 2, minimum_deck_size = 20}},
     loc_vars = function(self, info_queue, center)
-      type_tooltip(self, info_queue, center)
-      return {vars = {center.ability.extra.choices, center.ability.extra.targets,
-                        center.ability.extra.mult, center.ability.extra.Xmult, G.GAME.starting_deck_size, G.GAME.starting_deck_size + 12, 
-                      (G.playing_cards and (#G.playing_cards - G.GAME.starting_deck_size) or 0) * center.ability.extra.mult}}
+        type_tooltip(self, info_queue, center)
+        return {vars = {center.ability.extra.targets,
+        center.ability.extra.mult, center.ability.extra.mult_mod, center.ability.extra.minimum_deck_size}}
     end,
     rarity = 3, 
     cost = 8, 
@@ -297,36 +365,59 @@ local timburr = {
     end,
     blueprint_compat = true,
     calculate = function(self, card, context)
-      if context.end_of_round and not context.individual and not context.repetition then
-        local targets = {}
-        for i = 1, math.min(card.ability.extra.choices, #G.playing_cards - 1) do
-            targets[i] = pseudorandom_element(G.playing_cards, pseudoseed('alolan_muk'))
-            print(targets[i].base.nominal, targets[i].base.suit, " worth", card_rating(targets[i]))
-        end
-        
-        table.sort(targets, function(a, b) return card_rating(a) < card_rating(b) end)
-        local actually_removed = {}
-        for j = 1, math.min(card.ability.extra.targets, #targets) do
-            print("Deleting ".. targets[j].base.nominal, targets[j].base.suit)
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.2,
-                func = function() 
-                    if targets[j].ability.name == 'Glass Card' then 
-                        targets[j]:shatter()
-                    else
-                        targets[j]:start_dissolve()
-                    end
-                return true end }))
-        end
-        delay(0.3)
-        for i = 1, #G.jokers.cards do
-            for j = 1, #targets do
-                G.jokers.cards[i]:calculate_joker({remove_playing_cards = true, removed = {targets[j]}})
+        if context.cardarea == G.jokers and context.scoring_hand then
+            if context.joker_main then
+                return {
+                    message = localize{type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult}}, 
+                    colour = G.C.MULT,
+                    mult_mod = card.ability.extra.mult
+                }
             end
         end
-        card:juice_up()
-      end
+        if context.end_of_round and not context.individual and not context.repetition then
+            local targets = {}
+            for _, deckcard in ipairs(G.playing_cards) do
+                if deckcard.ability.effect == "Base" then
+                    table.insert(targets, deckcard)
+                end
+            end
+            --the first Alolan Grimer/Muk will centralize all deletions, to avoid deleting beyond the minimum deck size
+            local alolanmuks = SMODS.find_card(card.config.center.key)
+            alolanmuks = remove_debuffed(alolanmuks)
+            if card == alolanmuks[1] then
+                local actually_removed = {}
+                pseudoshuffle(targets, pseudoseed("muk"))
+                local amount_to_delete = math.min(#targets, 
+                                                card.ability.extra.targets * #alolanmuks,
+                                                #G.playing_cards - card.ability.extra.minimum_deck_size)
+                for j = 1, amount_to_delete do
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.2,---mmmmmmmmmmmmmmmmm
+                        func = function()
+                            table.insert(actually_removed, targets[j])
+                            targets[j]:start_dissolve()
+                            --if a Muk deleted at least one card, it gets upgraded
+                            local upgraded_muk_index = math.ceil(#actually_removed/card.ability.extra.targets) --targets is 2, usually
+                            local upg_muk = alolanmuks[upgraded_muk_index]
+                            if math.fmod(#actually_removed,2) == 1 then
+                                upg_muk.ability.extra.mult = upg_muk.ability.extra.mult + upg_muk.ability.extra.mult_mod
+                                card_eval_status_text(upg_muk, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.BLUE})
+                            end
+                        return true end }))
+                end
+                delay(0.3)
+                for i = 1, #G.jokers.cards do
+                    for j = 1, #actually_removed do
+                        G.jokers.cards[i]:calculate_joker({remove_playing_cards = true, removed = {actually_removed[j]}})
+                    end
+                end
+                
+                for _, muk in ipairs(alolanmuks) do
+                    muk:juice_up()
+                end
+            end
+        end
     end,
 }
 
@@ -470,7 +561,7 @@ local gumshoos = {
 }
 
 return {name = "Pokemon Jokers 541-570", 
-        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_muk, yungoos, gumshoos},
+        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos},
 }
 
 -- local kakuna={

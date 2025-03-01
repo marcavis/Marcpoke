@@ -1,3 +1,4 @@
+--currently unused function, was used in the obsolete Alolan Muk design to decide which cards to remove
 card_rating = function (card)
     local result
     if card.ability.name == "Stone Card" then
@@ -34,4 +35,14 @@ reset_gumshoos_card = function (card)
         card.ability.extra.target_suit = target_card.base.suit
         card.ability.extra.target_id = target_card.base.id
     end
+end
+
+remove_debuffed = function(jokers)
+    local result = {}
+    for _, j in ipairs(jokers) do
+        if not j.debuff then
+            table.insert(result, j)
+        end
+    end
+    return result
 end
