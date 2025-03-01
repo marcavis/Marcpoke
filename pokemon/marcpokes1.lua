@@ -313,7 +313,6 @@ local timburr = {
             end
             --the first Alolan Grimer/Muk will centralize all deletions, to avoid deleting beyond the minimum deck size
             local alolangrimers = SMODS.find_card(card.config.center.key)
-            alolangrimers = remove_debuffed(alolangrimers)
             if card == alolangrimers[1] then
                 local actually_removed = {}
                 pseudoshuffle(targets, pseudoseed("grimer"))
@@ -383,7 +382,6 @@ local alolan_muk={
             end
             --the first Alolan Grimer/Muk will centralize all deletions, to avoid deleting beyond the minimum deck size
             local alolanmuks = SMODS.find_card(card.config.center.key)
-            alolanmuks = remove_debuffed(alolanmuks)
             if card == alolanmuks[1] then
                 local actually_removed = {}
                 pseudoshuffle(targets, pseudoseed("muk"))
