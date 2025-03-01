@@ -291,8 +291,8 @@ local timburr = {
     stage = "One", 
     ptype = "Dark",
     set_sprites = function(self, card, front)
-        card.config.center.atlas = "poke_Pokedex2"
-        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex2']
+        card.config.center.atlas = "poke_Pokedex1"
+        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex1']
         card.children.center:reset()
     end,
     blueprint_compat = true,
@@ -330,19 +330,66 @@ local timburr = {
     end,
 }
 
+local yungoos = {
+    name = "yungoos", 
+    pos = {x = 12, y = 0}, 
+    
+    config = {extra = {money_mod = 4, target_rank = "Ace", target_suit = "Spades", target_id = 14, earned = 0, dollars_required = 8}},
+    loc_vars = function(self, info_queue, center)
+        type_tooltip(self, info_queue, center)
+        return {vars = {center.ability.extra.target_rank .. " of " .. center.ability.extra.target_suit,
+                center.ability.extra.money_mod, center.ability.extra.earned, center.ability.extra.dollars_required}}
+    end,
+    rarity = 1, 
+    cost = 4, 
+    stage = "One", 
+    ptype = "Colorless",
+    set_sprites = function(self, card, front)
+        card.config.center.atlas = "poke_Pokedex7"
+        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex7']
+        card.children.center:reset()
+    end,
+    blueprint_compat = true,
+    add_to_deck = function(self, card, from_debuff)
+        reset_gumshoos_card(card)
+    end,
+    calculate = function(self, card, context)
+        if context.setting_blind then
+            reset_gumshoos_card(card)
+        end
+        if context.individual and context.cardarea == G.play then
+            --Maybe it works even if the card is debuffed...
+            --if (not context.other_card.debuff) and
+            if  (context.other_card:get_id() == card.ability.extra.target_id) and 
+            (context.other_card.base.suit == card.ability.extra.target_suit) then
+                local earned = 0
+                if not context.blueprint then
+                    card.ability.extra.earned = card.ability.extra.earned + card.ability.extra.money_mod
+                end
+                earned = earned + card.ability.extra.money_mod
+                earned = ease_poke_dollars(card, "yungoos", earned)
+                return {
+                    message = localize('$')..earned,
+                    colour = G.C.MONEY,
+                    card = card
+                }
+            end
+        end
+        return scaling_evo(self, card, context, "j_marcpoke_gumshoos", card.ability.extra.earned, card.ability.extra.dollars_required)
+    end
+}
+
 local gumshoos = {
     name = "gumshoos", 
     pos = {x = 13, y = 0}, 
     --will delete the weakest <targets> out of the <choices>; e.g. 2 weakest out of 7 random cards
-    config = {extra = {money_mod = 3, target_rank = "Ace", target_suit = "Spades", target_id = 14, targets = 3}},
+    config = {extra = {money_mod = 4, target_rank = "Ace", target_suit = "Spades", target_id = 14, targets = 3}},
     loc_vars = function(self, info_queue, center)
-      type_tooltip(self, info_queue, center)
-      return {vars = {center.ability.extra.targets, center.ability.extra.target_rank .. " of " .. center.ability.extra.target_suit, center.ability.extra.target_id}}
-    --   return {vars = {center.ability.extra.choices, center.ability.extra.targets,
-    --                     center.ability.extra.mult, center.ability.extra.Xmult, G.GAME.starting_deck_size, G.GAME.starting_deck_size + 12, 
-    --                   (G.playing_cards and (#G.playing_cards - G.GAME.starting_deck_size) or 0) * center.ability.extra.mult}}
+        type_tooltip(self, info_queue, center)
+        return {vars = {center.ability.extra.targets, center.ability.extra.target_rank .. " of " .. center.ability.extra.target_suit,
+            center.ability.extra.money_mod}}
     end,
-    rarity = 2, 
+    rarity = 1, 
     cost = 8, 
     stage = "One", 
     ptype = "Colorless",
@@ -352,6 +399,9 @@ local gumshoos = {
         card.children.center:reset()
     end,
     blueprint_compat = true,
+    add_to_deck = function(self, card, from_debuff)
+        reset_gumshoos_card(card)
+    end,
     calculate = function(self, card, context)
         if context.setting_blind then
             reset_gumshoos_card(card)
@@ -361,54 +411,53 @@ local gumshoos = {
             if context.joker_main and next(context.poker_hands['Flush']) then
                 --for i = 1, #G.deck.cards do
                 local movable_cards = {}
-                for i = 1, card.ability.extra.targets do
-                    for index, deckcard in ipairs(G.deck.cards) do
-                        if  (deckcard:get_id() == card.ability.extra.target_id) and 
-                        (deckcard.base.suit == card.ability.extra.target_suit) then
-                            --G.playing_card = (G.playing_card and G.playing_card + 1) or 1
-                            local card_to_copy = deckcard
-                            local copy = copy_card(card_to_copy, nil, nil, G.playing_card)
-                            copy:add_to_deck()
-                            G.deck.config.card_limit = G.deck.config.card_limit + 1
-                            table.insert(G.playing_cards, copy)
-                            G.hand:emplace(copy)
-                            copy.states.visible = nil
-
-                            G.E_MANAGER:add_event(Event({
-                                func = function()
-                                    copy:start_materialize()
-                                    return true
-                                end
-                            })) 
-                            G.E_MANAGER:add_event(Event({
-                                trigger = 'after',
-                                delay = 0.2,
-                                func = function() 
-                                    if deckcard.ability.name == 'Glass Card' then 
-                                        deckcard:shatter()
-                                    else
-                                        deckcard:start_dissolve()
-                                    end
-                                return true end }))
-                            print ("Moved!")
-                        end
+                for _, deckcard in ipairs(G.deck.cards) do
+                    if  (deckcard:get_id() == card.ability.extra.target_id) and 
+                    (deckcard.base.suit == card.ability.extra.target_suit) then
+                        --G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+                        table.insert(movable_cards, #movable_cards + 1, deckcard)
                     end
                 end
+                for i = 1, math.min(card.ability.extra.targets, #movable_cards) do
+                    local copy = copy_card(movable_cards[i], nil, nil, G.playing_card)
+                    copy:add_to_deck()
+                    G.deck.config.card_limit = G.deck.config.card_limit + 1
+                    table.insert(G.playing_cards, copy)
+                    G.hand:emplace(copy)
+                    copy.states.visible = nil
                     
-              return {
-                -- message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult}}, 
-                message = "Flushed out!",
-                colour = G.C.MULT,
-                --Xmult_mod = card.ability.extra.Xmult
-              }
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            copy:start_materialize()
+                            return true
+                        end
+                    })) 
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.2,
+                        func = function() 
+                            if movable_cards[i].ability.name == 'Glass Card' then 
+                                movable_cards[i]:shatter()
+                            else
+                                movable_cards[i]:start_dissolve()
+                            end
+                            return true end }))
+                end
+                if #movable_cards > 0 then
+                    return {
+                        -- message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult}}, 
+                        message = "Flushed out!",
+                        colour = G.C.MULT,
+                    }
+                end
+                return true
             end
-          end
+        end
         if context.individual and context.cardarea == G.play then
             --Maybe it works even if the card is debuffed...
             --if (not context.other_card.debuff) and
             if  (context.other_card:get_id() == card.ability.extra.target_id) and 
             (context.other_card.base.suit == card.ability.extra.target_suit) then
-                print ("Found you!!!")
                 local earned = ease_poke_dollars(card, "gumshoos", card.ability.extra.money_mod)
                 return {
                     message = localize('$')..earned,
@@ -417,41 +466,11 @@ local gumshoos = {
                 }
             end
         end
-    --   if context.end_of_round and not context.individual and not context.repetition then
-    --     local targets = {}
-    --     for i = 1, math.min(card.ability.extra.choices, #G.playing_cards - 1) do
-    --         targets[i] = pseudorandom_element(G.playing_cards, pseudoseed('alolan_muk'))
-    --         print(targets[i].base.nominal, targets[i].base.suit, " worth", card_rating(targets[i]))
-    --     end
-        
-    --     table.sort(targets, function(a, b) return card_rating(a) < card_rating(b) end)
-    --     local actually_removed = {}
-    --     for j = 1, math.min(card.ability.extra.targets, #targets) do
-    --         print("Deleting ".. targets[j].base.nominal, targets[j].base.suit)
-    --         G.E_MANAGER:add_event(Event({
-    --             trigger = 'after',
-    --             delay = 0.2,
-    --             func = function() 
-    --                 if targets[j].ability.name == 'Glass Card' then 
-    --                     targets[j]:shatter()
-    --                 else
-    --                     targets[j]:start_dissolve()
-    --                 end
-    --             return true end }))
-    --     end
-    --     delay(0.3)
-    --     for i = 1, #G.jokers.cards do
-    --         for j = 1, #targets do
-    --             G.jokers.cards[i]:calculate_joker({remove_playing_cards = true, removed = {targets[j]}})
-    --         end
-    --     end
-    --     card:juice_up()
-    --   end
     end,
 }
 
 return {name = "Pokemon Jokers 541-570", 
-        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_muk, gumshoos},
+        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_muk, yungoos, gumshoos},
 }
 
 -- local kakuna={

@@ -84,6 +84,17 @@ return {
                     "{C:attention}#1#{} cards in the full deck"
                 }
             },
+            j_marcpoke_yungoos = {
+                name = "Yungoos",
+                text = {
+                    "Gain {C:money}$#2#{} when a card",
+                    "with the targeted",
+                    "rank and suit is scored",
+                    "Current target: {C:attention}#1#{}",
+                    "{C:inactive,s:0.8}(Target changes at blind selection){}",
+                    "{C:inactive,s:0.8}(Evolves at $#3#{C:inactive,s:0.8}/{C:money,s:0.8}$#4#{C:inactive,s:0.8} earned)",
+                }
+            },
             j_marcpoke_gumshoos = {
                 name = "Gumshoos",
                 text = {
@@ -91,9 +102,9 @@ return {
                     "{C:attention}Flush{}, draw up to {C:attention}#1#{} cards",
                     "with the targeted rank and suit",
                     "{br:2}text needs to be here to work",
-                    "Gain {C:money}$#1#{} when target is scored",
+                    "Gain {C:money}$#3#{} when target is scored",
                     "Current target: {C:attention}#2#{}",
-                    "{C:inactive,s:0.8}(Rank and Suit change every round){}",
+                    "{C:inactive,s:0.8}(Target changes at blind selection){}",
                 }
             }
         }
