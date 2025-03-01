@@ -1,7 +1,5 @@
 card_rating = function (card)
-    
     local result
-
     if card.ability.name == "Stone Card" then
         result = 0
     elseif card.ability.name == "Default Base" then
@@ -19,4 +17,21 @@ card_rating = function (card)
     if card.edition and card.edition.holographic then result = result + 100 end
 
     return result
+end
+
+reset_gumshoos_card = function (card)
+    card.ability.extra.target_rank = 'Ace'
+    card.ability.extra.target_suit = 'Spades'
+    local valid_gumshoos_targets = {}
+    for k, v in ipairs(G.playing_cards) do
+        if v.ability.effect ~= 'Stone Card' then
+            valid_gumshoos_targets[#valid_gumshoos_targets+1] = v
+        end
+    end
+    if valid_gumshoos_targets[1] then 
+        local target_card = pseudorandom_element(valid_gumshoos_targets, pseudoseed('gumshoos'..G.GAME.round_resets.ante))
+        card.ability.extra.target_rank = target_card.base.value
+        card.ability.extra.target_suit = target_card.base.suit
+        card.ability.extra.target_id = target_card.base.id
+    end
 end

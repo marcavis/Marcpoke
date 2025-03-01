@@ -126,5 +126,6 @@ local meganium={
 
 
 return {name = "Eryn's Pokemon", 
-        list = {chikorita, bayleef, meganium},
+        --list = {chikorita, bayleef, meganium},
+        list = {},
 }

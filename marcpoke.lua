@@ -18,6 +18,7 @@ SMODS.Atlas({
 table.insert(family, {"trubbish", "garbodor"})
 table.insert(family, {"timburr", "gurdurr", "conkeldurr"})
 table.insert(family, {"chikorita", "bayleef", "meganium"})
+table.insert(family, {"yunggoos", "gumshoos"})
 
 -- Get mod path and load other files
 mod_dir = ''..SMODS.current_mod.path
