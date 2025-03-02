@@ -120,6 +120,13 @@ return {
                     "Current target: {C:attention}#2#{}",
                     "{C:inactive,s:0.8}(Target changes at blind selection){}",
                 }
+            },
+            j_marcpoke_toxtricity = {
+                name = "Toxtricity",
+                text = {
+                    "Increases the effect",
+                    "of energy cards by 50%"
+                }
             }
         }
     }

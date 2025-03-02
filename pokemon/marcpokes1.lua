@@ -105,7 +105,7 @@ local garbodor = {
 local timburr = {
     name = "timburr", 
     poke_custom_prefix = "marcpoke",
-    pos = {x = 6, y = 5}, 
+    pos = {x = 10, y = 2}, 
     config = {extra = {money = 2, earned = 0, dollars_required = 8}},
     loc_vars = function(self, info_queue, center)
       type_tooltip(self, info_queue, center)
@@ -151,7 +151,7 @@ local timburr = {
   local gurdurr = {
     name = "gurdurr", 
     poke_custom_prefix = "marcpoke",
-    pos = {x = 7, y = 5}, 
+    pos = {x = 11, y = 2}, 
     config = {extra = {money = 3, earned = 0, dollars_required = 20}},
     loc_vars = function(self, info_queue, center)
       type_tooltip(self, info_queue, center)
@@ -197,7 +197,7 @@ local timburr = {
   local conkeldurr = {
     name = "conkeldurr", 
     poke_custom_prefix = "marcpoke",
-    pos = {x = 8, y = 5}, 
+    pos = {x = 12, y = 2}, 
     config = {extra = {
         money = 4, earned = 0,
         stone_quest = false, steel_quest = false, glass_quest = false,
@@ -322,7 +322,7 @@ local timburr = {
                 for j = 1, amount_to_delete do
                     G.E_MANAGER:add_event(Event({
                         trigger = 'after',
-                        delay = 0.2,---mmmmmmmmmmmmmmmmm
+                        delay = 0.2,
                         func = function()
                             table.insert(actually_removed, targets[j])
                             targets[j]:start_dissolve()
@@ -391,7 +391,7 @@ local alolan_muk={
                 for j = 1, amount_to_delete do
                     G.E_MANAGER:add_event(Event({
                         trigger = 'after',
-                        delay = 0.2,---mmmmmmmmmmmmmmmmm
+                        delay = 0.2,
                         func = function()
                             table.insert(actually_removed, targets[j])
                             targets[j]:start_dissolve()
@@ -450,7 +450,7 @@ local yungoos = {
             --Maybe it works even if the card is debuffed...
             --if (not context.other_card.debuff) and
             if  (context.other_card:get_id() == card.ability.extra.target_id) and 
-            (context.other_card.base.suit == card.ability.extra.target_suit) then
+            (context.other_card:is_suit(card.ability.extra.target_suit)) then
                 local earned = 0
                 if not context.blueprint then
                     card.ability.extra.earned = card.ability.extra.earned + card.ability.extra.money_mod
@@ -471,14 +471,13 @@ local yungoos = {
 local gumshoos = {
     name = "gumshoos", 
     pos = {x = 13, y = 0}, 
-    --will delete the weakest <targets> out of the <choices>; e.g. 2 weakest out of 7 random cards
     config = {extra = {money_mod = 4, target_rank = "Ace", target_suit = "Spades", target_id = 14, targets = 3}},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
         return {vars = {center.ability.extra.targets, center.ability.extra.target_rank .. " of " .. center.ability.extra.target_suit,
             center.ability.extra.money_mod}}
     end,
-    rarity = 1, 
+    rarity = 2, 
     cost = 8, 
     stage = "One", 
     ptype = "Colorless",
@@ -502,7 +501,7 @@ local gumshoos = {
                 local movable_cards = {}
                 for _, deckcard in ipairs(G.deck.cards) do
                     if  (deckcard:get_id() == card.ability.extra.target_id) and 
-                    (deckcard.base.suit == card.ability.extra.target_suit) then
+                    (deckcard:is_suit(card.ability.extra.target_suit)) then
                         --G.playing_card = (G.playing_card and G.playing_card + 1) or 1
                         table.insert(movable_cards, #movable_cards + 1, deckcard)
                     end
@@ -546,7 +545,7 @@ local gumshoos = {
             --Maybe it works even if the card is debuffed...
             --if (not context.other_card.debuff) and
             if  (context.other_card:get_id() == card.ability.extra.target_id) and 
-            (context.other_card.base.suit == card.ability.extra.target_suit) then
+            (context.other_card:is_suit(card.ability.extra.target_suit)) then
                 local earned = ease_poke_dollars(card, "gumshoos", card.ability.extra.money_mod)
                 return {
                     message = localize('$')..earned,
@@ -558,8 +557,32 @@ local gumshoos = {
     end,
 }
 
+local toxtricity = {
+    name = "toxtricity", 
+    pos = {x = 13, y = 0}, 
+    config = {extra = {target_id = 14, targets = 3}},
+    loc_vars = function(self, info_queue, center)
+        type_tooltip(self, info_queue, center)
+        return {vars = {}}
+    end,
+    rarity = 1, 
+    cost = 8, 
+    stage = "One", 
+    ptype = "Lightning",
+    set_sprites = function(self, card, front)
+        card.config.center.atlas = "poke_Pokedex6"
+        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex6']
+        card.children.center:reset()
+    end,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        --relevant code is in lovely/toxtricity.toml
+    end,
+}
+
+
 return {name = "Pokemon Jokers 541-570", 
-        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos},
+        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos, toxtricity},
 }
 
 -- local kakuna={
