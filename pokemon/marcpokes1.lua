@@ -560,12 +560,12 @@ local gumshoos = {
 local toxtricity = {
     name = "toxtricity", 
     pos = {x = 13, y = 0}, 
-    config = {extra = {target_id = 14, targets = 3}},
+    config = {extra = {}},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
         return {vars = {}}
     end,
-    rarity = 1, 
+    rarity = 2, 
     cost = 8, 
     stage = "One", 
     ptype = "Lightning",
@@ -579,7 +579,6 @@ local toxtricity = {
         --relevant code is in lovely/toxtricity.toml
     end,
 }
-
 
 return {name = "Pokemon Jokers 541-570", 
         list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos, toxtricity},
