@@ -53,4 +53,35 @@ local marcavis_alolan_muk={
     end,
 }
 
+--disabled
+local joke_exploud = {
+    name = "joke_exploud", 
+    pos = {x = 3, y = 4}, 
+    config = {extra = {}},
+    loc_vars = function(self, info_queue, center)
+        type_tooltip(self, info_queue, center)
+        return {vars = {}}
+    end,
+    rarity = 2, 
+    cost = 8, 
+    stage = "Two", 
+    ptype = "Colorless",
+    set_sprites = function(self, card, front)
+        card.config.center.atlas = "poke_Pokedex3"
+        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex3']
+        card.children.center:reset()
+    end,
+    blueprint_compat = true,
+    add_to_deck = function(self, card, from_debuff)
+        G.SETTINGS.SOUND.volume = G.SETTINGS.SOUND.volume + 50
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        G.SETTINGS.SOUND.volume = G.SETTINGS.SOUND.volume - 50
+    end,
+    calculate = function(self, card, context)
+        --just changes volume
+    end,
+}
+
+
 return {}

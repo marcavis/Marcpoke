@@ -37,3 +37,11 @@ pattern = "local addition = energy_values[name]"
 position = "after"
 payload = 'addition = addition + (addition / 2) * (#SMODS.find_card("j_marcpoke_toxtricity"))'
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "engine/sound_manager.lua"
+pattern = "function RESTART_MUSIC(args)"
+position = "after"
+payload = "print (args)"
+match_indent = true
