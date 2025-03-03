@@ -580,8 +580,47 @@ local toxtricity = {
     end,
 }
 
+local chatot = {
+    name = "chatot", 
+    pos = {x = 12, y = 3}, 
+    config = {extra = {chips = 0, chip_mod = 0.5}},
+    loc_vars = function(self, info_queue, center)
+        type_tooltip(self, info_queue, center)
+        return {vars = {center.ability.extra.chips, center.ability.extra.chip_mod}}
+    end,
+    rarity = 2,
+    cost = 6,
+    stage = "Basic",
+    ptype = "Colorless",
+    set_sprites = function(self, card, front)
+        card.config.center.atlas = "poke_Pokedex4"
+        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex4']
+        card.children.center:reset()
+    end,
+    blueprint_compat = false,
+    chatter_boost = function(self, card)
+        --called by
+        card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod
+        --should be silent
+        --card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_upgrade_ex'), colour = G.C.BLUE})
+        
+        return true
+    end,
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.scoring_hand then
+            if context.joker_main then
+              return {
+                message = localize{type = 'variable', key = 'a_chips', vars = {card.ability.extra.chips}}, 
+                colour = G.C.CHIPS,
+                chip_mod = card.ability.extra.chips
+              }
+            end
+        end
+    end,
+}
+
 return {name = "Pokemon Jokers 541-570", 
-        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos, toxtricity},
+        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos, toxtricity, chatot},
 }
 
 -- local kakuna={

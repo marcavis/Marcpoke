@@ -128,13 +128,28 @@ return {
                     "of energy cards by 50%"
                 }
             },
+            j_marcpoke_joke_exploud = {
+                name = "Joke Exploud",
+                text = {
+                    "Increases master",
+                    "volume by 50%"
+                }
+            },
+            j_marcpoke_chatot = {
+                name = "Chatot",
+                text = {
+                    "{C:chips}+#1#{} Chips",
+                    "Gains {C:chips}+#2#{} Chips",
+                    "whenever any Joker",
+                    'or card "talks"'
+                }
+            },
             j_marcpoke_luminous_cave = {
                 name = "Luminous Cave",
                 text = {
                     "{X:red,C:white}X#1#{} Mult",
                     "Gains {X:red,C:white}X#2#{} Mult",
                     "when a Joker evolves",
-                    
                 }
             }
 
