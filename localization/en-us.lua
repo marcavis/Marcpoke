@@ -127,7 +127,17 @@ return {
                     "Increases the effect",
                     "of energy cards by 50%"
                 }
+            },
+            j_marcpoke_luminous_cave = {
+                name = "Luminous Cave",
+                text = {
+                    "{X:red,C:white}X#1#{} Mult",
+                    "Gains {X:red,C:white}X#2#{} Mult",
+                    "when a Joker evolves",
+                    
+                }
             }
+
         }
     }
 }
