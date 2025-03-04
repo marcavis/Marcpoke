@@ -40,19 +40,15 @@ local luminous_cave = {
 local bills_pc = {
     name = "bills_pc", 
     pos = {x = 0, y = 0}, 
-    config = {extra = {debuffed_by_me = 1}},
+    config = {extra = {debuffed_by_me = 1, checked_debuffs = false}},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
-        self.debuff_neighbor(self, center)
-        
         return {vars = {}}
-        --dunno if I wanna use mult_mod2 after all
     end,
     debuff_neighbor = function(self, center)
         if G.jokers and #G.jokers.cards > #SMODS.find_card(center.config.center.key) then
             local debuff_now = (center.rank + 1) % #G.jokers.cards
             if debuff_now == 0 then debuff_now = #G.jokers.cards end
-            -- G.jokers.cards[center.ability.extra.debuffed_by_me].debuff = false
             G.jokers.cards[debuff_now].debuff = true
             center.ability.extra.debuffed_by_me = debuff_now
             for i, j in ipairs(G.jokers.cards) do
@@ -61,6 +57,9 @@ local bills_pc = {
                 end
             end
         end
+    end,
+    update = function(self, card, dt)
+        self.debuff_neighbor(self, card)
     end,
     rarity = 3,
     cost = 8,
@@ -75,11 +74,8 @@ local bills_pc = {
         G.jokers.config.card_limit = G.jokers.config.card_limit - 2
     end,
     calculate = function(self, card, context)
-        
-        -- print("Outside")
         if context.cardarea == G.jokers then
             self.debuff_neighbor(self, card)
-            -- print("Howdy")
         end
     end,
 }
