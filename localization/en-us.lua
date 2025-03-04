@@ -144,6 +144,16 @@ return {
                     'or card "talks"'
                 }
             },
+            j_marcpoke_maractus = {
+                name = "Maractus",
+                text = {
+                    "{C:green}#1# in #2#{} chance to",
+                    "improve the reward",
+                    "of scored {C:attention}Lucky{} cards",
+                    "by {C:mult}+#3#{} Mult and {C:money}$#4#{}"
+                }
+
+            },
             j_marcpoke_luminous_cave = {
                 name = "Luminous Cave",
                 text = {

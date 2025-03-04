@@ -619,8 +619,45 @@ local chatot = {
     end,
 }
 
+local maractus = {
+    name = "maractus", 
+    pos = {x = 6, y = 4}, 
+    config = {extra = {odds = 7, mult_mod = 1, money_mod = 1}},
+    loc_vars = function(self, info_queue, center)
+        type_tooltip(self, info_queue, center)
+        return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds, center.ability.extra.mult_mod, center.ability.extra.money_mod}}
+    end,
+    rarity = 2,
+    cost = 6,
+    stage = "Basic",
+    ptype = "Grass",
+    set_sprites = function(self, card, front)
+        card.config.center.atlas = "poke_Pokedex5"
+        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex5']
+        card.children.center:reset()
+    end,
+    blueprint_compat = false,
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card and not context.other_card.debuff
+        and not context.end_of_round and context.other_card.ability.name == 'Lucky Card' then
+            if (pseudorandom('maractus') < G.GAME.probabilities.normal/card.ability.extra.odds) then
+                context.other_card.ability.p_dollars = context.other_card.ability.p_dollars + card.ability.extra.money_mod
+                context.other_card.ability.mult = context.other_card.ability.mult + card.ability.extra.mult_mod
+                --local earned = ease_poke_dollars(card, "gumshoos", card.ability.extra.money_mod)
+                card:juice_up()
+                return {
+                    message = "Luckier!",
+                    --message = localize('$')..earned,
+                    colour = G.C.MONEY,
+                    card = context.other_card
+                }
+            end
+        end
+    end,
+}
+
 return {name = "Pokemon Jokers 541-570", 
-        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos, toxtricity, chatot},
+        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos, toxtricity, chatot, maractus},
 }
 
 -- local kakuna={

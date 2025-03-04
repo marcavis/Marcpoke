@@ -21,6 +21,13 @@ SMODS.Atlas({
   py = 95
 }):register()
 
+SMODS.Atlas({
+  key = "bills_pc",
+  path = "BillsPC.png",
+  px = 71,
+  py = 95
+}):register()
+
 --Required by the pokemon family function (right click on a pokemon joker)
 table.insert(family, {"trubbish", "garbodor"})
 table.insert(family, {"timburr", "gurdurr", "conkeldurr"})
