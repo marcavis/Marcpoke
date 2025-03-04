@@ -59,7 +59,12 @@ local bills_pc = {
         end
     end,
     update = function(self, card, dt)
-        self.debuff_neighbor(self, card)
+        --problems:
+        --gotta undebuff when sold
+        --gotta remember not to mess with jokers that are debuffed for other reasons
+        if card.area == G.jokers then
+            self.debuff_neighbor(self, card)
+        end
     end,
     rarity = 3,
     cost = 8,

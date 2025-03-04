@@ -622,7 +622,7 @@ local chatot = {
 local maractus = {
     name = "maractus", 
     pos = {x = 6, y = 4}, 
-    config = {extra = {odds = 7, mult_mod = 1, money_mod = 1}},
+    config = {extra = {odds = 4, mult_mod = 2, money_mod = 2}},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
         return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds, center.ability.extra.mult_mod, center.ability.extra.money_mod}}
