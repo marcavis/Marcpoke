@@ -83,5 +83,95 @@ local joke_exploud = {
     end,
 }
 
+--couldn't make it to work i think
+local maractus = {
+    name = "maractus", 
+    pos = {x = 6, y = 4}, 
+    config = {extra = {odds = 4}},
+    loc_vars = function(self, info_queue, center)
+        type_tooltip(self, info_queue, center)
+        return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds}}
+    end,
+    rarity = 2,
+    cost = 6,
+    stage = "Basic",
+    ptype = "Grass",
+    set_sprites = function(self, card, front)
+        card.config.center.atlas = "poke_Pokedex5"
+        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex5']
+        card.children.center:reset()
+    end,
+    blueprint_compat = false,
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.scoring_hand then
+            if context.joker_main then
+                local index = pseudorandom('maractus', 1, #context.scoring_hand)
+                local copy
+                --copy:add_to_deck()
+                --SMODS.add
+                --G.deck.config.card_limit = G.deck.config.card_limit + 5
+                local card_index = 1
+                for i, v in ipairs(G.playing_cards) do
+                    if v == context.scoring_hand[index] then
+                        card_index = i
+                        copy = copy_card(v, nil, nil, G.playing_card)
+                    end
+                end
+
+                copy:add_to_deck()
+                G.deck.config.card_limit = G.deck.config.card_limit + 1
+                table.insert(G.playing_cards, copy)
+                --table.insert(G.deck.cards, copy)
+                G.hand:emplace(copy)
+                copy.states.visible = nil
+
+
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        copy:start_materialize()
+                        return true
+                    end
+                })) 
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.2,
+                    func = function()
+                        local moved_index = 1
+                        for i, v in ipairs(G.playing_cards) do
+                            if v == context.scoring_hand[index] then
+                                moved_index = i
+                                table.remove(G.playing_cards, i)
+                                -- if v.ability.name == 'Glass Card' then 
+                                --     v:shatter()
+                                -- else
+                                --     v:start_dissolve()
+                                -- end
+                                break
+                            end
+                        end
+
+                        for i, v in ipairs(G.discard.cards) do
+                            if v == context.scoring_hand[index] then 
+                            --they aren't going to be equal, something changes when the card is discarded/played
+                            --if v.base
+                            
+                                moved_index = i
+                                print("deleted on deck too")
+                                table.remove(G.discard.cards, i)
+                                -- if v.ability.name == 'Glass Card' then 
+                                --     v:shatter()
+                                -- else
+                                --     v:start_dissolve()
+                                -- end
+                                break
+                            end
+                            --print(i, ":", v.config.card.name)
+                        end
+                        return true end }))
+            end
+        end
+    end,
+}
+
 
 return {}
