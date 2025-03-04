@@ -161,6 +161,14 @@ return {
                     "Gains {X:red,C:white}X#2#{} Mult",
                     "when a Joker evolves",
                 }
+            },
+            j_marcpoke_bills_pc = {
+                name = "Bill's PC",
+                text = {
+                    "Benches (debuffs) the joker",
+                    "to the right (Wraps around)",
+                    "Adds 2 Joker slots",
+                }
             }
 
         }
