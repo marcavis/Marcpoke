@@ -40,31 +40,10 @@ local luminous_cave = {
 local bills_pc = {
     name = "bills_pc", 
     pos = {x = 0, y = 0}, 
-    config = {extra = {debuffed_by_me = 1, checked_debuffs = false}},
+    config = {extra = {location = nil, j_size = 2}, debug_iter = 0},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
         return {vars = {}}
-    end,
-    debuff_neighbor = function(self, center)
-        if G.jokers and #G.jokers.cards > #SMODS.find_card(center.config.center.key) then
-            local debuff_now = (center.rank + 1) % #G.jokers.cards
-            if debuff_now == 0 then debuff_now = #G.jokers.cards end
-            G.jokers.cards[debuff_now].debuff = true
-            center.ability.extra.debuffed_by_me = debuff_now
-            for i, j in ipairs(G.jokers.cards) do
-                if i ~= debuff_now then
-                    G.jokers.cards[i].debuff = false
-                end
-            end
-        end
-    end,
-    update = function(self, card, dt)
-        --problems:
-        --gotta undebuff when sold
-        --gotta remember not to mess with jokers that are debuffed for other reasons
-        if card.area == G.jokers then
-            self.debuff_neighbor(self, card)
-        end
     end,
     rarity = 3,
     cost = 8,
@@ -73,14 +52,93 @@ local bills_pc = {
     atlas = "bills_pc",
     blueprint_compat = false,
     add_to_deck = function(self, card, from_debuff)
-        G.jokers.config.card_limit = G.jokers.config.card_limit + 2
+        G.jokers.config.card_limit = G.jokers.config.card_limit + card.ability.extra.j_size
     end,
     remove_from_deck = function(self, card, from_debuff)
-        G.jokers.config.card_limit = G.jokers.config.card_limit - 2
+        for i = 1, #G.jokers.cards do
+            -- if a joker has been debuffed by bill and there's no bill to the left of it, then un-debuff it
+            local joker = G.jokers.cards[i]
+            if joker.ability.debuff_sources and joker.ability.debuff_sources['bill_pc'] then
+                if i == 1 or G.jokers.cards[i-1].ability.name ~= self.name then
+                    SMODS.debuff_card(joker, nil, 'bill_pc')
+                end
+            end
+            if joker.debuff then
+                joker:set_debuff()
+            end
+        end
+        G.jokers.config.card_limit = G.jokers.config.card_limit - card.ability.extra.j_size
     end,
-    calculate = function(self, card, context)
-        if context.cardarea == G.jokers then
-            self.debuff_neighbor(self, card)
+    update = function(self, card, dt)
+        -- if it's in the shop or collection screen
+        if card.area ~= G.jokers then return end
+        card.ability.debuff_sources = card.ability.debuff_sources or {}
+
+        -- check for moved jokers and also get bill's location
+        local bill_loc = nil
+        for i = 1, #G.jokers.cards do
+            -- if a joker has been debuffed by bill and there's no bill to the left of it, then un-debuff it
+            if G.jokers.cards[i].ability.debuff_sources and G.jokers.cards[i].ability.debuff_sources['bill_pc'] then
+                if i == 1 or G.jokers.cards[i-1].ability.name ~= self.name then
+                    SMODS.debuff_card(G.jokers.cards[i], nil, 'bill_pc')
+                end
+            end
+            -- while we're looking through the jokers, also confirm bill's location
+            if G.jokers.cards[i] == card then
+                bill_loc = i
+            end
+        end
+        card.ability.extra.location = bill_loc
+
+        -- should never occur, but might?
+        if not bill_loc or G.jokers.cards[bill_loc] ~= card then
+            print("CAN'T FIND THE PC?!")
+            return
+        end
+
+        local right_card = G.jokers.cards[bill_loc + 1]
+
+        if not right_card then
+            if not card.ability.debuff_sources['bill_pc_self'] then
+                SMODS.debuff_card(card, true, 'bill_pc_self')
+            end
+            return
+        end
+        if right_card.debuff and not card.debuff then return end
+
+        right_card.ability.debuff_sources = right_card.ability.debuff_sources or {}
+
+        if not right_card.debuff then
+            if right_card.ability.debuff_sources['bill_pc'] then
+                if not card.ability.debuff_sources['bill_pc_self'] then
+                    SMODS.debuff_card(card, true, 'bill_pc_self')
+                end
+                return
+            end
+            if card.ability.debuff_sources['bill_pc_self'] then
+                SMODS.debuff_card(card, nil, 'bill_pc_self')
+            end
+            card:set_debuff()
+            if card.debuff then return end
+            -- right is not debuffed and we are not debuffed
+            SMODS.debuff_card(right_card, true, 'bill_pc')
+            if not right_card.debuff then
+                if not card.ability.debuff_sources['bill_pc_self'] then
+                    SMODS.debuff_card(card, true, 'bill_pc_self')
+                end
+            end
+            return
+        else
+            -- both are debuffed
+            if card.ability.debuff_sources['bill_pc_self'] then
+                SMODS.debuff_card(card, nil, 'bill_pc_self')
+            end
+            card:set_debuff()
+            if not card.debuff then return end
+            if right_card.ability.debuff_sources['bill_pc'] then
+                SMODS.debuff_card(right_card, nil, 'bill_pc')
+                SMODS.recalc_debuff(right_card)
+            end
         end
     end,
 }
