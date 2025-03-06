@@ -96,6 +96,15 @@ local bills_pc = {
             return
         end
 
+        --force the PC into the leftmost spot (unless Bill's PC is the only kind of joker in the jokers area)
+        if bill_loc == #G.jokers.cards and not card.states.drag.is and #SMODS.find_card(card.config.center.key) < #G.jokers.cards then
+            -- if x is true, return 1, otherwise return false
+            local bool_to_int = function(x) return x and 1 or 0 end
+            -- G.jokers:sort(function(a,b) return bool_to_int(a == card) < bool_to_int(b == card) end)
+            -- G.jokers:sort()
+            table.sort(G.jokers.cards, function (a, b) return (a.unique_val + bool_to_int(a == card)) > (b.unique_val + bool_to_int(b == card)) end )
+        end
+
         local right_card = G.jokers.cards[bill_loc + 1]
 
         if not right_card then
