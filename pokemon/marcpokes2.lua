@@ -92,7 +92,7 @@ local bills_pc = {
 
         -- should never occur, but might?
         if not bill_loc or G.jokers.cards[bill_loc] ~= card then
-            print("CAN'T FIND THE PC?!")
+            print("CAN'T FIND THE PC?! Contact Kek and marcavis")
             return
         end
 
