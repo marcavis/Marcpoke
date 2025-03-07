@@ -162,15 +162,19 @@ return {
                     "when a Joker evolves",
                 }
             },
-            j_marcpoke_bills_pc = {
+            
+
+        },
+        Item = {
+            c_marcpoke_bills_pc = {
                 name = "Bill's PC",
                 text = {
-                    "Benches (debuffs) the joker",
-                    "to the right (Wraps around)",
-                    "Adds 2 Joker slots",
+                    "{C:dark_edition}+#1#{} Joker slot",
+                    "{C:dark_edition}+#2#{} consumable slot",
+                    "Benches (debuffs) the rightmost joker",
+                    "Can't be sold when joker slots are filled"
                 }
             }
-
         }
     }
 }

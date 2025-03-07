@@ -37,7 +37,7 @@ local luminous_cave = {
     end,
 }
 
-local bills_pc = {
+local backup_bills_pc = {
     name = "bills_pc", 
     pos = {x = 0, y = 0}, 
     config = {extra = {location = nil, j_size = 2}, debug_iter = 0},
@@ -153,5 +153,5 @@ local bills_pc = {
 }
 
 return {name = "Pokemon Jokers 541-570", 
-        list = {luminous_cave, bills_pc},
+        list = {luminous_cave},
 }

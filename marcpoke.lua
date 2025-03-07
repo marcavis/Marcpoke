@@ -31,15 +31,42 @@ SMODS.Atlas({
 --Required by the pokemon family function (right click on a pokemon joker)
 table.insert(family, {"trubbish", "garbodor"})
 table.insert(family, {"timburr", "gurdurr", "conkeldurr"})
-table.insert(family, {"chikorita", "bayleef", "meganium"})
 table.insert(family, {"yungoos", "gumshoos"})
 table.insert(family, {"alolan_grimer", "alolan_muk"})
+
+
+table.insert(family, {"toxtricity"})
+table.insert(family, {"chatot"})
+table.insert(family, {"maractus"})
+--table.insert(family, {"chikorita", "bayleef", "meganium"})
+
 
 -- Get mod path and load other files
 mod_dir = ''..SMODS.current_mod.path
 if (SMODS.Mods["Pokermon"] or {}).can_load then
     pokermon_config = SMODS.Mods["Pokermon"].config
 end
+
+--Load consumables
+local pconsumables = NFS.getDirectoryItems(mod_dir.."consumables")
+
+for _, file in ipairs(pconsumables) do
+  sendDebugMessage ("The file is: "..file)
+  local consumable, load_error = SMODS.load_file("consumables/"..file)
+  if load_error then
+    sendDebugMessage ("The error is: "..load_error)
+  else
+    local curr_consumable = consumable()
+    if curr_consumable.init then curr_consumable:init() end
+    
+    for i, item in ipairs(curr_consumable.list) do
+      if not (item.pokeball and not pokermon_config.pokeballs) then
+        item.discovered = not pokermon_config.pokemon_discovery
+        SMODS.Consumable(item)
+      end
+    end
+  end
+end 
 
 --Load pokemon file
 local pfiles = NFS.getDirectoryItems(mod_dir.."pokemon")
