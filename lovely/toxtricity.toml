@@ -35,7 +35,7 @@ priority = 10
 target = '=[SMODS Pokermon "functions/energyfunctions.lua"]'
 pattern = "local addition = energy_values[name]"
 position = "after"
-payload = 'addition# = addition + (addition / 2) * (#SMODS.find_card("j_marcpoke_toxtricity"))'
+payload = 'addition = addition + (addition / 2) * (#SMODS.find_card("j_marcpoke_toxtricity"))'
 match_indent = true
 
 #[[patches]]#
