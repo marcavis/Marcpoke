@@ -1,0 +1,12 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 10
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/game_object.lua"]'
+pattern = 'self.full_path = (self.mod and self.mod.path or SMODS.path) ..'
+position = "at"
+payload = "self.full_path = (self.path_prefix or self.mod and self.mod.path or SMODS.path) .."
+match_indent = true
