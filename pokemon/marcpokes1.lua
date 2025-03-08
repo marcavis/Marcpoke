@@ -347,7 +347,7 @@ local timburr = {
 local alolan_muk={
     name = "alolan_muk", 
     pos = {x = 10, y = 6}, 
-    config = {extra = {mult = 0, mult_mod = 4, targets = 2, minimum_deck_size = 20}},
+    config = {extra = {mult = 10, mult_mod = 2, targets = 2, minimum_deck_size = 20}},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
         return {vars = {center.ability.extra.targets,
