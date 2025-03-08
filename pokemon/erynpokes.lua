@@ -1,6 +1,5 @@
 local chikorita={ 
     name = "chikorita",
-    poke_custom_prefix = "marcpoke",
     pos = {x = 0, y = 0},
     config = {extra = {money_mod = 1, earned = 0, d_size = -1, h_size = 1, dollars_required = 12}},
     loc_vars = function(self, info_queue, center)
@@ -45,7 +44,6 @@ local chikorita={
 
 local bayleef={ 
     name = "bayleef",
-    poke_custom_prefix = "marcpoke",
     pos = {x = 1, y = 0},
     config = {extra = {money_mod = 2, earned = 0, d_size = -1, h_size = 1, dollars_required = 24}},
     loc_vars = function(self, info_queue, center)
@@ -90,7 +88,6 @@ local bayleef={
 
 local meganium={ 
     name = "meganium",
-    poke_custom_prefix = "marcpoke",
     pos = {x = 2, y = 0},
     config = {extra = {money_mod = 3, earned = 0, h_size = 1}},
     loc_vars = function(self, info_queue, center)

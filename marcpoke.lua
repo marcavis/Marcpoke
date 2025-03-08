@@ -1,8 +1,51 @@
 assert(SMODS.load_file("functions/marcpokefunctions.lua"))()
 
+default_poke_custom_prefix = "marcpoke"
+
+SMODS.Atlas({
+  key = "marcPoke1",
+  path = "Pokedex1.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "shiny_marcPoke1",
+  path = "Shinydex1.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
 SMODS.Atlas({
   key = "marcPoke2",
   path = "Pokedex2.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "shiny_marcPoke2",
+  path = "Shinydex2.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "marcPoke4",
+  path = "Pokedex4.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "shiny_marcPoke4",
+  path = "Shinydex4.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
   px = 71,
   py = 95
 }):register()
@@ -10,8 +53,49 @@ SMODS.Atlas({
 SMODS.Atlas({
     key = "marcPoke5",
     path = "Pokedex5.png",
+    path_prefix = SMODS.Mods["Pokermon"].path,
     px = 71,
     py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "shiny_marcPoke5",
+  path = "Shinydex5.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "marcPoke6",
+  path = "Pokedex6.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "shiny_marcPoke6",
+  path = "Shinydex6.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "marcPoke7",
+  path = "Pokedex7.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "shiny_marcPoke7",
+  path = "Shinydex7.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
 }):register()
 
 SMODS.Atlas({
@@ -119,6 +203,7 @@ for _, file in ipairs(pfiles) do
           if pokermon_config.jokers_only and item.rarity == "poke_safari" then
             item.rarity = 3
           end
+          item.poke_custom_prefix = default_poke_custom_prefix
           item.discovered = not pokermon_config.pokemon_discovery 
           SMODS.Joker(item)
         end

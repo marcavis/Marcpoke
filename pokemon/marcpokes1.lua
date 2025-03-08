@@ -39,11 +39,7 @@ local trubbish = {
         cost = 4,
         ptype = "Dark",
         stage = "Basic", 
-        set_sprites = function(self, card, front)
-            card.config.center.atlas = "poke_Pokedex5"
-            card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex5']
-            card.children.center:reset()
-        end,
+        atlas = "marcPoke5",
         blueprint_compat = true,
         calculate = function(self, card, context)
             if context.cardarea == G.jokers and context.scoring_hand then
@@ -66,7 +62,6 @@ local trubbish = {
 -- Garbodor 569
 local garbodor = {
     name = "garbodor",
-    poke_custom_prefix = "marcpoke",
     pos = {x = 5, y = 5}, 
     config = {extra = {chips = 25}},
     loc_vars = function(self, info_queue, center)
@@ -77,11 +72,7 @@ local garbodor = {
     cost = 4,
     ptype = "Dark",
     stage = "One", 
-    set_sprites = function(self, card, front)
-        card.config.center.atlas = "poke_Pokedex5"
-        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex5']
-        card.children.center:reset()
-    end,
+    atlas = "marcPoke5",
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.scoring_hand then
@@ -104,7 +95,6 @@ local garbodor = {
 
 local timburr = {
     name = "timburr", 
-    poke_custom_prefix = "marcpoke",
     pos = {x = 10, y = 2}, 
     config = {extra = {money = 2, earned = 0, dollars_required = 8}},
     loc_vars = function(self, info_queue, center)
@@ -115,11 +105,7 @@ local timburr = {
     cost = 4,
     ptype = "Fighting",
     stage = "Basic", 
-    set_sprites = function(self, card, front)
-        card.config.center.atlas = "poke_Pokedex5"
-        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex5']
-        card.children.center:reset()
-    end,
+    atlas = "marcPoke5",
     enhancement_gate = 'm_stone',
     blueprint_compat = true,
     calculate = function(self, card, context)
@@ -150,7 +136,6 @@ local timburr = {
 
   local gurdurr = {
     name = "gurdurr", 
-    poke_custom_prefix = "marcpoke",
     pos = {x = 11, y = 2}, 
     config = {extra = {money = 3, earned = 0, dollars_required = 20}},
     loc_vars = function(self, info_queue, center)
@@ -161,11 +146,7 @@ local timburr = {
     cost = 4,
     ptype = "Fighting",
     stage = "One", 
-    set_sprites = function(self, card, front)
-        card.config.center.atlas = "poke_Pokedex5"
-        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex5']
-        card.children.center:reset()
-    end,
+    atlas = "marcPoke5",
     enhancement_gate = 'm_stone',
     blueprint_compat = true,
     calculate = function(self, card, context)
@@ -196,7 +177,6 @@ local timburr = {
 
   local conkeldurr = {
     name = "conkeldurr", 
-    poke_custom_prefix = "marcpoke",
     pos = {x = 12, y = 2}, 
     config = {extra = {
         money = 4, earned = 0,
@@ -211,11 +191,7 @@ local timburr = {
     cost = 4,
     ptype = "Fighting",
     stage = "Two", 
-    set_sprites = function(self, card, front)
-        card.config.center.atlas = "poke_Pokedex5"
-        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex5']
-        card.children.center:reset()
-    end,
+    atlas = "marcPoke5",
     enhancement_gate = 'm_stone',
     blueprint_compat = true,
     calculate = function(self, card, context)
@@ -288,11 +264,7 @@ local timburr = {
     cost = 4, 
     stage = "One", 
     ptype = "Dark",
-    set_sprites = function(self, card, front)
-        card.config.center.atlas = "poke_Pokedex1"
-        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex1']
-        card.children.center:reset()
-    end,
+    atlas = "marcPoke1",
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.scoring_hand then
@@ -357,11 +329,7 @@ local alolan_muk={
     cost = 8, 
     stage = "One", 
     ptype = "Dark",
-    set_sprites = function(self, card, front)
-        card.config.center.atlas = "poke_Pokedex1"
-        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex1']
-        card.children.center:reset()
-    end,
+    atlas = "marcPoke1",
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.scoring_hand then
@@ -433,11 +401,7 @@ local yungoos = {
     cost = 4, 
     stage = "One", 
     ptype = "Colorless",
-    set_sprites = function(self, card, front)
-        card.config.center.atlas = "poke_Pokedex7"
-        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex7']
-        card.children.center:reset()
-    end,
+    atlas = "marcPoke7",
     blueprint_compat = true,
     add_to_deck = function(self, card, from_debuff)
         reset_gumshoos_card(card)
@@ -481,11 +445,7 @@ local gumshoos = {
     cost = 8, 
     stage = "One", 
     ptype = "Colorless",
-    set_sprites = function(self, card, front)
-        card.config.center.atlas = "poke_Pokedex7"
-        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex7']
-        card.children.center:reset()
-    end,
+    atlas = "marcPoke7",
     blueprint_compat = true,
     add_to_deck = function(self, card, from_debuff)
         reset_gumshoos_card(card)
@@ -569,11 +529,7 @@ local toxtricity = {
     cost = 8, 
     stage = "One", 
     ptype = "Lightning",
-    set_sprites = function(self, card, front)
-        card.config.center.atlas = "poke_Pokedex6"
-        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex6']
-        card.children.center:reset()
-    end,
+    atlas = "marcPoke6",
     blueprint_compat = true,
     calculate = function(self, card, context)
         --relevant code is in lovely/toxtricity.toml
@@ -592,11 +548,7 @@ local chatot = {
     cost = 6,
     stage = "Basic",
     ptype = "Colorless",
-    set_sprites = function(self, card, front)
-        card.config.center.atlas = "poke_Pokedex4"
-        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex4']
-        card.children.center:reset()
-    end,
+    atlas = "marcPoke4",
     blueprint_compat = false,
     chatter_boost = function(self, card)
         --called by
@@ -631,11 +583,7 @@ local maractus = {
     cost = 6,
     stage = "Basic",
     ptype = "Grass",
-    set_sprites = function(self, card, front)
-        card.config.center.atlas = "poke_Pokedex5"
-        card.children.center.atlas = G.ASSET_ATLAS['poke_Pokedex5']
-        card.children.center:reset()
-    end,
+    atlas = "marcPoke5",
     blueprint_compat = false,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card and not context.other_card.debuff
