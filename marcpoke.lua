@@ -106,7 +106,21 @@ SMODS.Atlas({
 }):register()
 
 SMODS.Atlas({
+  key = "shiny_luminous_cave",
+  path = "LuminousCave.png",
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
   key = "bills_pc",
+  path = "BillsPC.png",
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "shiny_bills_pc",
   path = "BillsPC.png",
   px = 71,
   py = 95
@@ -146,6 +160,7 @@ for _, file in ipairs(pconsumables) do
     for i, item in ipairs(curr_consumable.list) do
       if not (item.pokeball and not pokermon_config.pokeballs) then
         item.discovered = not pokermon_config.pokemon_discovery
+        item.poke_custom_prefix = default_poke_custom_prefix
         SMODS.Consumable(item)
       end
     end
