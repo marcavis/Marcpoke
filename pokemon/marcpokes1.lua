@@ -585,6 +585,7 @@ local maractus = {
     ptype = "Grass",
     atlas = "marcPoke5",
     blueprint_compat = false,
+
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card and not context.other_card.debuff
         and not context.end_of_round and context.other_card.ability.name == 'Lucky Card' then
@@ -604,8 +605,126 @@ local maractus = {
     end,
 }
 
+local cinderace = {
+    name = "cinderace",
+    pos = {x = 5, y = 0},
+    config = {extra = {mult = 0, ball_effect = 1.2}, ninesrequired = 5, default_ball_effect = 1.2},
+    
+    loc_vars = function(self, info_queue, center)
+        type_tooltip(self, info_queue, center)
+        return {vars = {center.ability.extra.mult}}
+    end,
+    rarity = "poke_safari",
+    stage = "Two",
+    ptype = "Fire",
+    atlas = "marcPoke8",
+    blueprint_compat = true,
+    add_to_deck = function(self, card, from_debuff)
+        card.ability.soccer_sticker = true
+    end,
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.scoring_hand then
+            if context.before and not context.blueprint then
+                card.ability.ninesrequired = #context.scoring_hand
+                local hasten = false
+                local haslow = false
+                for k, v in pairs(context.scoring_hand) do
+                    if v:get_id() == 10 then --pass the ball, strengthening its effect
+                        hasten = true
+                        break
+                    end
+                    if v:get_id() >=2 and v:get_id() <= 6 then --recover the ball, strengthening its effect
+                        haslow = true
+                        break
+                    end
+                    if v:get_id() == 9 then --use up the ball sticker, getting a reward now and losing it for this turn
+                        card.ability.ninesrequired = card.ability.ninesrequired - 1
+                    end
+                end
+                
+                if card.ability.soccer_sticker and hasten then
+                    --TODO: What if he passes to another Cinderace?
+                    local pass_targets = {}
+                    for i=1, #G.jokers.cards do 
+                        if G.jokers.cards[i] ~= card and
+                        not G.jokers.cards[i].ability.soccer_sticker then
+                            pass_targets[#pass_targets+1] = G.jokers.cards[i]
+                        end
+                    end
+                    if #pass_targets >= 1 then
+                        card.ability.soccer_sticker = false
+                        card.ability.extra.ball_effect = card.ability.extra.ball_effect + 0.8
+                        pseudoshuffle(pass_targets, pseudoseed("cinderace"))
+                        local chosen_joker = pass_targets[1]
+                        chosen_joker.ability.soccer_sticker = true
+                        return {
+                            message = "Great Pass!",
+                            colour = G.C.MULT
+                        }
+                    end
+                elseif not card.ability.soccer_sticker and haslow then
+                    local tackle_targets = {}
+                    for i=1, #G.jokers.cards do 
+                        if G.jokers.cards[i] ~= card and
+                        G.jokers.cards[i].ability.soccer_sticker then
+                            tackle_targets[#tackle_targets+1] = G.jokers.cards[i]
+                        end
+                    end
+                    if #tackle_targets >= 1 then
+                        card.ability.soccer_sticker = true
+                        card.ability.extra.ball_effect = card.ability.extra.ball_effect + 0.8
+                        pseudoshuffle(tackle_targets, pseudoseed("cinderace"))
+                        local chosen_joker = tackle_targets[1]
+                        chosen_joker.ability.soccer_sticker = false
+                        return {
+                            message = "Great Tackle!",
+                            colour = G.C.MULT
+                        }
+                    end
+                elseif card.ability.soccer_sticker and card.ability.ninesrequired > 0 then
+                    card.ability.extra.ball_effect = card.ability.extra.ball_effect + 0.2
+                    return {
+                        message = "Good Control!",
+                        colour = G.C.MULT
+                    }
+                end
+            elseif context.joker_main then
+                if card.ability.soccer_sticker and card.ability.ninesrequired == 0 then
+                    card.ability.soccer_sticker = false
+                    return {
+                        message = "Goal!!!", 
+                        colour = G.C.MULT,
+                        Xmult_mod = card.ability.extra.ball_effect,
+                        mult_mod = card.ability.extra.mult,
+                    }
+                end
+                return {
+                    message = localize{type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult}}, 
+                    colour = G.C.MULT,
+                    mult_mod = card.ability.extra.mult
+                }
+            end
+        end
+        if not context.repetition and not context.individual and context.end_of_round and not context.blueprint then
+            card.ability.extra.ball_effect = card.ability.default_ball_effect
+            --restore the ball sticker to Cinderace, remove from others
+            for _, v in ipairs(G.jokers.cards) do
+                if card.config.center.key == v.config.center.key then
+                    card.ability.soccer_sticker = true
+                else
+                    v.ability.soccer_sticker = false    
+                end
+            end
+            return {
+                message = localize('k_reset'),
+                colour = G.C.RED
+            }
+        end
+    end,
+}
+
 return {name = "Pokemon Jokers 541-570", 
-        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos, toxtricity, chatot, maractus},
+        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos, toxtricity, chatot, maractus, cinderace},
 }
 
 -- local kakuna={

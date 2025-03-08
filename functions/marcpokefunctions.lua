@@ -37,6 +37,7 @@ reset_gumshoos_card = function (card)
     end
 end
 
+--currently unused
 remove_debuffed = function(jokers)
     local result = {}
     for _, j in ipairs(jokers) do

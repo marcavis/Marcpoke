@@ -1,5 +1,10 @@
 return {
-    descriptions = {
+    misc = {
+        labels = {
+            soccer_sticker = "Soccer"
+        }
+    },
+    descriptions = {  
         Joker = {
             j_marcpoke_chikorita = {
                 name = "Chikorita",
@@ -162,7 +167,14 @@ return {
                     "when a Joker evolves",
                 }
             },
-            
+            j_marcpoke_cinderace = {
+                name = "Cinderace",
+                text = {
+                    "{C:mult}+#1#{} Mult (testing)",
+                    "Restores its soccer ball",
+                    "sticker every blind",
+                }
+            },
 
         },
         Item = {
@@ -175,35 +187,19 @@ return {
                     "Can't be sold when joker slots are filled"
                 }
             }
+        },
+        Other = {
+            soccer_sticker = {
+                name = "Soccer Ball",
+                text = {
+                    "{X:red,C:white}X#1#{} Mult when shot",
+                    "Interacts with Cinderace",
+                    "Only {X:attention,C:white}9s{} : Cinderace shoots it!",
+                    "Has {X:attention,C:white}10{} : Passes it, +{X:red,C:white}X0.8{} mult",
+                    "Has {X:attention,C:white}2-6{} : Recovers it, +{X:red,C:white}X0.8{} mult",
+                    "{X:attention,C:white}Otherwise{} : +{X:red,C:white}X0.2{} mult"
+                },
+            }
         }
     }
 }
-
--- j_poke_bulbasaur = {
---     name = "Bulbasaur",
---     text = {
---         "{C:attention}+#4#{} hand size",
---         "Earn {C:money}$#1#{} for each",
---         "{C:attention}#3#{} held in hand",
---         "{C:inactive,s:0.8}(Rank changes every round){}",
---         "{C:inactive,s:0.8}(Evolves at $#2#{C:inactive,s:0.8}/{C:money,s:0.8}$16{C:inactive,s:0.8} earned)",
---     } 
--- },
-
--- j_poke_arcanine = {
---     name = "Arcanine",
---     text = {
---         "{X:red,C:white} X#1# {} Mult if played hand",
---         "contains a {C:attention}Flush{}",
---         "{br:2}text needs to be here to work",
---         "Create a {C:attention}Lovers{} card",
---         "when {C:attention}Blind{} is selected"
---     } 
--- },
-
--- text = {
---     "Played cards with",
---     "{C:diamonds}#3#{} suit give",
---     "{C:mult}+#1#{} Mult and ",
---     "{C:money}$#2#{} when scored",
--- } 

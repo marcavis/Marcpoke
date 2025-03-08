@@ -99,6 +99,22 @@ SMODS.Atlas({
 }):register()
 
 SMODS.Atlas({
+  key = "marcPoke8",
+  path = "Pokedex8.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "shiny_marcPoke8",
+  path = "Shinydex8.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
   key = "luminous_cave",
   path = "LuminousCave.png",
   px = 71,
@@ -126,6 +142,13 @@ SMODS.Atlas({
   py = 95
 }):register()
 
+SMODS.Atlas {
+	key = "stickers",
+	path = "stickers.png",
+	px = 71,
+	py = 95
+}
+
 --Required by the pokemon family function (right click on a pokemon joker)
 table.insert(family, {"trubbish", "garbodor"})
 table.insert(family, {"timburr", "gurdurr", "conkeldurr"})
@@ -136,6 +159,7 @@ table.insert(family, {"alolan_grimer", "alolan_muk"})
 table.insert(family, {"toxtricity"})
 table.insert(family, {"chatot"})
 table.insert(family, {"maractus"})
+table.insert(family, {"cinderace"})
 --table.insert(family, {"chikorita", "bayleef", "meganium"})
 
 
@@ -166,6 +190,26 @@ for _, file in ipairs(pconsumables) do
     end
   end
 end 
+
+--Load stickers
+local pseals = NFS.getDirectoryItems(mod_dir.."stickers")
+
+for _, file in ipairs(pseals) do
+  sendDebugMessage ("The file is: "..file)
+  local sticker, load_error = SMODS.load_file("stickers/"..file)
+  if load_error then
+    sendDebugMessage ("The error is: "..load_error)
+  else
+    local curr_sticker = sticker()
+    if curr_sticker.init then curr_sticker:init() end
+    
+    for i, item in ipairs(curr_sticker.list) do
+      item.discovered = not pokermon_config.pokemon_discovery
+      SMODS.Sticker(item)
+    end
+  end
+end
+
 
 --Load pokemon file
 local pfiles = NFS.getDirectoryItems(mod_dir.."pokemon")
