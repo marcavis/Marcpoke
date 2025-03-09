@@ -592,11 +592,9 @@ local maractus = {
             if (pseudorandom('maractus') < G.GAME.probabilities.normal/card.ability.extra.odds) then
                 context.other_card.ability.p_dollars = context.other_card.ability.p_dollars + card.ability.extra.money_mod
                 context.other_card.ability.mult = context.other_card.ability.mult + card.ability.extra.mult_mod
-                --local earned = ease_poke_dollars(card, "gumshoos", card.ability.extra.money_mod)
                 card:juice_up()
                 return {
                     message = "Luckier!",
-                    --message = localize('$')..earned,
                     colour = G.C.MONEY,
                     card = context.other_card
                 }
