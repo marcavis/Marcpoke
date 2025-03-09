@@ -608,11 +608,11 @@ local maractus = {
 local cinderace = {
     name = "cinderace",
     pos = {x = 5, y = 0},
-    config = {extra = {mult = 0, ball_effect = 1.2}, ninesrequired = 5, default_ball_effect = 1.2},
+    config = {extra = {mult = 0, ball_effect = 1.0, Xmult_mod = 0.2}, nines = 0, default_ball_effect = 1.0},
     
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
-        return {vars = {center.ability.extra.mult}}
+        return {vars = {center.ability.extra.ball_effect, center.ability.extra.mult}}
     end,
     rarity = "poke_safari",
     stage = "Two",
@@ -625,24 +625,21 @@ local cinderace = {
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.scoring_hand then
             if context.before and not context.blueprint then
-                card.ability.ninesrequired = #context.scoring_hand
+                --card.ability.ninesrequired = #context.scoring_hand
+                card.ability.nines = 0
                 local hasten = false
                 local haslow = false
                 for k, v in pairs(context.scoring_hand) do
                     if v:get_id() == 10 then --pass the ball, strengthening its effect
                         hasten = true
-                        break
-                    end
-                    if v:get_id() >=2 and v:get_id() <= 6 then --recover the ball, strengthening its effect
+                    elseif v:get_id() >=2 and v:get_id() <= 6 then --recover the ball, strengthening its effect
                         haslow = true
-                        break
-                    end
-                    if v:get_id() == 9 then --use up the ball sticker, getting a reward now and losing it for this turn
-                        card.ability.ninesrequired = card.ability.ninesrequired - 1
+                    elseif v:get_id() == 9 then --use up the ball sticker, getting a reward now and losing it for this turn
+                        card.ability.nines = card.ability.nines + 1
                     end
                 end
                 
-                if card.ability.soccer_sticker and hasten then
+                if card.ability.soccer_sticker and hasten and card.ability.nines == 0 then
                     --TODO: What if he passes to another Cinderace?
                     local pass_targets = {}
                     for i=1, #G.jokers.cards do 
@@ -662,7 +659,7 @@ local cinderace = {
                             colour = G.C.MULT
                         }
                     end
-                elseif not card.ability.soccer_sticker and haslow then
+                elseif not card.ability.soccer_sticker and haslow and card.ability.nines == 0 then
                     local tackle_targets = {}
                     for i=1, #G.jokers.cards do 
                         if G.jokers.cards[i] ~= card and
@@ -681,7 +678,7 @@ local cinderace = {
                             colour = G.C.MULT
                         }
                     end
-                elseif card.ability.soccer_sticker and card.ability.ninesrequired > 0 then
+                elseif card.ability.soccer_sticker and card.ability.nines == 0 then
                     card.ability.extra.ball_effect = card.ability.extra.ball_effect + 0.2
                     return {
                         message = "Good Control!",
@@ -689,10 +686,13 @@ local cinderace = {
                     }
                 end
             elseif context.joker_main then
-                if card.ability.soccer_sticker and card.ability.ninesrequired == 0 then
+                if card.ability.soccer_sticker and card.ability.nines > 0 then
                     card.ability.soccer_sticker = false
+                    card.ability.extra.ball_effect = card.ability.extra.ball_effect + (0.2 * card.ability.nines)
+                    local message_flavor
+                    if card.ability.nines > 3 then message_flavor = "Great Goal!!!" end
                     return {
-                        message = "Goal!!!", 
+                        message = message_flavor or "Goal!", 
                         colour = G.C.MULT,
                         Xmult_mod = card.ability.extra.ball_effect,
                         mult_mod = card.ability.extra.mult,

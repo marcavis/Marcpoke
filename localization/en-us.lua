@@ -170,7 +170,9 @@ return {
             j_marcpoke_cinderace = {
                 name = "Cinderace",
                 text = {
-                    "{C:mult}+#1#{} Mult (testing)",
+                    "{X:red,C:white}X#1#{} Mult when shooting",
+                    "a soccer ball",
+                    "{C:mult}+#2#{} Mult (testing)",
                     "Restores its soccer ball",
                     "sticker every blind",
                 }
@@ -192,12 +194,11 @@ return {
             soccer_sticker = {
                 name = "Soccer Ball",
                 text = {
-                    "{X:red,C:white}X#1#{} Mult when shot",
-                    "Interacts with Cinderace",
                     "Only {X:attention,C:white}9s{} : Cinderace shoots it!",
-                    "Has {X:attention,C:white}10{} : Passes it, +{X:red,C:white}X0.8{} mult",
-                    "Has {X:attention,C:white}2-6{} : Recovers it, +{X:red,C:white}X0.8{} mult",
-                    "{X:attention,C:white}Otherwise{} : +{X:red,C:white}X0.2{} mult"
+                    "Each {X:attention,C:white}9{} adds {X:red,C:white}X#1#{} to shot",
+                    "Has {X:attention,C:white}10{} : Passes it, +{X:red,C:white}X#2#{} mult",
+                    "Has {X:attention,C:white}2-6{} : Recovers it, +{X:red,C:white}X#2#{} mult",
+                    "{X:attention,C:white}Otherwise{} : +{X:red,C:white}X#1#{} mult"
                 },
             }
         }

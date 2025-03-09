@@ -6,9 +6,9 @@ local soccer_sticker = {
 	  loc_vars = function(self, info_queue, card)
         if card.ability and card.ability.extra then
             if card.ability.name == "cinderace" then
-                return { vars = {card.ability.extra.ball_effect}}
+                return { vars = {card.ability.extra.Xmult_mod, card.ability.extra.Xmult_mod * 4}}
             else
-                return { vars = {1}}
+                return { vars = {0.2, 0.8}}
             end
         end
 	  end,
@@ -22,7 +22,7 @@ local soccer_sticker = {
     sets = {
     	Joker = true
     },
-	config = {card_pointer = nil, extra={effect = 1.2}, base_effect = 1.2},
+	config = {card_pointer = nil},
     apply = function(self, card, val)
     	card.ability[self.key] = val
   	end,
