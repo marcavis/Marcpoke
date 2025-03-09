@@ -581,6 +581,7 @@ local maractus = {
     end,
     rarity = 2,
     cost = 6,
+    enhancement_gate = 'm_lucky',
     stage = "Basic",
     ptype = "Grass",
     atlas = "marcPoke5",
