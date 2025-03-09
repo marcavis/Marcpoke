@@ -519,7 +519,7 @@ local gumshoos = {
 
 local toxtricity = {
     name = "toxtricity", 
-    pos = {x = 13, y = 0}, 
+    pos = {x = 13, y = 2}, 
     config = {extra = {}},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
@@ -529,7 +529,7 @@ local toxtricity = {
     cost = 8, 
     stage = "One", 
     ptype = "Lightning",
-    atlas = "marcPoke6",
+    atlas = "marcPoke8",
     blueprint_compat = true,
     calculate = function(self, card, context)
         --relevant code is in lovely/toxtricity.toml
@@ -574,31 +574,26 @@ local chatot = {
 local maractus = {
     name = "maractus", 
     pos = {x = 6, y = 4}, 
-    config = {extra = {odds = 3, mult_mod = 5, money_mod = 5}},
+    config = {extra = {mult_mod = 7, money_mod = 7}},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
-        return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), center.ability.extra.odds, center.ability.extra.mult_mod, center.ability.extra.money_mod}}
+        return {vars = {center.ability.extra.mult_mod, center.ability.extra.money_mod}}
     end,
     rarity = 2,
     cost = 6,
     stage = "Basic",
     ptype = "Grass",
     atlas = "marcPoke5",
-    blueprint_compat = false,
-
+    blueprint_compat = true,
     calculate = function(self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card and not context.other_card.debuff
-        and not context.end_of_round and context.other_card.ability.name == 'Lucky Card' then
-            if (pseudorandom('maractus') < G.GAME.probabilities.normal/card.ability.extra.odds) then
-                context.other_card.ability.p_dollars = context.other_card.ability.p_dollars + card.ability.extra.money_mod
-                context.other_card.ability.mult = context.other_card.ability.mult + card.ability.extra.mult_mod
-                card:juice_up()
-                return {
-                    message = "Luckier!",
-                    colour = G.C.MONEY,
-                    card = context.other_card
-                }
-            end
+        if context.individual and context.cardarea == G.play and context.other_card and context.other_card.lucky_trigger then
+            context.other_card.ability.p_dollars = context.other_card.ability.p_dollars + card.ability.extra.money_mod
+            context.other_card.ability.mult = context.other_card.ability.mult + card.ability.extra.mult_mod
+            return {
+                extra = {message = localize('k_upgrade_ex'), colour = G.C.CHIPS},
+                colour = G.C.MONEY,
+                card = card
+            }
         end
     end,
 }

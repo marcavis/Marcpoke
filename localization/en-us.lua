@@ -152,10 +152,9 @@ return {
             j_marcpoke_maractus = {
                 name = "Maractus",
                 text = {
-                    "{C:green}#1# in #2#{} chance to",
-                    "improve the reward of {C:attention}Lucky{} cards",
-                    "each time they're scored",
-                    "by {C:mult}+#3#{} Mult and {C:money}$#4#{}"
+                    "When a {C:attention}Lucky{} card triggers",
+                    "its rewards improve",
+                    "by {C:mult}+#1#{} Mult and {C:money}$#2#{}"
                 }
 
             },
