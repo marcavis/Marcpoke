@@ -1,0 +1,14 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 10
+
+[[patches]]
+[patches.pattern]
+target = 'cardarea.lua'
+pattern = "local card_count = math.abs(delta)"
+position = "after"
+payload = "card_count = math.min(card_count, self.config.card_limit - self.config.card_count)"
+match_indent = true
+
+
