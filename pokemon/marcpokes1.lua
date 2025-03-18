@@ -553,7 +553,7 @@ local toxtricity_lowkey = {
     calculate = function(self, card, context)
         if not context.repetition and not context.individual and context.end_of_round and not context.blueprint then
             for _, nrg in ipairs(G.consumeables.cards) do
-                if nrg.ability and nrg.ability.set == "Energy" and not nrg.ability.edition.negative then
+                if nrg.ability and nrg.ability.set == "Energy" and not (nrg.ability.edition and nrg.ability.edition.negative) then
                     nrg:set_edition({negative = true}, true)
                     card_eval_status_text(nrg, 'extra', nil, nil, nil, {message = "Negative!", colour = G.C.PURPLE})
                 end
