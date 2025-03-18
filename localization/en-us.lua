@@ -126,7 +126,7 @@ return {
                     "{C:inactive,s:0.8}(Target changes at blind selection){}",
                 }
             },
-            j_marcpoke_toxtricity = {
+            j_marcpoke_toxtricity_amped = {
                 name = "Toxtricity (Amped)",
                 text = {
                     "Increases the effect",
