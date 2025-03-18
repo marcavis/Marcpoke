@@ -131,7 +131,6 @@ return {
                 text = {
                     "Increases the effectiveness",
                     "of {C:pink}Energy{} cards by {C:attention}50%{}"
-<<<<<<< HEAD
                 }
             },
             j_marcpoke_toxtricity_lowkey = {
@@ -140,8 +139,6 @@ return {
                     "At end of round,",
                     "converts any energy cards",
                     "to {C:dark_edition}Negative{}"
-=======
->>>>>>> 9110f5e5ff3bcf41660607ce9fce2ee33881854d
                 }
             },
             j_marcpoke_joke_exploud = {
