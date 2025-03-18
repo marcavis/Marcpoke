@@ -129,8 +129,8 @@ return {
             j_marcpoke_toxtricity_amped = {
                 name = "Toxtricity (Amped)",
                 text = {
-                    "Increases the effect",
-                    "of energy cards by 50%"
+                    "Increases the effectiveness",
+                    "of {C:pink}Energy{} cards by {C:attention}50%{}"
                 }
             },
             j_marcpoke_toxtricity_lowkey = {
