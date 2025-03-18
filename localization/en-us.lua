@@ -129,8 +129,8 @@ return {
             j_marcpoke_toxtricity = {
                 name = "Toxtricity",
                 text = {
-                    "Increases the effect",
-                    "of energy cards by 50%"
+                    "Increases the effectiveness",
+                    "of {C:pink}Energy{} cards by {C:attention}50%{}"
                 }
             },
             j_marcpoke_joke_exploud = {
