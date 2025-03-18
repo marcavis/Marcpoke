@@ -517,8 +517,8 @@ local gumshoos = {
     end,
 }
 
-local toxtricity = {
-    name = "toxtricity", 
+local toxtricity_amped = {
+    name = "toxtricity_amped", 
     pos = {x = 13, y = 2}, 
     config = {extra = {}},
     loc_vars = function(self, info_queue, center)
@@ -533,6 +533,32 @@ local toxtricity = {
     blueprint_compat = true,
     calculate = function(self, card, context)
         --relevant code is in lovely/toxtricity.toml
+    end,
+}
+
+local toxtricity_lowkey = {
+    name = "toxtricity_lowkey", 
+    pos = {x = 0, y = 3}, 
+    config = {extra = {}},
+    loc_vars = function(self, info_queue, center)
+        type_tooltip(self, info_queue, center)
+        return {vars = {}}
+    end,
+    rarity = 2, 
+    cost = 8, 
+    stage = "One", 
+    ptype = "Lightning",
+    atlas = "marcPoke8",
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if not context.repetition and not context.individual and context.end_of_round and not context.blueprint then
+            for _, nrg in ipairs(G.consumeables.cards) do
+                if nrg.ability and nrg.ability.set == "Energy" and not nrg.ability.edition.negative then
+                    nrg:set_edition({negative = true}, true)
+                    card_eval_status_text(nrg, 'extra', nil, nil, nil, {message = "Negative!", colour = G.C.PURPLE})
+                end
+            end
+        end
     end,
 }
 
@@ -718,7 +744,7 @@ local cinderace = {
 }
 
 return {name = "Pokemon Jokers 541-570", 
-        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos, toxtricity, chatot, maractus, cinderace},
+        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos, toxtricity_amped, toxtricity_lowkey, chatot, maractus, cinderace},
 }
 
 -- local kakuna={

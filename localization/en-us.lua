@@ -127,10 +127,18 @@ return {
                 }
             },
             j_marcpoke_toxtricity = {
-                name = "Toxtricity",
+                name = "Toxtricity (Amped)",
                 text = {
                     "Increases the effect",
                     "of energy cards by 50%"
+                }
+            },
+            j_marcpoke_toxtricity_lowkey = {
+                name = "Toxtricity (Low Key)",
+                text = {
+                    "At end of round,",
+                    "converts any energy cards",
+                    "to {C:dark_edition}Negative{}"
                 }
             },
             j_marcpoke_joke_exploud = {
