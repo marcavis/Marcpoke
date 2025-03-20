@@ -11,10 +11,12 @@ pattern = "if total_cashout_rows > 7 then"
 position = "before"
 payload = '''
 local johto_moms = find_joker('johto_mom')
-for i = 1, #johto_moms do
-  add_round_eval_row({bonus = true, name='joker_johto_mom'..i, pitch = pitch, dollars = -3, card = johto_moms[i]})
-  johto_moms[i].config.center:add_to_savings(-2)
-  dollars = dollars - 3
+--for i = 1, #johto_moms do
+for i, v in ipairs(SMODS.find_card("j_marcpoke_johto_mom")) do
+  local moms_cut = v.ability.extra.tax_rate * dollars
+  add_round_eval_row({bonus = true, name='joker_johto_mom'..i, pitch = pitch, dollars = -moms_cut, card = v})
+  v.config.center:add_to_savings(v, moms_cut * v.ability.extra.efficiency)
+  dollars = dollars - moms_cut
 end
 '''
 match_indent = true

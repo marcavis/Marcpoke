@@ -178,7 +178,7 @@ return {
                 name = "Johto Mom",
                 text = {
                     "Lose {C:attention}20%{} of end of round payout,",
-                    "Earning half of that as {C:attention}sell value{}",
+                    "earning half of that as {C:attention}sell value{}",
                     "Buys random {C:dark_edition}Negative{} rare items",
                     "when holding more than",
                     "{C:money}$#1#{} in sell value"
