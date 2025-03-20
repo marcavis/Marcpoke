@@ -174,6 +174,16 @@ return {
                     "when a Joker evolves",
                 }
             },
+            j_marcpoke_johto_mom = {
+                name = "Johto Mom",
+                text = {
+                    "Lose {C:attention}20%{} of end of round payout,",
+                    "Earning half of that as {C:attention}sell value{}",
+                    "Buys random {C:dark_edition}Negative{} rare items",
+                    "when holding more than",
+                    "{C:money}$#1#{} in sell value"
+                }
+            },
             j_marcpoke_cinderace = {
                 name = "Cinderace",
                 text = {

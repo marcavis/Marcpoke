@@ -1,0 +1,20 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Johto Mom taking a fraction of payout
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "if total_cashout_rows > 7 then"
+position = "before"
+payload = '''
+local johto_moms = find_joker('johto_mom')
+for i = 1, #johto_moms do
+  add_round_eval_row({bonus = true, name='joker_johto_mom'..i, pitch = pitch, dollars = -3, card = johto_moms[i]})
+  johto_moms[i].config.center:add_to_savings(-2)
+  dollars = dollars - 3
+end
+'''
+match_indent = true
