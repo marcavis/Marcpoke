@@ -2,6 +2,9 @@ return {
     misc = {
         labels = {
             soccer_sticker = "Soccer"
+        },
+        dictionary = {
+            poke_deenergized_ex = "Lost energy!",
         }
     },
     descriptions = {  
@@ -194,6 +197,18 @@ return {
                     "sticker every blind",
                 }
             },
+            j_marcpoke_darkrai = {
+                name = "Darkrai",
+                text = {
+                    "When blind is selected,",
+                    "create a {C:dark_edition}Nightmare{} spectral card",
+                    "{C:inactive,s:0.8}(Must have room)",
+                    "{br:2}text needs to be here to work",
+                    "{C:attention}Energy{} cards in your consumable",
+                    "area apply their effect to all",
+                    "Jokers of the same type"
+                }
+            }
 
         },
         Item = {
