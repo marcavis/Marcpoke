@@ -11,8 +11,24 @@ SMODS.Atlas({
 }):register()
 
 SMODS.Atlas({
-  key = "shiny_marcPoke1",
-  path = "Shinydex1.png",
+  key = "marcPoke1",
+  path = "Pokedex1.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "regionals",
+  path = "Regionals.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "shiny_regionals",
+  path = "ShinyRegionals.png",
   path_prefix = SMODS.Mods["Pokermon"].path,
   px = 71,
   py = 95

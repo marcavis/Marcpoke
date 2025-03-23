@@ -253,7 +253,7 @@ local timburr = {
 
   local alolan_grimer={
     name = "alolan_grimer", 
-    pos = {x = 9, y = 6}, 
+    pos = {x = 2, y = 1}, 
     config = {extra = {mult = 8, minimum_deck_size = 24, rounds = 5}},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
@@ -264,7 +264,7 @@ local timburr = {
     cost = 4, 
     stage = "One", 
     ptype = "Dark",
-    atlas = "marcPoke1",
+    atlas = "regionals",
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.scoring_hand then
@@ -318,7 +318,7 @@ local timburr = {
 
 local alolan_muk={
     name = "alolan_muk", 
-    pos = {x = 10, y = 6}, 
+    pos = {x = 3, y = 1}, 
     config = {extra = {mult = 10, mult_mod = 2, targets = 2, minimum_deck_size = 20}},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
@@ -329,7 +329,7 @@ local alolan_muk={
     cost = 8, 
     stage = "One", 
     ptype = "Dark",
-    atlas = "marcPoke1",
+    atlas = "regionals",
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.scoring_hand then

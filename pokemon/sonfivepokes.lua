@@ -15,7 +15,7 @@ local darkrai = {
     atlas = "marcPoke4",
     blueprint_compat = true,
     calculate = function(self, card, context)
-        if context.setting_blind then
+        if context.setting_blind and context.blind == G.P_BLINDS.bl_small then
             if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
                 local _card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, "c_poke_nightmare")
                 _card:add_to_deck()

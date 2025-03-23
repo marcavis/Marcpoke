@@ -200,7 +200,7 @@ return {
             j_marcpoke_darkrai = {
                 name = "Darkrai",
                 text = {
-                    "When blind is selected,",
+                    "When {C:attention}Small Blind{} is selected,",
                     "create a {C:dark_edition}Nightmare{} spectral card",
                     "{C:inactive,s:0.8}(Must have room)",
                     "{br:2}text needs to be here to work",
