@@ -34,12 +34,11 @@ local darkrai = {
             for _j, joker in ipairs(G.jokers.cards) do
                 for _c, nrg in ipairs(energies) do
                     --to ease end of round calculations, colorless energy CAN'T be used in non-colorless jokers.
-                    print(joker.ability.extra.pytpe, nrg.config.center.etype)
                     if energy_matches(joker, nrg.config.center.etype, false) then
                         energy_shift(joker, 1, joker.ability.extra.ptype, false, false)        
                         joker.ability.extra.borrowed_energy = (joker.ability.extra.borrowed_energy or 0) + 1
                         --TODO: remove prints later
-                        print(joker.ability.name, joker.ability.extra.borrowed_energy, " energy borrowed")
+                        -- print(joker.ability.name, joker.ability.extra.borrowed_energy, " energy borrowed")
                     end
                 end
             end
