@@ -1,0 +1,76 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 10
+
+#Force the energy used infobox to appear if we have borrowed energy, even if we don't have added energy to the pokemon directly
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
+pattern = '''
+if (center.ability and center.ability.extra and type(center.ability.extra) == "table" and ((center.ability.extra.energy_count or 0) + (center.ability.extra.c_energy_count or 0) > 0)) then
+'''
+position = "at"
+payload = '''
+if (center.ability and center.ability.extra and type(center.ability.extra) == "table" and
+     ((center.ability.extra.energy_count or 0) + (center.ability.extra.c_energy_count or 0) > 0) or
+     center.ability.extra.borrowed_energy and center.ability.extra.borrowed_energy ~= 0) then
+'''
+match_indent = true
+
+#add the amount of borrowed energy in parentheses in the Energy Used box, in case it exists
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
+pattern = '''
+info_queue[#info_queue+1] = {set = 'Other', key = "energy", vars = {(center.ability.extra.energy_count or 0) + (center.ability.extra.c_energy_count or 0), energy_max + (G.GAME.energy_plus or 0)}}
+'''
+position = "at"
+payload = '''
+local borrowed_energy = center.ability and center.ability.extra and center.ability.extra.borrowed_energy or 0
+local borrowed_energy_string
+if borrowed_energy ~= 0 then borrowed_energy_string = "(+"..borrowed_energy..")" else borrowed_energy_string = "" end
+info_queue[#info_queue+1] = {
+    set = "Other",
+    key = "energy",
+    vars = {
+        (center.ability.extra.energy_count or 0) + (center.ability.extra.c_energy_count or 0),
+        energy_max + (G.GAME.energy_plus or 0),
+        borrowed_energy_string
+    }
+}
+'''
+match_indent = true
+
+#Add (+X) energy borrowed field to the energy infobox on the localization field
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "localization/en-us.lua"]'
+pattern = '''
+name = "Energy Used",
+    text = {
+        "{C:attention}#1#{}/#2#",
+    }
+'''
+position="at"
+payload = '''
+name = "Energy Used",
+    text = {
+        "{C:attention}#1#{}{C:dark_edition}#3#{}/#2#",
+    }
+'''
+match_indent = true
+
+
+#local borrowed_energy = center.ability.extra.borrowed_energy or 0
+#local borrowed_energy_string
+#if borrowed_energy then borrowed_energy_string = "(+"..borrowed_energy..")" else "" end
+#info_queue[#info_queue+1] = {
+#    set = "Other",
+#    key = "energy",
+#    vars = {
+#        (center.ability.extra.energy_count or 0) + (center.ability.extra.c_energy_count or 0),
+#        energy_max + (G.GAME.energy_plus or 0),
+#        borrowed_energy_string
+#    }
+#}
