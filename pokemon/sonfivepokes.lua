@@ -15,12 +15,14 @@ local darkrai = {
     atlas = "marcPoke4",
     blueprint_compat = true,
     calculate = function(self, card, context)
-        if context.setting_blind and context.blind == G.P_BLINDS.bl_small then
-            if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-                local _card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, "c_poke_nightmare")
-                _card:add_to_deck()
-                G.consumeables:emplace(_card)
-                card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize("k_plus_spectral"), colour = G.C.PURPLE})
+        if context.setting_blind then
+            if context.blind == G.P_BLINDS.bl_small then
+                if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                    local _card = create_card('Spectral', G.consumeables, nil, nil, nil, nil, "c_poke_nightmare")
+                    _card:add_to_deck()
+                    G.consumeables:emplace(_card)
+                    card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize("k_plus_spectral"), colour = G.C.PURPLE})
+                end
             end
             local energies = {}
             for _c, item in ipairs(G.consumeables.cards) do
@@ -32,6 +34,7 @@ local darkrai = {
             for _j, joker in ipairs(G.jokers.cards) do
                 for _c, nrg in ipairs(energies) do
                     --to ease end of round calculations, colorless energy CAN'T be used in non-colorless jokers.
+                    print(joker.ability.extra.pytpe, nrg.config.center.etype)
                     if energy_matches(joker, nrg.config.center.etype, false) then
                         energy_shift(joker, 1, joker.ability.extra.ptype, false, false)        
                         joker.ability.extra.borrowed_energy = (joker.ability.extra.borrowed_energy or 0) + 1
