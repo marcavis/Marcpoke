@@ -28,7 +28,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
   key = "shiny_marcPoke1",
-  path = "ShinyPokedex1.png",
+  path = "Shinydex1.png",
   path_prefix = SMODS.Mods["Pokermon"].path,
   px = 71,
   py = 95
