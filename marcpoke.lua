@@ -3,22 +3,6 @@ assert(SMODS.load_file("functions/marcpokefunctions.lua"))()
 default_poke_custom_prefix = "marcpoke"
 
 SMODS.Atlas({
-  key = "marcPoke1",
-  path = "Pokedex1.png",
-  path_prefix = SMODS.Mods["Pokermon"].path,
-  px = 71,
-  py = 95
-}):register()
-
-SMODS.Atlas({
-  key = "marcPoke1",
-  path = "Pokedex1.png",
-  path_prefix = SMODS.Mods["Pokermon"].path,
-  px = 71,
-  py = 95
-}):register()
-
-SMODS.Atlas({
   key = "regionals",
   path = "Regionals.png",
   path_prefix = SMODS.Mods["Pokermon"].path,
@@ -29,6 +13,22 @@ SMODS.Atlas({
 SMODS.Atlas({
   key = "shiny_regionals",
   path = "ShinyRegionals.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "marcPoke1",
+  path = "Pokedex1.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "shiny_marcPoke1",
+  path = "ShinyPokedex1.png",
   path_prefix = SMODS.Mods["Pokermon"].path,
   px = 71,
   py = 95
