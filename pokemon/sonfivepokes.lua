@@ -32,14 +32,19 @@ local darkrai = {
                 end
             end
             for _j, joker in ipairs(G.jokers.cards) do
+                local show_message = false
                 for _c, nrg in ipairs(energies) do
                     --to ease end of round calculations, colorless energy CAN'T be used in non-colorless jokers.
                     if energy_matches(joker, nrg.config.center.etype, false) then
-                        energy_shift(joker, 1, joker.ability.extra.ptype, false, false)        
+                        energy_shift(joker, 1, joker.ability.extra.ptype, false, true)        
                         joker.ability.extra.borrowed_energy = (joker.ability.extra.borrowed_energy or 0) + 1
+                        show_message = true
                         --TODO: remove prints later
                         -- print(joker.ability.name, joker.ability.extra.borrowed_energy, " energy borrowed")
                     end
+                end
+                if show_message then 
+                    card_eval_status_text(joker, 'extra', nil, nil, nil, {message = "Borrowed "..(joker.ability.extra.borrowed_energy or 0).." energy!", colour = G.C.CHIPS})
                 end
             end
         end
