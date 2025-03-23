@@ -59,6 +59,7 @@ energy_shift = function(card, energy_delta, etype, evolving, silent)
             local data = card.ability.extra[name]
             if type(data) == "number" then
                 local addition = energy_values[name] * energy_delta
+                addition = addition + (addition / 2) * (#SMODS.find_card("j_marcpoke_toxtricity_amped"))
                 local previous_mod = nil
                 local updated_mod = nil
                 if name == "mult_mod" or name == "chip_mod" then previous_mod = card.ability.extra[name] end
