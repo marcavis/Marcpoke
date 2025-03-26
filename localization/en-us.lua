@@ -1,7 +1,8 @@
 return {
     misc = {
         labels = {
-            soccer_sticker = "Soccer"
+            soccer_sticker = "Soccer",
+            rebel_sticker = "Rebel",
         },
         dictionary = {
             poke_deenergized_ex = "Lost energy!",
@@ -231,6 +232,13 @@ return {
                     "Has {X:attention,C:white}10{} : Passes it, +{X:red,C:white}X#2#{} mult",
                     "Has {X:attention,C:white}2-6{} : Recovers it, +{X:red,C:white}X#2#{} mult",
                     "{X:attention,C:white}Otherwise{} : +{X:red,C:white}X#1#{} mult"
+                },
+            },
+            rebel_sticker = {
+                name = "Rebel",
+                text = {
+                    "The values on this",
+                    "joker are reversed",
                 },
             }
         }
