@@ -31,7 +31,7 @@ local soccer_sticker = {
 local rebel_sticker = {
     key = "rebel_sticker",
     should_apply = function(self, card, center, area)
-    	return true
+    	return false
   	end,
     loc_vars = function(self, info_queue, card)
         return { vars = {}}
