@@ -1,0 +1,20 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 10
+
+
+#this is missing the code for allowing saving it with the controller, but let's leave that for later
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "pokeui.lua"]'
+pattern = '''
+if (G.STATE == G.STATES.SMODS_BOOSTER_OPENED and SMODS.OPENED_BOOSTER.label:find("Pocket")) or (G.GAME.poke_save_all and not SMODS.OPENED_BOOSTER.label:find("Wish")) or (card.ability.name == 'megastone') then
+'''
+position = "at"
+payload = '''
+if (G.STATE == G.STATES.SMODS_BOOSTER_OPENED and SMODS.OPENED_BOOSTER.label:find("Pocket")) or (G.GAME.poke_save_all and not SMODS.OPENED_BOOSTER.label:find("Wish")) or (card.ability.name == 'megastone') or (card.ability.name == "bills_pc")  then
+'''
+match_indent = true
+
+
