@@ -10,7 +10,7 @@ local bills_pc = {
     pos = { x = 0, y = 0 },
     atlas = "bills_pc",
     cost = 4,
-    hidden = true,
+    --hidden = true,
     unlocked = true,
     discovered = true,
     add_to_deck = function(self, card, from_debuff)
