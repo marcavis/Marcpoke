@@ -6,9 +6,9 @@ local soccer_sticker = {
 	  loc_vars = function(self, info_queue, card)
         if card.ability and card.ability.extra then
             if card.ability.name == "cinderace" then
-                return { vars = {card.ability.extra.Xmult_mod, card.ability.extra.Xmult_mod * 4}}
+                return { vars = {card.ability.extra.Xmult_mod * 2, 1.0 + card.ability.extra.Xmult_mod, card.ability.extra.Xmult_mod}}
             else
-                return { vars = {0.2, 0.8}}
+                return { vars = {0.4, 1.2, 0.2}}
             end
         end
 	  end,

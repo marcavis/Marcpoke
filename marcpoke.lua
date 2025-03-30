@@ -51,6 +51,22 @@ SMODS.Atlas({
 }):register()
 
 SMODS.Atlas({
+  key = "marcPoke3",
+  path = "Pokedex3.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
+  key = "shiny_marcPoke3",
+  path = "Shinydex3.png",
+  path_prefix = SMODS.Mods["Pokermon"].path,
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
   key = "marcPoke4",
   path = "Pokedex4.png",
   path_prefix = SMODS.Mods["Pokermon"].path,

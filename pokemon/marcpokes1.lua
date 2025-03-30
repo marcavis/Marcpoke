@@ -629,7 +629,7 @@ local maractus = {
 local cinderace = {
     name = "cinderace",
     pos = {x = 5, y = 0},
-    config = {extra = {mult = 0, ball_effect = 1.0, Xmult_mod = 0.2}, nines = 0, default_ball_effect = 1.0},
+    config = {extra = {mult = 0, ball_effect = 1.0, Xmult_mod = 0.2}, nines = 0, tens = 0, default_ball_effect = 1.0},
     
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
@@ -644,72 +644,43 @@ local cinderace = {
         card.ability.soccer_sticker = true
     end,
     calculate = function(self, card, context)
-        if context.cardarea == G.jokers and context.scoring_hand then
+        -- if context.individual and context.cardarea == G.play then
+        --     if context.other_card:get_id() == 10 or context.other_card:get_id() == 10 then
+
+        --     end
+        -- end
+        if context.cardarea == G.jokers and context.full_hand then
             if context.before and not context.blueprint then
                 --card.ability.ninesrequired = #context.scoring_hand
                 card.ability.nines = 0
-                local hasten = false
-                local haslow = false
-                for k, v in pairs(context.scoring_hand) do
-                    if v:get_id() == 10 then --pass the ball, strengthening its effect
-                        hasten = true
-                    elseif v:get_id() >=2 and v:get_id() <= 6 then --recover the ball, strengthening its effect
-                        haslow = true
-                    elseif v:get_id() == 9 then --use up the ball sticker, getting a reward now and losing it for this turn
+                card.ability.tens = 0
+                card.ability.aces = 0
+                for k, v in pairs(context.full_hand) do
+                    if v:get_id() == 10 then --power up the ball
+                        card.ability.tens = card.ability.tens + 1
+                    elseif v:get_id() == 14 then
+                        card.ability.aces = card.ability.aces + 1
+                    elseif v:get_id() == 9 then --use up the ball sticker, getting a reward now and losing it for this round
                         card.ability.nines = card.ability.nines + 1
                     end
                 end
                 
-                if card.ability.soccer_sticker and hasten and card.ability.nines == 0 then
-                    --TODO: What if he passes to another Cinderace?
-                    local pass_targets = {}
-                    for i=1, #G.jokers.cards do 
-                        if G.jokers.cards[i] ~= card and
-                        not G.jokers.cards[i].ability.soccer_sticker then
-                            pass_targets[#pass_targets+1] = G.jokers.cards[i]
-                        end
-                    end
-                    if #pass_targets >= 1 then
-                        card.ability.soccer_sticker = false
-                        card.ability.extra.ball_effect = card.ability.extra.ball_effect + 0.8
-                        pseudoshuffle(pass_targets, pseudoseed("cinderace"))
-                        local chosen_joker = pass_targets[1]
-                        chosen_joker.ability.soccer_sticker = true
-                        return {
-                            message = "Great Pass!",
-                            colour = G.C.MULT
-                        }
-                    end
-                elseif not card.ability.soccer_sticker and haslow and card.ability.nines == 0 then
-                    local tackle_targets = {}
-                    for i=1, #G.jokers.cards do 
-                        if G.jokers.cards[i] ~= card and
-                        G.jokers.cards[i].ability.soccer_sticker then
-                            tackle_targets[#tackle_targets+1] = G.jokers.cards[i]
-                        end
-                    end
-                    if #tackle_targets >= 1 then
-                        card.ability.soccer_sticker = true
-                        card.ability.extra.ball_effect = card.ability.extra.ball_effect + 0.8
-                        pseudoshuffle(tackle_targets, pseudoseed("cinderace"))
-                        local chosen_joker = tackle_targets[1]
-                        chosen_joker.ability.soccer_sticker = false
-                        return {
-                            message = "Great Tackle!",
-                            colour = G.C.MULT
-                        }
-                    end
-                elseif card.ability.soccer_sticker and card.ability.nines == 0 then
-                    card.ability.extra.ball_effect = card.ability.extra.ball_effect + 0.2
+                if card.ability.soccer_sticker then
+                    print(card.ability.extra.ball_effect)
+                    card.ability.extra.ball_effect = card.ability.extra.ball_effect + (2 * card.ability.extra.Xmult_mod * card.ability.tens)
+                    print(card.ability.extra.ball_effect)
+                    card.ability.extra.ball_effect = card.ability.extra.ball_effect * math.pow(1.0 + card.ability.extra.Xmult_mod, card.ability.aces)
+                    print(card.ability.extra.ball_effect)
                     return {
-                        message = "Good Control!",
+                        message = "Power up!",
                         colour = G.C.MULT
                     }
                 end
             elseif context.joker_main then
                 if card.ability.soccer_sticker and card.ability.nines > 0 then
                     card.ability.soccer_sticker = false
-                    card.ability.extra.ball_effect = card.ability.extra.ball_effect + (0.2 * card.ability.nines)
+                    card.ability.extra.ball_effect = card.ability.extra.ball_effect + (card.ability.extra.Xmult_mod * card.ability.nines)
+                    print(card.ability.extra.ball_effect)
                     local message_flavor
                     if card.ability.nines > 3 then message_flavor = "Great Goal!!!" end
                     return {
@@ -728,14 +699,8 @@ local cinderace = {
         end
         if not context.repetition and not context.individual and context.end_of_round and not context.blueprint then
             card.ability.extra.ball_effect = card.ability.default_ball_effect
-            --restore the ball sticker to Cinderace, remove from others
-            for _, v in ipairs(G.jokers.cards) do
-                if card.config.center.key == v.config.center.key then
-                    card.ability.soccer_sticker = true
-                else
-                    v.ability.soccer_sticker = false    
-                end
-            end
+            --restore the ball sticker to Cinderace
+            card.ability.soccer_sticker = true
             return {
                 message = localize('k_reset'),
                 colour = G.C.RED

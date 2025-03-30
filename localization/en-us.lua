@@ -209,8 +209,7 @@ return {
                     "area apply their effect to all",
                     "Jokers of the same type"
                 }
-            }
-
+            },
         },
         Item = {
             c_marcpoke_bills_pc = {
@@ -227,11 +226,13 @@ return {
             soccer_sticker = {
                 name = "Soccer Ball",
                 text = {
-                    "Only {X:attention,C:white}9s{} : Cinderace shoots it!",
-                    "Each {X:attention,C:white}9{} adds {X:red,C:white}X#1#{} to shot",
-                    "Has {X:attention,C:white}10{} : Passes it, +{X:red,C:white}X#2#{} mult",
-                    "Has {X:attention,C:white}2-6{} : Recovers it, +{X:red,C:white}X#2#{} mult",
-                    "{X:attention,C:white}Otherwise{} : +{X:red,C:white}X#1#{} mult"
+                    "If played hand has {X:attention,C:white}9s{} :",
+                    "Cinderace shoots it!",
+                    "Each {X:attention,C:white}9{} adds {X:red,C:white}X#3#{} to shot",
+                    "{br:2}text needs to be here to work",
+                    "Each {X:attention,C:white}10{} : +{X:red,C:white}X#1#{} mult",
+                    "Has {X:attention,C:white}Ace{} : Multiplies the {X:red,C:white}X{} mult", 
+                    "of the next shot by {X:red,C:white}X#2#{} mult",
                 },
             },
             rebel_sticker = {
@@ -244,3 +245,13 @@ return {
         }
     }
 }
+
+            -- j_marcpoke_test_magmar = {
+            --     name = 'Test Magmar',      
+            --     text = {
+            --         "If {C:attention}first discard{} of round has only",
+            --         "{C:attention}1{} card, destroy it and gain {C:mult}+#2#{} Mult",
+            --         "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)",
+            --         "{C:inactive,s:0.8}(Evolves with a {C:attention,s:0.8}Linking Cord{C:inactive,s:0.8})"
+            --     } 
+            -- },
