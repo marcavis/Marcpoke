@@ -12,15 +12,12 @@ local vanilla_rarities = {["Common"] = 1, ["Uncommon"] = 2, ["Rare"] = 3, ["Lege
 '''
 position = "after"
 payload = '''
-print(rarity_poll)
 local repels = SMODS.find_card("c_marcpoke_repel")
 for i, v in ipairs(repels) do
-    print(i)
     if v.ability.used then
         rarity_poll = 0.7 + (0.3 * rarity_poll)
         break
     end
 end
-print(rarity_poll)
 '''
 match_indent = true
