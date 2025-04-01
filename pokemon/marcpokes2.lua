@@ -43,6 +43,7 @@ local johto_mom = {
     config = {extra = {spend_target = 15, tax_rate = 0.2, efficiency = 0.5}},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
+        info_queue[#info_queue+1] = {set = 'Other', key = 'moms_shopping_list'}
         return {vars = {center.ability.extra.spend_target, center.ability.extra.tax_rate, center.ability.extra.efficiency}}
         --dunno if I wanna use mult_mod2 after all
     end,

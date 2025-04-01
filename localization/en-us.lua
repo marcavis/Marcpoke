@@ -44,6 +44,7 @@ return {
                     "Gives {C:attention}+#1#%{} of",
                     "the chip value of the",
                     "remaining cards in deck",
+                    "Currently: {C:chips}#3#{} chips",
                     "{C:inactive}(Evolves after {C:attention}#2#{}{C:inactive} rounds)"
                 } 
             },
@@ -52,7 +53,8 @@ return {
                 text = {
                     "Gives {C:attention}+#1#%{} of",
                     "the chip value of the",
-                    "remaining cards in deck"
+                    "remaining cards in deck",
+                    "Currently: {C:chips}#2#{} chips"
                 } 
             },
             j_marcpoke_timburr = {
@@ -223,6 +225,15 @@ return {
             }
         },
         Other = {
+            moms_shopping_list = {
+                name = "Mom's Shopping List",
+                text = {
+                    "{C:attention}10%{} - {X:water,C:white}Salon visit!{}",
+                    "{C:inactive,s:0.8}(Gives a random edition to a joker){C:inactive,s:0.8})",
+                    "{C:attention}10%{} - {X:water,C:white}Evolution Stone{}",
+                    "{C:attention}1%{} - {X:fairy,C:white}Mega Stone{}"
+                }
+            },
             soccer_sticker = {
                 name = "Soccer Ball",
                 text = {

@@ -27,53 +27,31 @@
 -- Archeops 567
 -- Trubbish 568
 local trubbish = {
-        name = "trubbish",
-        poke_custom_prefix = "marcpoke",
-        pos = {x = 4, y = 5}, 
-        config = {extra = {chips = 10, rounds = 5}},
-        loc_vars = function(self, info_queue, center)
-          type_tooltip(self, info_queue, center)
-          return {vars = {center.ability.extra.chips, center.ability.extra.rounds}}
-        end,
-        rarity = 2, 
-        cost = 4,
-        ptype = "Dark",
-        stage = "Basic", 
-        atlas = "marcPoke5",
-        blueprint_compat = true,
-        calculate = function(self, card, context)
-            if context.cardarea == G.jokers and context.scoring_hand then
-                if context.joker_main and #G.deck.cards > 0 then
-                    local chipSum = 0
-                    for k, v in pairs(G.deck.cards) do
-                        local total_chips = poke_total_chips(v)
-                        chipSum = chipSum + total_chips
-                    end
-                    return {
-                        message = localize{type = 'variable', key = 'a_chips', vars = {(card.ability.extra.chips/100) * chipSum}}, 
-                        colour = G.C.CHIPS,
-                        chip_mod = (card.ability.extra.chips/100) * chipSum
-                    }
-                end
-            end
-            return level_evo(self, card, context, "j_marcpoke_garbodor")
-        end
-      }
--- Garbodor 569
-local garbodor = {
-    name = "garbodor",
-    pos = {x = 5, y = 5}, 
-    config = {extra = {chips = 25}},
+    name = "trubbish",
+    poke_custom_prefix = "marcpoke",
+    pos = {x = 4, y = 5}, 
+    config = {extra = {chips = 10, rounds = 5}},
     loc_vars = function(self, info_queue, center)
-      type_tooltip(self, info_queue, center)
-      return {vars = {center.ability.extra.chips}}
+        type_tooltip(self, info_queue, center)
+        return {vars = {center.ability.extra.chips,
+                        center.ability.extra.rounds,
+                        (center.ability.extra.chips/100) * center.config.center:sumchips()}}
     end,
     rarity = 2, 
     cost = 4,
     ptype = "Dark",
-    stage = "One", 
+    stage = "Basic", 
     atlas = "marcPoke5",
     blueprint_compat = true,
+    sumchips = function(self)
+        if not G.deck then return 0 end
+        local chipSum = 0
+        for k, v in pairs(G.deck.cards) do
+            local total_chips = poke_total_chips(v)
+            chipSum = chipSum + total_chips
+        end
+        return chipSum
+    end,
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.scoring_hand then
             if context.joker_main and #G.deck.cards > 0 then
@@ -82,6 +60,44 @@ local garbodor = {
                     local total_chips = poke_total_chips(v)
                     chipSum = chipSum + total_chips
                 end
+                return {
+                    message = localize{type = 'variable', key = 'a_chips', vars = {(card.ability.extra.chips/100) * chipSum}}, 
+                    colour = G.C.CHIPS,
+                    chip_mod = (card.ability.extra.chips/100) * chipSum
+                }
+            end
+        end
+        return level_evo(self, card, context, "j_marcpoke_garbodor")
+    end
+    }
+-- Garbodor 569
+local garbodor = {
+    name = "garbodor",
+    pos = {x = 5, y = 5}, 
+    config = {extra = {chips = 25}},
+    loc_vars = function(self, info_queue, center)
+      type_tooltip(self, info_queue, center)
+      return {vars = {center.ability.extra.chips, (center.ability.extra.chips/100) * center.config.center:sumchips()}}
+    end,
+    rarity = 2, 
+    cost = 4,
+    ptype = "Dark",
+    stage = "One", 
+    atlas = "marcPoke5",
+    blueprint_compat = true,
+    sumchips = function(self)
+        if not G.deck then return 0 end
+        local chipSum = 0
+        for k, v in pairs(G.deck.cards) do
+            local total_chips = poke_total_chips(v)
+            chipSum = chipSum + total_chips
+        end
+        return chipSum
+    end,
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.scoring_hand then
+            if context.joker_main and #G.deck.cards > 0 then
+                local chipSum = card.config.center:sumchips()
                 return {
                     message = localize{type = 'variable', key = 'a_chips', vars = {(card.ability.extra.chips/100) * chipSum}}, 
                     colour = G.C.CHIPS,
