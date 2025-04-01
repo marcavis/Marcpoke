@@ -1,0 +1,26 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Repel functionality
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = '''
+local vanilla_rarities = {["Common"] = 1, ["Uncommon"] = 2, ["Rare"] = 3, ["Legendary"] = 4}
+'''
+position = "after"
+payload = '''
+print(rarity_poll)
+local repels = SMODS.find_card("c_marcpoke_repel")
+for i, v in ipairs(repels) do
+    print(i)
+    if v.ability.used then
+        rarity_poll = 0.7 + (0.3 * rarity_poll)
+        break
+    end
+end
+print(rarity_poll)
+'''
+match_indent = true

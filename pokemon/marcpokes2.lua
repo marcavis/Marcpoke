@@ -3,14 +3,13 @@ local luminous_cave = {
     pos = {x = 0, y = 0}, 
     config = {extra = {Xmult = 1.5, Xmult_mod = 0.3, mult_mod2 = 2}},
     loc_vars = function(self, info_queue, center)
-        type_tooltip(self, info_queue, center)
+        -- type_tooltip(self, info_queue, center)
         return {vars = {center.ability.extra.Xmult, center.ability.extra.Xmult_mod}}
         --dunno if I wanna use mult_mod2 after all
     end,
     rarity = 3,
     cost = 8,
     stage = "Other",
-    ptype = "Colorless",
     atlas = "luminous_cave",
     blueprint_compat = true,
     evolution_boost = function(self, card)
@@ -40,17 +39,17 @@ local luminous_cave = {
 local johto_mom = {
     name = "johto_mom", 
     pos = {x = 0, y = 0}, 
-    config = {extra = {spend_target = 15, tax_rate = 0.2, efficiency = 0.5}},
+    config = {extra = {mult = 0, mult_mod = 1, spend_target = 15, tax_rate = 0.2, efficiency = 0.5}},
     loc_vars = function(self, info_queue, center)
-        type_tooltip(self, info_queue, center)
+        -- type_tooltip(self, info_queue, center)
         info_queue[#info_queue+1] = {set = 'Other', key = 'moms_shopping_list'}
-        return {vars = {center.ability.extra.spend_target, center.ability.extra.tax_rate, center.ability.extra.efficiency}}
+        return {vars = {center.ability.extra.mult, center.ability.extra.mult_mod,
+        center.ability.extra.spend_target, center.ability.extra.tax_rate, center.ability.extra.efficiency}}
         --dunno if I wanna use mult_mod2 after all
     end,
     rarity = 3,
     cost = 8,
     stage = "Other",
-    ptype = "Colorless",
     atlas = "luminous_cave",
     blueprint_compat = true,
     add_to_savings = function(self, card, money)
@@ -91,6 +90,15 @@ local johto_mom = {
                         card:set_cost()
                         card_eval_status_text(card, 'extra', nil, nil, nil, {message = "Spent $"..purchase_price.."!"})
                     return true end }))
+            end
+        end
+        if context.cardarea == G.jokers and context.scoring_hand then
+            if context.joker_main then
+              return {
+                message = localize{type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult}}, 
+                colour = G.C.MULT,
+                mult_mod = card.ability.extra.mult
+              }
             end
         end
         -- if context.cardarea == G.jokers and context.scoring_hand then

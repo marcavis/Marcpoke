@@ -69,6 +69,58 @@ local bills_pc = {
     use = function(self, card, area, copier) end
   }
 
+local repel = {
+    name = "repel",
+    key = "repel",
+    set = "Item",
+    loc_vars = function(self, info_queue, center)
+        --  info_queue[#info_queue+1] = {set = 'Other', key = 'basic'}
+        return {vars = {center.ability.rerolls}}
+    end,
+    config = {used = false, rerolls = 3},
+    pos = { x = 0, y = 0 },
+    atlas = "bills_pc", 
+    cost = 4,
+    hidden = true,
+    -- soul_set = "Item",
+    -- soul_rate = .005,
+    unlocked = true,
+    discovered = true,
+    calculate = function(self, card, context)
+        --TODO: maybe we graphically show it spraying???
+        if context.reroll_shop and card.ability.used then
+            card.ability.rerolls = card.ability.rerolls - 1
+            if card.ability.rerolls < 0 then remove(self, card, {}) end
+        end
+        if context.ending_shop and card.ability.used then
+            remove(self, card, {})
+        end
+    end,
+    --TODO::: maaaybe we should instantly delete the object, but let's test it like this for now
+    keep_on_use = function(self, card)
+        return true
+    end,
+    can_use = function(self, card)
+        return not card.ability.used
+    end,
+    use = function(self, card, area, copier)
+        card.ability.used = true
+    end,
+        -- G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+        --     play_sound('timpani')
+        --     --   local _card = create_repeated_poke_joker("pokeball")
+        --     local _card = create_repeated_poke_joker("pokeball")
+        --     _card.sell_cost = 1
+        --     _card:add_to_deck()
+        --     G.jokers:emplace(_card)
+        --     return true end }))
+        --     delay(0.6)
+        -- end,
+    in_pool = function(self)
+        return false
+    end  
+    }
+
   return {name = "Items",
-  list = {bills_pc}
+  list = {bills_pc, repel}
 }

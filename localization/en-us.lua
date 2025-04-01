@@ -181,13 +181,16 @@ return {
                 }
             },
             j_marcpoke_johto_mom = {
-                name = "Johto Mom",
+                name = "Mom",
                 text = {
+                    "{C:mult}+#1#{} Mult",
+                    "Gains {C:mult}+#2#{} Mult when cheering",
+                    "{br:2}text needs to be here to work",
                     "Lose {C:attention}20%{} of end of round payout,",
                     "earning half of that as {C:attention}sell value{}",
-                    "Buys random {C:dark_edition}Negative{} rare items",
-                    "when holding more than",
-                    "{C:money}$#1#{} in sell value"
+                    -- "Buys random {C:dark_edition}Negative{} rare items",
+                    "Buys random rare items when holding more than",
+                    "{C:money}$#3#{} in sell value",
                 }
             },
             j_marcpoke_cinderace = {
@@ -222,16 +225,27 @@ return {
                     "Benches (debuffs) the rightmost joker",
                     "Can't be sold when joker slots are filled"
                 }
+            },
+            c_marcpoke_repel = {
+                name = "Repel",
+                text = {
+                    "Prevents the appearance",
+                    "of common jokers for {C:attention}#1#{} rerolls",
+                    "Expires when you leave shop"
+                }
             }
         },
         Other = {
             moms_shopping_list = {
                 name = "Mom's Shopping List",
                 text = {
-                    "{C:attention}10%{} - {X:water,C:white}Salon visit!{}",
-                    "{C:inactive,s:0.8}(Gives a random edition to a joker){C:inactive,s:0.8})",
-                    "{C:attention}10%{} - {X:water,C:white}Evolution Stone{}",
-                    "{C:attention}1%{} - {X:fairy,C:white}Mega Stone{}"
+                    -- "{C:green}10%{} - {X:water,C:white}Salon visit!{}",
+                    -- "{C:inactive,s:0.8}(Gives a random edition to a joker){C:inactive,s:0.8})",
+                    "{C:green}10%{} - {C:attention}Makeover!{} (becomes {C:attention}Polychrome{})",
+                    "{C:green}10%{} - {C:attention}Random Evolution Card{}",
+                    "{C:green}9%{} - {C:attention}Repel{}",
+                    "{C:green}1%{} - {C:attention}Mega Stone{}",
+                    "{C:attention}Unable to buy{} - Cheer (gain Mult)",
                 }
             },
             soccer_sticker = {
