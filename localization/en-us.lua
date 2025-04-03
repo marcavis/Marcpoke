@@ -142,9 +142,10 @@ return {
             j_marcpoke_toxtricity_lowkey = {
                 name = "Toxtricity (Low Key)",
                 text = {
-                    "At end of round,",
-                    "converts any energy cards",
-                    "to {C:dark_edition}Negative{}"
+                    "When {C:attention}Small Blind{} is selected,",
+                    "or when a joker is destroyed",
+                    "create a {C:dark_edition}Negative{} {C:pink}Energy{} card",
+                    "of its own type."
                 }
             },
             j_marcpoke_joke_exploud = {

@@ -38,10 +38,28 @@ position = "after"
 payload = 'addition = addition + (addition / 2) * (#SMODS.find_card("j_marcpoke_toxtricity_amped"))'
 match_indent = true
 
-#[[patches]]#
-#[patches.pattern]
-#target = "engine/sound_manager.lua"
-#pattern = "function RESTART_MUSIC(args)"
-#position = "after"
-#payload = "print (args)"
-#match_indent = true
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = "local dissolve_time = 0.7*(dissolve_time_fac or 1)"
+position = "before"
+payload = '''
+if G and G.jokers then
+    for i, v in ipairs(G.jokers.cards) do
+        if v and v.config and v.config.center and v ~= self then
+            if v.config.center.joker_destroyed_effect then
+                v.config.center.joker_destroyed_effect(v, v)
+            end
+        end
+    end
+end
+'''
+match_indent = true
+
+#G.E_MANAGER:add_event(Event({
+#    func = function()
+#        for i, v in G.jokers.cards do
+#            v.calculate(v, self, {joker_destroyed = true})
+#        end
+#    end
+#}))

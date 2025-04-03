@@ -566,14 +566,25 @@ local toxtricity_lowkey = {
     ptype = "Lightning",
     atlas = "marcPoke8",
     blueprint_compat = true,
+    joker_destroyed_effect = function(self, card)
+        local forced_key = matching_energy(card);
+        local _card = create_card('Energy', G.consumeables, nil, nil, nil, nil, forced_key)
+        local edition = {negative = true}
+        _card:set_edition(edition, true)
+        _card:add_to_deck()
+        G.consumeables:emplace(_card)
+        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("poke_plus_energy"), colour = G.ARGS.LOC_COLOURS["pink"]})
+    end,
     calculate = function(self, card, context)
-        if not context.repetition and not context.individual and context.end_of_round and not context.blueprint then
-            for _, nrg in ipairs(G.consumeables.cards) do
-                local can_make_negative = not nrg.edition or (nrg.edition and not nrg.edition.negative)
-                if nrg.ability and nrg.ability.set == "Energy" and can_make_negative then
-                    nrg:set_edition({negative = true}, true)
-                    card_eval_status_text(nrg, 'extra', nil, nil, nil, {message = "Negative!", colour = G.C.PURPLE})
-                end
+        if context.setting_blind then
+            if context.blind == G.P_BLINDS.bl_small then
+                local forced_key = matching_energy(card);
+                local _card = create_card('Energy', G.consumeables, nil, nil, nil, nil, forced_key)
+                local edition = {negative = true}
+                _card:set_edition(edition, true)
+                _card:add_to_deck()
+                G.consumeables:emplace(_card)
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("poke_plus_energy"), colour = G.ARGS.LOC_COLOURS["pink"]})
             end
         end
     end,

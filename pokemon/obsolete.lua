@@ -168,6 +168,34 @@ local backup_bills_pc = {
     end,
 }
 
+local old_toxtricity_lowkey = {
+    name = "toxtricity_lowkey", 
+    pos = {x = 0, y = 3}, 
+    config = {extra = {}},
+    loc_vars = function(self, info_queue, center)
+        type_tooltip(self, info_queue, center)
+        return {vars = {}}
+    end,
+    rarity = 2, 
+    cost = 8, 
+    stage = "One", 
+    ptype = "Lightning",
+    atlas = "marcPoke8",
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if not context.repetition and not context.individual and context.end_of_round and not context.blueprint then
+            for _, nrg in ipairs(G.consumeables.cards) do
+                local can_make_negative = not nrg.edition or (nrg.edition and not nrg.edition.negative)
+                if nrg.ability and nrg.ability.set == "Energy" and can_make_negative then
+                    nrg:set_edition({negative = true}, true)
+                    card_eval_status_text(nrg, 'extra', nil, nil, nil, {message = "Negative!", colour = G.C.PURPLE})
+                end
+            end
+        end
+    end,
+}
+
+
 --disabled
 local joke_exploud = {
     name = "joke_exploud", 

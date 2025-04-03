@@ -51,6 +51,7 @@ local darkrai = {
         if context.end_of_round and not context.individual and not context.repetition then
             --TODO: Maybe this code should be done elsewhere - what if Darkrai is debuffed or sold when the round ends?
             for _j, joker in ipairs(G.jokers.cards) do
+                if not joker.ability or not joker.ability.extra then break end
                 if joker.ability.extra.borrowed_energy then
                     energy_shift(joker, -joker.ability.extra.borrowed_energy, joker.ability.extra.ptype, false, false)
                     joker.ability.extra.borrowed_energy = 0
