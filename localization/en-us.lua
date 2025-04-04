@@ -143,7 +143,7 @@ return {
                 name = "Toxtricity (Low Key)",
                 text = {
                     "When {C:attention}Small Blind{} is selected,",
-                    "or when a joker is destroyed",
+                    "{C:inactive}or when a joker is destroyed{}(disabled)",
                     "create a {C:dark_edition}Negative{} {C:pink}Energy{} card",
                     "of its own type."
                 }

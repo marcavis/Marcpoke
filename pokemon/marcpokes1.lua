@@ -566,7 +566,8 @@ local toxtricity_lowkey = {
     ptype = "Lightning",
     atlas = "marcPoke8",
     blueprint_compat = true,
-    joker_destroyed_effect = function(self, card)
+    --joker_destroyed_effect = function(self, card)
+    disabled_joker_destroyed_effect = function(self, card)
         local forced_key = matching_energy(card);
         local _card = create_card('Energy', G.consumeables, nil, nil, nil, nil, forced_key)
         local edition = {negative = true}
