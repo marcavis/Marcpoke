@@ -188,7 +188,8 @@ return {
                     "Gains {C:mult}+#2#{} Mult when cheering",
                     "{br:2}text needs to be here to work",
                     "Lose {C:attention}20%{} of end of round payout,",
-                    "earning half of that as {C:attention}sell value{}",
+                    "earning that as {C:attention}sell value{}",
+                    -- "earning half of that as {C:attention}sell value{}",
                     -- "Buys random {C:dark_edition}Negative{} rare items",
                     "Buys random rare items when holding more than",
                     "{C:money}$#3#{} in sell value",
@@ -214,6 +215,22 @@ return {
                     "{C:attention}Energy{} cards in your consumable",
                     "area apply their effect to all",
                     "Jokers of the same type"
+                }
+            },
+            j_marcpoke_snorlax_doll = {
+                name = "Snorlax Doll",
+                text = {
+                    "Does nothing on its own",
+                    -- "but acts as a real {C:attention}Snorlax{}",
+                    -- "if (testing) {C:attention}Caterpie{} is present",
+                }
+            },
+            j_marcpoke_clefairy_doll = {
+                name = "Clefairy Doll",
+                text = {
+                    "Does nothing on its own",
+                    -- "but acts as a real {C:attention}Clefairy{}",
+                    -- "if (testing) {C:attention}Caterpie{} is present",
                 }
             },
         },

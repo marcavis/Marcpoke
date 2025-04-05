@@ -39,7 +39,7 @@ local luminous_cave = {
 local johto_mom = {
     name = "johto_mom", 
     pos = {x = 0, y = 0}, 
-    config = {extra = {mult = 0, mult_mod = 1, spend_target = 15, tax_rate = 0.2, efficiency = 0.5}},
+    config = {extra = {mult = 0, mult_mod = 1, spend_target = 15, tax_rate = 0.2, efficiency = 1.0}},
     loc_vars = function(self, info_queue, center)
         -- type_tooltip(self, info_queue, center)
         info_queue[#info_queue+1] = {set = 'Other', key = 'moms_shopping_list'}
@@ -151,7 +151,7 @@ local johto_mom = {
                     gift_success = true
                     local evo_items = {"thunderstone", "moonstone", "firestone", "waterstone",
                     "leafstone", "sunstone", "shinystone", "duskstone", "kingsrock", "linkcable", "upgrade", "dubious_disc", "prismscale"}
-                    local _card = create_card("Item", G.pack_cards, nil, nil, true, true, pseudorandom_element(evo_items, pseudoseed('evoitem')), nil)
+                    local _card = create_card("Item", G.pack_cards, nil, nil, true, true, 'j_poke_'..pseudorandom_element(evo_items, pseudoseed('evoitem')), nil)
                     purchase_price = _card.sell_cost * 2
                     _card:add_to_deck()
                     G.consumeables:emplace(_card)
@@ -168,10 +168,10 @@ local johto_mom = {
                 end
             elseif gift == 'doll' then
                 if #G.jokers.cards < G.jokers.config.card_limit then
-                    local dolls = {"snorlax", "clefairy"}
+                    local dolls = {"snorlax_doll", "clefairy_doll"}
                     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                         play_sound('timpani')
-                        local temp_card = {set = "Joker", area = G.jokers, key = pseudorandom_element(dolls, pseudoseed('doll'))}
+                        local temp_card = {set = "Joker", area = G.jokers, key = 'j_marcpoke_'..pseudorandom_element(dolls, pseudoseed('doll'))}
                         local _card = SMODS.create_card(temp_card)
                         _card:add_to_deck()
                         G.jokers:emplace(_card)
@@ -196,7 +196,7 @@ local johto_mom = {
             if purchase_price > 0.1 then
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
-                    delay = 0.2,
+                    delay = 0.3,
                     func = function()
                         --local purchase_price = _card.sell_cost * 2
                         card.ability.extra_value = card.ability.extra_value - purchase_price
@@ -215,17 +215,9 @@ local johto_mom = {
             }
         end
     end
-            -- if context.cardarea == G.jokers and context.scoring_hand then
-            --     if context.joker_main then
-            --         return {
-            --             message = localize{type = 'variable', key = 'a_xmult', vars = {card.ability.extra.Xmult}}, 
-            --             colour = G.C.XMULT,
-            --             Xmult_mod = card.ability.extra.Xmult
-            --         }
-            --     end
-            -- end
-        end,
-    }
+
+    end,
+}
 
 return {name = "Pokemon Jokers 541-570", 
         list = {luminous_cave, johto_mom},
