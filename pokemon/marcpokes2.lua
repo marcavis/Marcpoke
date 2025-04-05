@@ -151,7 +151,7 @@ local johto_mom = {
                     gift_success = true
                     local evo_items = {"thunderstone", "moonstone", "firestone", "waterstone",
                     "leafstone", "sunstone", "shinystone", "duskstone", "kingsrock", "linkcable", "upgrade", "dubious_disc", "prismscale"}
-                    local _card = create_card("Item", G.pack_cards, nil, nil, true, true, 'j_poke_'..pseudorandom_element(evo_items, pseudoseed('evoitem')), nil)
+                    local _card = create_card("Item", G.pack_cards, nil, nil, true, true, 'c_poke_'..pseudorandom_element(evo_items, pseudoseed('evoitem')), nil)
                     purchase_price = _card.sell_cost * 2
                     _card:add_to_deck()
                     G.consumeables:emplace(_card)
