@@ -191,8 +191,8 @@ return {
                     "earning that as {C:attention}sell value{}",
                     -- "earning half of that as {C:attention}sell value{}",
                     -- "Buys random {C:dark_edition}Negative{} rare items",
-                    "Buys random rare items when holding more than",
-                    "{C:money}$#3#{} in sell value",
+                    "Buys random rare items when holding",
+                    "more than {C:money}$#3#{} in sell value",
                 }
             },
             j_marcpoke_cinderace = {
