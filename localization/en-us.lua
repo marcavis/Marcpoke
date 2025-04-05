@@ -243,8 +243,11 @@ return {
                     -- "{C:green}10%{} - {X:water,C:white}Salon visit!{}",
                     -- "{C:inactive,s:0.8}(Gives a random edition to a joker){C:inactive,s:0.8})",
                     "{C:green}10%{} - {C:attention}Makeover!{} (becomes {C:attention}Polychrome{})",
-                    "{C:green}10%{} - {C:attention}Random Evolution Card{}",
-                    "{C:green}9%{} - {C:attention}Repel{}",
+                    "{C:green}10%{} - {C:attention}Usable Evolution Card{}",
+                    "{C:green}20%{} - {C:attention}Random Evolution Card{}",
+                    "{C:green}20%{} - {C:attention}Pokemon Doll{}",
+                    "{C:green}20%{} - {C:attention}Random Berries{}",
+                    "{C:green}19%{} - {C:attention}Repel{}",
                     "{C:green}1%{} - {C:attention}Mega Stone{}",
                     "{C:attention}Unable to buy{} - Cheer (gain Mult)",
                 }
