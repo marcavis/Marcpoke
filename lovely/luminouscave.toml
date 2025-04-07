@@ -6,7 +6,9 @@ priority = 10
 [[patches]]
 [patches.pattern]
 target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
-pattern = 'return localize("poke_evolve_success")'
+pattern = 'card.children.center = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS[new_card.atlas], new_card.pos)'
 position = "before"
-payload = 'for _, v in ipairs(SMODS.find_card("j_marcpoke_luminous_cave")) do v.config.center:evolution_boost(v) end'
+payload = '''
+for _, v in ipairs(SMODS.find_card("j_marcpoke_luminous_cave")) do v.config.center:evolution_boost(v) end
+'''
 match_indent = true
