@@ -13,8 +13,10 @@ if (center.ability and center.ability.extra and type(center.ability.extra) == "t
 position = "at"
 payload = '''
 if (center.ability and center.ability.extra and type(center.ability.extra) == "table" and
-     ((center.ability.extra.energy_count or 0) + (center.ability.extra.c_energy_count or 0) > 0) or
-     center.ability.extra.borrowed_energy and center.ability.extra.borrowed_energy ~= 0) then
+    (
+        ((center.ability.extra.energy_count or 0) + (center.ability.extra.c_energy_count or 0) > 0) or
+        type(center.ability.extra) == "table" and center.ability.extra.borrowed_energy and center.ability.extra.borrowed_energy ~= 0)
+    ) then
 '''
 match_indent = true
 
