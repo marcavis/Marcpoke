@@ -233,6 +233,27 @@ return {
                     -- "if (testing) {C:attention}Caterpie{} is present",
                 }
             },
+            j_marcpoke_scraggy = {
+                name = "Scraggy",
+                text = {
+                    "Gives {C:attention}+#1#%{} of",
+                    "the {C:chips}chip{}, {C:mult}mult{},",
+                    "{X:red,C:white}Xmult{} and {C:money}money{}",
+                    "bonuses from other jokers",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive}, {C:mult}+#3#{C:inactive}, {X:red,C:white}X#4#{C:inactive}, {C:money}$#5#{C:inactive} end of round)",
+                    "{C:inactive}(Evolves after {C:attention}#6#{}{C:inactive} rounds with Joker slots full)"
+                }
+            },
+            j_marcpoke_scrafty = {
+                name = "Scrafty",
+                text = {
+                    "Gives {C:attention}+#1#%{} of",
+                    "the {C:chips}chip{}, {C:mult}mult{},",
+                    "{X:red,C:white}Xmult{} and {C:money}money{}",
+                    "bonuses from other jokers",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive}, {C:mult}+#3#{C:inactive}, {X:red,C:white}X#4#{C:inactive}, {C:money}$#5#{C:inactive} end of round)",
+                }
+            },
         },
         Item = {
             c_marcpoke_bills_pc = {

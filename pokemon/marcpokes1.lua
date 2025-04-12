@@ -26,6 +26,138 @@
 -- Archen 566
 -- Archeops 567
 -- Trubbish 568
+local scraggy = {
+    name = "scraggy",
+    pos = {x = 9, y = 4}, 
+    config = {extra = {efficiency = 0.10, rounds = 5, chip_total = 0, mult_total = 0, Xmult_total = 1, dollars_total = 0}},
+    loc_vars = function(self, info_queue, center)
+        center.config.center:update_bonuses(center)
+        type_tooltip(self, info_queue, center)
+        return {vars = {center.ability.extra.efficiency * 100,
+                        center.ability.extra.chip_total,
+                        center.ability.extra.mult_total,
+                        center.ability.extra.Xmult_total,
+                        center.ability.extra.dollars_total,
+                        center.ability.extra.rounds}}
+    end,
+    rarity = 2, 
+    cost = 4,
+    ptype = "Dark",
+    stage = "Basic", 
+    atlas = "marcPoke5",
+    blueprint_compat = true,
+    update_bonuses = function(self, center)
+        if not G.jokers or not G.jokers.cards then return nil end
+        center.ability.extra.chip_total = 0
+        center.ability.extra.mult_total = 0
+        center.ability.extra.Xmult_total = 1
+        center.ability.extra.dollars_total = 0
+        for k, v in pairs(G.jokers.cards) do
+            if v.ability and v.ability.extra and type(v.ability.extra) == "table" then
+                if v.ability.extra.chips then
+                    center.ability.extra.chip_total = center.ability.extra.chip_total + (v.ability.extra.chips * center.ability.extra.efficiency)
+                end
+                if v.ability.extra.mult then
+                    center.ability.extra.mult_total = center.ability.extra.mult_total + (v.ability.extra.mult * center.ability.extra.efficiency)
+                end
+                if v.ability.extra.Xmult then
+                    center.ability.extra.Xmult_total = center.ability.extra.Xmult_total + ((v.ability.extra.Xmult - 1) * center.ability.extra.efficiency)
+                end
+                if v.ability.extra.money then
+                    center.ability.extra.dollars_total = center.ability.extra.dollars_total + (v.ability.extra.money * center.ability.extra.efficiency)
+                end
+            end
+        end
+    end,
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.scoring_hand then
+            if context.joker_main then
+                card.config.center:update_bonuses(card)
+                return {
+                  message = "Beat Up!",
+                  colour = G.C.BLACK,
+                  mult_mod = card.ability.extra.mult_total,
+                  chip_mod = card.ability.extra.chip_total,
+                  Xmult_mod = card.ability.extra.Xmult_total
+                }
+            end
+        end
+        if G.jokers and G.jokers.config.card_count >= G.jokers.config.card_limit then
+            return level_evo(self, card, context, "j_marcpoke_scrafty")
+        end
+    end,
+    calc_dollar_bonus = function(self, card)
+        card.config.center:update_bonuses(card)
+        if card.ability.extra.dollars_total > 0 then
+            return ease_poke_dollars(card, "Scraggy", card.ability.extra.dollars_total, true)
+        end
+    end
+    }
+
+local scrafty = {
+    name = "scrafty",
+    pos = {x = 10, y = 4}, 
+    config = {extra = {efficiency = 0.15, chip_total = 0, mult_total = 0, Xmult_total = 1, dollars_total = 0}},
+    loc_vars = function(self, info_queue, center)
+        center.config.center:update_bonuses(center)
+        type_tooltip(self, info_queue, center)
+        return {vars = {center.ability.extra.efficiency * 100,
+                        center.ability.extra.chip_total,
+                        center.ability.extra.mult_total,
+                        center.ability.extra.Xmult_total,
+                        center.ability.extra.dollars_total}}
+    end,
+    rarity = "poke_safari", 
+    cost = 8,
+    ptype = "Dark",
+    stage = "One", 
+    atlas = "marcPoke5",
+    blueprint_compat = true,
+    update_bonuses = function(self, center)
+        if not G.jokers or not G.jokers.cards then return nil end
+        center.ability.extra.chip_total = 0
+        center.ability.extra.mult_total = 0
+        center.ability.extra.Xmult_total = 1
+        center.ability.extra.dollars_total = 0
+        for k, v in pairs(G.jokers.cards) do
+            if v.ability and v.ability.extra and type(v.ability.extra) == "table" then
+                if v.ability.extra.chips then
+                    center.ability.extra.chip_total = center.ability.extra.chip_total + (v.ability.extra.chips * center.ability.extra.efficiency)
+                end
+                if v.ability.extra.mult then
+                    center.ability.extra.mult_total = center.ability.extra.mult_total + (v.ability.extra.mult * center.ability.extra.efficiency)
+                end
+                if v.ability.extra.Xmult then
+                    center.ability.extra.Xmult_total = center.ability.extra.Xmult_total + ((v.ability.extra.Xmult - 1) * center.ability.extra.efficiency)
+                end
+                if v.ability.extra.money then
+                    center.ability.extra.dollars_total = center.ability.extra.dollars_total + (v.ability.extra.money * center.ability.extra.efficiency)
+                end
+            end
+        end
+    end,
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.scoring_hand then
+            if context.joker_main then
+                card.config.center:update_bonuses(card)
+                return {
+                  message = "Beat Up!",
+                  colour = G.C.BLACK,
+                  mult_mod = card.ability.extra.mult_total,
+                  chip_mod = card.ability.extra.chip_total,
+                  Xmult_mod = card.ability.extra.Xmult_total
+                }
+            end
+        end
+    end,
+    calc_dollar_bonus = function(self, card)
+        card.config.center:update_bonuses(card)
+        if card.ability.extra.dollars_total > 0 then
+            return ease_poke_dollars(card, "Scrafty", card.ability.extra.dollars_total, true)
+        end
+    end
+  }
+
 local trubbish = {
     name = "trubbish",
     poke_custom_prefix = "marcpoke",
@@ -407,11 +539,11 @@ local yungoos = {
     name = "yungoos", 
     pos = {x = 12, y = 0}, 
     
-    config = {extra = {money_mod = 4, target_rank = "Ace", target_suit = "Spades", target_id = 14, earned = 0, dollars_required = 8}},
+    config = {extra = {money = 4, target_rank = "Ace", target_suit = "Spades", target_id = 14, earned = 0, dollars_required = 8}},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
         return {vars = {center.ability.extra.target_rank .. " of " .. center.ability.extra.target_suit,
-                center.ability.extra.money_mod, center.ability.extra.earned, center.ability.extra.dollars_required}}
+                center.ability.extra.money, center.ability.extra.earned, center.ability.extra.dollars_required}}
     end,
     rarity = 1, 
     cost = 4, 
@@ -433,9 +565,9 @@ local yungoos = {
             (context.other_card:is_suit(card.ability.extra.target_suit)) then
                 local earned = 0
                 if not context.blueprint then
-                    card.ability.extra.earned = card.ability.extra.earned + card.ability.extra.money_mod
+                    card.ability.extra.earned = card.ability.extra.earned + card.ability.extra.money
                 end
-                earned = earned + card.ability.extra.money_mod
+                earned = earned + card.ability.extra.money
                 earned = ease_poke_dollars(card, "yungoos", earned)
                 return {
                     message = localize('$')..earned,
@@ -451,11 +583,11 @@ local yungoos = {
 local gumshoos = {
     name = "gumshoos", 
     pos = {x = 13, y = 0}, 
-    config = {extra = {money_mod = 4, target_rank = "Ace", target_suit = "Spades", target_id = 14, targets = 3}},
+    config = {extra = {money = 4, target_rank = "Ace", target_suit = "Spades", target_id = 14, targets = 3}},
     loc_vars = function(self, info_queue, center)
         type_tooltip(self, info_queue, center)
         return {vars = {center.ability.extra.targets, center.ability.extra.target_rank .. " of " .. center.ability.extra.target_suit,
-            center.ability.extra.money_mod}}
+            center.ability.extra.money}}
     end,
     rarity = 2, 
     cost = 8, 
@@ -522,7 +654,7 @@ local gumshoos = {
             --if (not context.other_card.debuff) and
             if  (context.other_card:get_id() == card.ability.extra.target_id) and 
             (context.other_card:is_suit(card.ability.extra.target_suit)) then
-                local earned = ease_poke_dollars(card, "gumshoos", card.ability.extra.money_mod)
+                local earned = ease_poke_dollars(card, "gumshoos", card.ability.extra.money)
                 return {
                     message = localize('$')..earned,
                     colour = G.C.MONEY,
@@ -738,61 +870,5 @@ local cinderace = {
 }
 
 return {name = "Pokemon Jokers 541-570", 
-        list = {trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos, toxtricity_amped, toxtricity_lowkey, chatot, maractus, cinderace},
+        list = {scraggy, scrafty, trubbish, garbodor, timburr, gurdurr, conkeldurr, alolan_grimer, alolan_muk, yungoos, gumshoos, toxtricity_amped, toxtricity_lowkey, chatot, maractus, cinderace},
 }
-
--- local kakuna={
---     name = "kakuna", 
---     pos = {x = 0, y = 1}, 
---     config = {extra = {chips = 32, rounds = 3}},
---     loc_vars = function(self, info_queue, center)
---       type_tooltip(self, info_queue, center)
---           return {vars = {center.ability.extra.chips, center.ability.extra.rounds}}
---     end,
---     rarity = 1, 
---     cost = 4, 
---     stage = "One", 
---     atlas = "Pokedex1",
---     ptype = "Grass",
---     blueprint_compat = true,
---     calculate = function(self, card, context)
---       if context.cardarea == G.jokers and context.scoring_hand then
---         if context.joker_main then
---           return {
---               message = localize{type = 'variable', key = 'a_chips', vars = {card.ability.extra.chips}}, 
---               colour = G.C.CHIPS,
---               chip_mod = card.ability.extra.chips
---             }
---         end
---       end
---       return level_evo(self, card, context, "j_poke_beedrill")
---     end,
---   }
-
--- local starmie={
---     name = "starmie", 
---     pos = {x = 3, y = 9},
---     config = {extra = {mult = 4, money_mod = 1, suit = "Diamonds"}},
---     loc_vars = function(self, info_queue, center)
---       type_tooltip(self, info_queue, center)
---       return {vars = {center.ability.extra.mult, center.ability.extra.money_mod, localize(center.ability.extra.suit, 'suits_singular')}}
---     end,
---     rarity = "poke_safari", 
---     cost = 10, 
---     stage = "One", 
---     ptype = "Water",
---     atlas = "Pokedex1",
---     blueprint_compat = true,
---     calculate = function(self, card, context)
---       if context.individual and context.cardarea == G.play and context.other_card:is_suit(card.ability.extra.suit) then
---         if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
---           local earned = ease_poke_dollars(card, "starmie", card.ability.extra.money_mod, true)
---           return {
---             mult = card.ability.extra.mult,
---             dollars = earned,
---             card = card
---           }
---         end
---       end
---     end
---   }
