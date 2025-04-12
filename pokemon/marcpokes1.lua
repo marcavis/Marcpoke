@@ -29,7 +29,7 @@
 local scraggy = {
     name = "scraggy",
     pos = {x = 9, y = 4}, 
-    config = {extra = {efficiency = 0.10, rounds = 5, chip_total = 0, mult_total = 0, Xmult_total = 1, dollars_total = 0}},
+    config = {extra = {efficiency = 0.15, rounds = 4, chip_total = 0, mult_total = 0, Xmult_total = 1, dollars_total = 0}},
     loc_vars = function(self, info_queue, center)
         center.config.center:update_bonuses(center)
         type_tooltip(self, info_queue, center)
@@ -97,7 +97,7 @@ local scraggy = {
 local scrafty = {
     name = "scrafty",
     pos = {x = 10, y = 4}, 
-    config = {extra = {efficiency = 0.15, chip_total = 0, mult_total = 0, Xmult_total = 1, dollars_total = 0}},
+    config = {extra = {efficiency = 0.25, chip_total = 0, mult_total = 0, Xmult_total = 1, dollars_total = 0}},
     loc_vars = function(self, info_queue, center)
         center.config.center:update_bonuses(center)
         type_tooltip(self, info_queue, center)
