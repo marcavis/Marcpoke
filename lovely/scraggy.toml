@@ -1,0 +1,13 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 10
+
+#Force the energy used infobox to appear if we have borrowed energy, even if we don't have added energy to the pokemon directly
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "functions/energyfunctions.lua"]'
+pattern = 'energy_max = 3'
+position = "before"
+payload = 'energy_values.efficiency = .1'
+match_indent = true

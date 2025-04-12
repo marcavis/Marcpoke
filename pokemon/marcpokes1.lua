@@ -60,7 +60,7 @@ local scraggy = {
                 if v.ability.extra.mult then
                     center.ability.extra.mult_total = center.ability.extra.mult_total + (v.ability.extra.mult * center.ability.extra.efficiency)
                 end
-                if v.ability.extra.Xmult then
+                if v.ability.extra.Xmult and v.ability.extra.Xmult >= 1 then
                     center.ability.extra.Xmult_total = center.ability.extra.Xmult_total + ((v.ability.extra.Xmult - 1) * center.ability.extra.efficiency)
                 end
                 if v.ability.extra.money then
@@ -127,7 +127,7 @@ local scrafty = {
                 if v.ability.extra.mult then
                     center.ability.extra.mult_total = center.ability.extra.mult_total + (v.ability.extra.mult * center.ability.extra.efficiency)
                 end
-                if v.ability.extra.Xmult then
+                if v.ability.extra.Xmult and v.ability.extra.Xmult >= 1 then
                     center.ability.extra.Xmult_total = center.ability.extra.Xmult_total + ((v.ability.extra.Xmult - 1) * center.ability.extra.efficiency)
                 end
                 if v.ability.extra.money then
