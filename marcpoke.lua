@@ -192,6 +192,7 @@ table.insert(family, {"toxtricity"})
 table.insert(family, {"chatot"})
 table.insert(family, {"maractus"})
 table.insert(family, {"cinderace"})
+table.insert(family, {"shuppet", "banette"})
 --table.insert(family, {"chikorita", "bayleef", "meganium"})
 
 

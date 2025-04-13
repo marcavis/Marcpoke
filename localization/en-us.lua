@@ -254,6 +254,34 @@ return {
                     "{C:inactive}(Currently {C:chips}+#2#{C:inactive}, {C:mult}+#3#{C:inactive}, {X:red,C:white}X#4#{C:inactive}, {C:money}$#5#{C:inactive} end of round)",
                 }
             },
+            j_marcpoke_shuppet = {
+                name = "Shuppet",
+                text = {
+                    "{C:chips}+#1#{} Chips",
+                    "{br:2}text needs to be here to work",
+                    "Makes adjacent Dolls act like",
+                    "the pokémon the represent",
+                    "{br:2}text needs to be here to work",
+                    "At the end of the round,",
+                    "gain {C:chips}+#2#{} chips",
+                    "for every disabled Joker or Doll",
+                    "{C:inactive}(Evolves after {C:attention}#3#{}{C:inactive} rounds)",
+                }
+            },
+            j_marcpoke_banette = {
+                name = "Banette",
+                text = {
+                    "{C:chips}+#1#{} Chips",
+                    "{X:red,C:white}X#2#{} Mult",
+                    "{br:2}text needs to be here to work",
+                    "Makes all Dolls act like",
+                    "the pokémon the represent",
+                    "{br:2}text needs to be here to work",
+                    "At the end of the round,",
+                    "gains {C:chips}+#3#{} chips and {X:red,C:white}X#4#{} Mult",
+                    "for every disabled Joker or Doll",
+                }
+            },
         },
         Item = {
             c_marcpoke_bills_pc = {

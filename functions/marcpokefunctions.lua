@@ -20,6 +20,13 @@ card_rating = function (card)
     return result
 end
 
+has_poke_adjacent = function(card, other_key)
+    for i, v in ipairs(poke_get_adjacent_jokers(card)) do
+        if v.config.center.key == other_key then return true end
+    end
+    return false
+end
+
 reset_gumshoos_card = function (card)
     card.ability.extra.target_rank = 'Ace'
     card.ability.extra.target_suit = 'Spades'
