@@ -36,6 +36,35 @@ local luminous_cave = {
     end,
 }
 
+local super_nerd = {
+    name = "super_nerd", 
+    pos = {x = 0, y = 0}, 
+    config = {extra = {retriggers = 1}},
+    loc_vars = function(self, info_queue, center)
+        -- type_tooltip(self, info_queue, center)
+        return {vars = {}}
+        --dunno if I wanna use mult_mod2 after all
+    end,
+    rarity = 3,
+    cost = 8,
+    stage = "Other",
+    atlas = "luminous_cave",
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play then
+            if not context.end_of_round and not context.before and not context.after and not context.other_card.debuff then
+              if context.other_card.edition then
+                return {
+                  message = localize('k_again_ex'),
+                  repetitions = card.ability.extra.retriggers,
+                  card = card
+                }
+              end
+            end
+          end
+    end,
+}
+
 local johto_mom = {
     name = "johto_mom", 
     pos = {x = 0, y = 0}, 
@@ -220,5 +249,5 @@ local johto_mom = {
 }
 
 return {name = "Pokemon Jokers 541-570", 
-        list = {luminous_cave, johto_mom},
+        list = {luminous_cave, super_nerd, johto_mom},
 }

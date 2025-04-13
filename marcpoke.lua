@@ -2,6 +2,16 @@ assert(SMODS.load_file("functions/marcpokefunctions.lua"))()
 
 default_poke_custom_prefix = "marcpoke"
 
+
+SMODS.Atlas({
+  key = "marcpokeboss",
+  atlas_table = "ANIMATION_ATLAS",
+  frames = 21,
+  path = "marcpokeboss.png",
+  px = 34,
+  py = 34
+}):register()
+
 SMODS.Atlas({
   key = "regionals",
   path = "Regionals.png",
@@ -303,3 +313,38 @@ for _, file in ipairs(pfiles) do
     end
   end
 end
+
+local blinds = NFS.getDirectoryItems(mod_dir.."blinds")
+
+for _, file in ipairs(blinds) do
+  sendDebugMessage ("The file is: "..file)
+  local blind, load_error = SMODS.load_file("blinds/"..file)
+  if load_error then
+    sendDebugMessage ("The error is: "..load_error)
+  else
+    local curr_blind = blind()
+    if curr_blind.init then curr_blind:init() end
+    
+    for i, item in ipairs(curr_blind.list) do
+      item.discovered = not pokermon_config.pokemon_discovery
+      SMODS.Blind(item)
+    end
+  end
+end
+
+--Load challenges file
+local pchallenges = NFS.getDirectoryItems(mod_dir.."challenges")
+
+for _, file in ipairs(pchallenges) do
+  local challenge, load_error = SMODS.load_file("challenges/"..file)
+  if load_error then
+    sendDebugMessage ("The error is: "..load_error)
+  else
+    local curr_challenge = challenge()
+    if curr_challenge.init then curr_challenge:init() end
+    
+    for i, item in ipairs(curr_challenge.list) do
+      SMODS.Challenge(item)
+    end
+  end
+end 

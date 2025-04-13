@@ -32,6 +32,7 @@ local bills_pc = {
         G.consumeables.config.card_limit = G.consumeables.config.card_limit - card.ability.extra.c_size
     end,
     update = function(self, card, dt)
+        if not G.jokers then return end
         if G.jokers.config.card_count >= G.jokers.config.card_limit then
             card.ability.eternal = true
         else

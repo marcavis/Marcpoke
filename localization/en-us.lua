@@ -6,6 +6,14 @@ return {
         },
         dictionary = {
             poke_deenergized_ex = "Lost energy!",
+        },
+        challenge_names = {
+            c_marcpoke_convention_concern = "Convention Concern",
+        },
+        
+        v_text = {
+            ch_c_marcpoke_forced_finisher_boss_blind = {"The only finisher boss blind allowed"},
+            ch_c_marcpoke_forced_finisher_boss_blind_2 = {"is {C:attention,T:bl_marcpoke_ppurist}Prismatic Purist{}"}
         }
     },
     descriptions = {  
@@ -281,6 +289,22 @@ return {
                     "gains {C:chips}+#3#{} chips and {X:red,C:white}X#4#{} Mult",
                     "for every disabled Joker or Doll",
                 }
+            },
+            j_marcpoke_super_nerd = {
+                name = "Super Nerd",
+                text = {
+                    "Retriggers all scored cards with editions",
+                }
+            },
+        },
+        Blind = {
+            bl_marcpoke_ppurist = {
+                name = "Prismatic Purist",
+                text = {
+                    "Jokers and cards",
+                    "without special editions",
+                    "are debuffed"
+                }, 
             },
         },
         Item = {
