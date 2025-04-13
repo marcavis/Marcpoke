@@ -13,6 +13,13 @@ SMODS.Atlas({
 }):register()
 
 SMODS.Atlas({
+  key = "super_nerd",
+  path = "SuperNerd.png",
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
   key = "regionals",
   path = "Regionals.png",
   path_prefix = SMODS.Mods["Pokermon"].path,
@@ -203,6 +210,7 @@ table.insert(family, {"chatot"})
 table.insert(family, {"maractus"})
 table.insert(family, {"cinderace"})
 table.insert(family, {"shuppet", "banette"})
+table.insert(family, {"scraggy", "scrafty"})
 --table.insert(family, {"chikorita", "bayleef", "meganium"})
 
 

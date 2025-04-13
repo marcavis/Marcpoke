@@ -6,8 +6,8 @@ end
 
 local ppurist={
   key = "ppurist",
-  dollars = 20,
-  mult = 16,
+  dollars = 8,
+  mult = 8,
   boss = { showdown = true, min = 8, max = 80 },
   boss_colour = HEX("7A9616"),
   pos = { x = 0, y = 0 },
@@ -16,13 +16,22 @@ local ppurist={
   debuff = {},
   config = {disabled = false},
   set_blind = function(self)
-    for x, y in ipairs(G.deck.cards) do
-      if not y.edition then y:set_debuff(true) end
-    end
+    -- for x, y in ipairs(G.deck.cards) do
+    --   print(y.edition)
+    --   if not y.edition then y.debuff = true end
+    -- end
   end,
+  -- debuff = {
+  --   edition = nil
+  -- },
+  -- debuff_card = function(card, from_blind)
+  --   --if not card.edition then card.debuff = true end
+  --   print(card)
+  --   if not card.edition then card:set_debuff(true); return end
+  --   card:set_debuff(false)
+  -- end,
   recalc_debuff = function(self, card, from_blind)
-    --will check later
-    --return goose_disable(self.config.disabled, card, self.config.ptypes)
+    if not card.edition then return true end
   end,
   press_play = function(self)
     G.GAME.blind.triggered = true

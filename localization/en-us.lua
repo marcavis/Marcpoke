@@ -13,39 +13,13 @@ return {
         
         v_text = {
             ch_c_marcpoke_forced_finisher_boss_blind = {"The only finisher boss blind allowed"},
-            ch_c_marcpoke_forced_finisher_boss_blind_2 = {"is {C:attention,T:bl_marcpoke_ppurist}Prismatic Purist{}"}
+            ch_c_marcpoke_forced_finisher_boss_blind_2 = {"is {C:attention}Prismatic Purist{}"},
+            ch_c_marcpoke_forced_finisher_boss_blind_3 = {"(Debuffs all cards and jokers"},
+            ch_c_marcpoke_forced_finisher_boss_blind_4 = {"without editions; 16x mult requirement)"}
         }
     },
     descriptions = {  
         Joker = {
-            j_marcpoke_chikorita = {
-                name = "Chikorita",
-                text = {
-                    "{C:attention}+#4#{} hand size",
-                    "{C:mult}#3# discards{}",
-                    "Earn {C:money}$#1#{} for each",
-                    "discarded hand",
-                    "{C:inactive,s:0.8}(Evolves at $#2#{C:inactive,s:0.8}/{C:money,s:0.8}$#5#{C:inactive,s:0.8} earned)",
-                } 
-            },
-            j_marcpoke_bayleef = {
-                name = "Bayleef",
-                text = {
-                    "{C:attention}+#4#{} hand size",
-                    "{C:mult}#3# discards{}",
-                    "Earn {C:money}$#1#{} for each",
-                    "discarded hand",
-                    "{C:inactive,s:0.8}(Evolves at $#2#{C:inactive,s:0.8}/{C:money,s:0.8}$#5#{C:inactive,s:0.8} earned)",
-                } 
-            },
-            j_marcpoke_meganium = {
-                name = "Meganium",
-                text = {
-                    "{C:attention}+#3#{} hand size",
-                    "Earn {C:money}$#1#{} for each",
-                    "discarded hand",
-                } 
-            },
             j_marcpoke_trubbish = {
                 name = "Trubbish",
                 text = {

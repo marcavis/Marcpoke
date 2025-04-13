@@ -3,7 +3,7 @@ version = "1.0.0"
 dump_lua = true
 priority = 10
 
-#Force the energy used infobox to appear if we have borrowed energy, even if we don't have added energy to the pokemon directly
+#Add efficiency to the variables that get improved by energy
 [[patches]]
 [patches.pattern]
 target = '=[SMODS Pokermon "functions/energyfunctions.lua"]'

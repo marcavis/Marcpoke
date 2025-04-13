@@ -48,7 +48,7 @@ local super_nerd = {
     rarity = 3,
     cost = 8,
     stage = "Other",
-    atlas = "luminous_cave",
+    atlas = "super_nerd",
     blueprint_compat = true,
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play then

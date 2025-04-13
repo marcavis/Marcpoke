@@ -5,6 +5,8 @@ local convention_concern = {
         custom = {
             {id = 'marcpoke_forced_finisher_boss_blind'},
             {id = 'marcpoke_forced_finisher_boss_blind_2'},
+            {id = 'marcpoke_forced_finisher_boss_blind_3'},
+            {id = 'marcpoke_forced_finisher_boss_blind_4'},
         },
         modifiers = {
         }
