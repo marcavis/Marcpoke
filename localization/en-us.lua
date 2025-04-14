@@ -21,7 +21,8 @@ return {
             ch_c_marcpoke_forced_finisher_boss_blind_3 = {"(Debuffs all cards and jokers"},
             ch_c_marcpoke_forced_finisher_boss_blind_4 = {"without editions; 8x mult requirement)"},
             ch_c_marcpoke_all_aging={"All Jokers are {C:attention}Aging{}"},
-            ch_c_marcpoke_all_aging_2 = {"({C:inactive}{C:attention}Holding Energy{}; Can't evolve or gain energy){}"},
+            -- ch_c_marcpoke_all_aging_2 = {"({C:inactive}{C:attention}Holding Energy{}; Can't evolve or gain energy){}"},
+            ch_c_marcpoke_all_aging_2 = {"({C:inactive}Can't evolve or gain energy){}"},
             ch_c_marcpoke_all_perishable={"All Jokers are {C:attention}Perishable{}"},
         }
     },
@@ -345,7 +346,7 @@ return {
             aging_sticker = {
                 name = "Aging",
                 text = {
-                    "{C:attention}Holding Energy{}",
+                    -- "{C:attention}Holding Energy{}",
                     "Can't evolve or gain energy",
                 },
             }
