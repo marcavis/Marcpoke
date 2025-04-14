@@ -16,20 +16,7 @@ local ppurist={
   debuff = {},
   config = {disabled = false},
   set_blind = function(self)
-    -- for x, y in ipairs(G.deck.cards) do
-    --   print(y.edition)
-    --   if not y.edition then y.debuff = true end
-    -- end
   end,
-  -- debuff = {
-  --   edition = nil
-  -- },
-  -- debuff_card = function(card, from_blind)
-  --   --if not card.edition then card.debuff = true end
-  --   print(card)
-  --   if not card.edition then card:set_debuff(true); return end
-  --   card:set_debuff(false)
-  -- end,
   recalc_debuff = function(self, card, from_blind)
     if not card.edition then return true end
   end,

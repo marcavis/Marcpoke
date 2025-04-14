@@ -94,6 +94,46 @@ local onsen = {
       type = 'Challenge Deck',
     },
 }
+local unsuitable = {
+    object_type = "Challenge",
+    key = "unsuitable",
+    rules = {
+        custom = {
+            
+        },
+        modifiers = {
+        }
+    },
+    consumeables = {
+        {id = 'c_jupiter'}
+    },
+    vouchers = {
+    },
+    jokers = {
+      {id = "j_poke_staryu", eternal = true},
+      {id = "j_poke_exeggcute", eternal = true},
+      {id = "j_poke_cleffa", eternal = true},
+      {id = "j_poke_igglybuff", eternal = true},
+    },
+    restrictions = {
+        banned_cards = {
+        },
+        banned_tags = {
+        },
+        banned_other = {
+            {id = 'bl_final_heart', type = 'blind'},
+            {id = 'bl_final_leaf', type = 'blind'},
+            {id = 'bl_marcpoke_ppurist', type = 'blind'},
+            {id = 'bl_head', type = 'blind'},
+            {id = 'bl_window', type = 'blind'},
+            {id = 'bl_goad', type = 'blind'},
+            {id = 'bl_club', type = 'blind'},
+        }
+    },
+    deck = {
+      type = 'Challenge Deck',
+    },
+}
 return {name = "Challenges", 
-        list = {convention_concern, graveyard_shift, onsen}
+        list = {convention_concern, graveyard_shift, onsen, unsuitable}
 }

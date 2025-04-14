@@ -12,6 +12,7 @@ return {
             c_marcpoke_convention_concern = "Convention Concern",
             c_marcpoke_graveyard_shift = "Graveyard Shift",
             c_marcpoke_onsen = "Onsen",
+            c_marcpoke_unsuitable = "Unsuitable",
         },
         
         v_text = {
