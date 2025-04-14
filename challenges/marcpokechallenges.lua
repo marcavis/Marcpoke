@@ -36,8 +36,64 @@ local convention_concern = {
       type = 'Challenge Deck',
     },
 }
-
-
+local graveyard_shift = {
+    object_type = "Challenge",
+    key = "graveyard_shift",
+    rules = {
+        custom = {
+            {id = 'marcpoke_all_perishable'},
+        },
+        modifiers = {
+        }
+    },
+    vouchers = {
+    },
+    jokers = {
+      {id = "j_marcpoke_shuppet", eternal = true},
+    },
+    restrictions = {
+        banned_cards = {
+        },
+        banned_tags = {
+        },
+        banned_other = {
+            {id = 'bl_marcpoke_ppurist', type = 'blind'},
+        }
+    },
+    deck = {
+      type = 'Challenge Deck',
+    },
+}
+local onsen = {
+    object_type = "Challenge",
+    key = "onsen",
+    rules = {
+        custom = {
+            {id = 'marcpoke_all_aging'},
+            {id = 'marcpoke_all_aging_2'},
+        },
+        modifiers = {
+        }
+    },
+    vouchers = {
+    },
+    jokers = {
+      {id = "j_poke_mudkip", eternal = true},
+      --Torkoal?
+    },
+    restrictions = {
+        banned_cards = {
+        },
+        banned_tags = {
+        },
+        banned_other = {
+            {id = 'bl_marcpoke_ppurist', type = 'blind'},
+        }
+    },
+    deck = {
+      type = 'Challenge Deck',
+    },
+}
 return {name = "Challenges", 
-        list = {convention_concern}
+        list = {convention_concern, graveyard_shift, onsen}
 }

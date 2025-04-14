@@ -32,8 +32,9 @@ local shuppet = {
                 if v.debuff then disabled = disabled + 1 end
             end
             card.ability.extra.chips = card.ability.extra.chips + (card.ability.extra.chip_mod * (dolls + disabled))
-            
-            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("k_upgrade_ex")})
+            if (dolls + disabled) > 0 then
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("k_upgrade_ex")})
+            end
         end
         return level_evo(self, card, context, "j_marcpoke_banette")
     end,
@@ -75,7 +76,9 @@ local banette = {
             end
             card.ability.extra.chips = card.ability.extra.chips + (card.ability.extra.chip_mod * (dolls + disabled))
             card.ability.extra.Xmult = card.ability.extra.Xmult + (card.ability.extra.Xmult_mod * (dolls + disabled))
-            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("k_upgrade_ex")})
+            if (dolls + disabled) > 0 then
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("k_upgrade_ex")})
+            end
         end
     end,
 }

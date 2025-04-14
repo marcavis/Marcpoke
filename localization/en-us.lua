@@ -3,19 +3,25 @@ return {
         labels = {
             soccer_sticker = "Soccer",
             rebel_sticker = "Rebel",
+            aging_sticker = "Aging",
         },
         dictionary = {
             poke_deenergized_ex = "Lost energy!",
         },
         challenge_names = {
             c_marcpoke_convention_concern = "Convention Concern",
+            c_marcpoke_graveyard_shift = "Graveyard Shift",
+            c_marcpoke_onsen = "Onsen",
         },
         
         v_text = {
             ch_c_marcpoke_forced_finisher_boss_blind = {"The only finisher boss blind allowed"},
             ch_c_marcpoke_forced_finisher_boss_blind_2 = {"is {C:attention}Prismatic Purist{}"},
             ch_c_marcpoke_forced_finisher_boss_blind_3 = {"(Debuffs all cards and jokers"},
-            ch_c_marcpoke_forced_finisher_boss_blind_4 = {"without editions; 16x mult requirement)"}
+            ch_c_marcpoke_forced_finisher_boss_blind_4 = {"without editions; 8x mult requirement)"},
+            ch_c_marcpoke_all_aging={"All Jokers are {C:attention}Aging{}"},
+            ch_c_marcpoke_all_aging_2 = {"({C:inactive}{C:attention}Holding Energy{}; Can't evolve or gain energy){}"},
+            ch_c_marcpoke_all_perishable={"All Jokers are {C:attention}Perishable{}"},
         }
     },
     descriptions = {  
@@ -333,6 +339,13 @@ return {
                 text = {
                     "The values on this",
                     "joker are reversed",
+                },
+            },
+            aging_sticker = {
+                name = "Aging",
+                text = {
+                    "{C:attention}Holding Energy{}",
+                    "Can't evolve or gain energy",
                 },
             }
         }

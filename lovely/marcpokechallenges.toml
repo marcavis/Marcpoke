@@ -1,0 +1,63 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 10
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = "if G.GAME.modifiers.all_eternal then"
+position = "before"
+payload = '''
+if G.GAME.modifiers.marcpoke_all_perishable then card:set_perishable(true) end
+if G.GAME.modifiers.marcpoke_all_aging then card.ability.aging_sticker = true end
+'''
+match_indent = true
+
+#prevent Aging pokes from gaining energy
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "functions/energyfunctions.lua"]'
+pattern = "energy_matches = function(card, etype, include_colorless)"
+position = "after"
+payload = "if card.ability and card.ability.aging_sticker then return false end"
+match_indent = true
+
+#prevent aging pokes from evolving
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
+pattern = "can_evolve = function(self, card, context, forced_key, ignore_step, allow_level)"
+position = "after"
+payload = "if card.ability and card.ability.aging_sticker then return false end"
+match_indent = true
+
+
+#prevent aging pokes from receiving evolution stones
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
+pattern = "function is_evo_item_for(self, card)"
+position = "after"
+payload = "if card.ability and card.ability.aging_sticker then return false end"
+match_indent = true
+
+#prevent evolution stone use when the joker is selected
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
+pattern = "local choice = G.jokers.highlighted[1]"
+position = "after"
+payload = "if choice.ability and choice.ability.aging_sticker then return false end"
+match_indent = true
+
+
+#prevent evolution stone use when e.g. four cards are selected for fire stone
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "functions/pokefunctions.lua"]'
+pattern = "evo_item_use_total = function(self, card, area, copier)"
+position = "after"
+payload = "if card.ability and card.ability.aging_sticker then return false end"
+match_indent = true
+

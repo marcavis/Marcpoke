@@ -59,8 +59,44 @@ local rebel_sticker = {
   	end,
 }
 
+local aging_sticker = {
+    key = "aging_sticker",
+    should_apply = function(self, card, center, area)
+    	return false
+  	end,
+	  loc_vars = function(self, info_queue, card)
+        return { vars = {}}
+	  end,
+      
+    badge_colour = HEX("9030A0"),
+    default_compat = true,
+    prefix_config = {key = false},
+    rate = 0.00,
+    atlas = "stickers",
+    pos = { x = 2, y = 0 },
+    sets = {
+    	Joker = true
+    },
+	config = {card_pointer = nil},
+    apply = function(self, card, val)
+    	card.ability[self.key] = val
+        -- G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+        -- G.E_MANAGER:add_event(Event({
+        --     trigger = 'before',
+        --     delay = 0.0,
+        --     func = (function()
+        --             local _card = create_card('Energy', G.consumeables, nil, nil, nil, nil, nil, 'pory')
+        --             _card:add_to_deck()
+        --             G.consumeables:emplace(_card)
+        --             G.GAME.consumeable_buffer = 0
+        --         return true
+        --     end)}))
+        -- card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize("poke_plus_energy"), colour = G.ARGS.LOC_COLOURS["pink"]})
+  	end,
+}
+
 return
 {
   name = "Stickers",
-  list = {soccer_sticker, rebel_sticker}
+  list = {soccer_sticker, rebel_sticker, aging_sticker}
 }
