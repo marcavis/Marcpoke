@@ -278,6 +278,40 @@ return {
                     "Retriggers all scored cards with editions",
                 }
             },
+            j_marcpoke_sinistea = {
+                name = 'Sinistea',
+                text = {
+                  "Leftmost {C:attention}Consumable{} gives",
+                  "the effect it would apply on a card",
+                --   "{C:inactive}Currently: #1#{}"
+                }
+            },
+            j_marcpoke_sinistea2 = {
+                name = 'Sinistea',
+                text = {
+                  "{C:money}Higher sale value{}",
+                  "Leftmost {C:attention}Consumable{} gives",
+                  "the effect it would apply on a card",
+                --   "{C:inactive}Currently: #1#{}"
+                }
+            },
+            j_marcpoke_polteageist = {
+                name = 'Polteageist',
+                text = {
+                    "{C:attention}Holding {C:dark_edition}Negative{} Twisted Spoon{}",
+                    "Every held {C:attention}Consumable{} gives",
+                    "the effect it would apply on a card",
+                }
+            },
+            j_marcpoke_polteageist2 = {
+                name = 'Polteageist',
+                text = {
+                    "{C:money}Higher sale value{}",
+                    "{C:attention}Holding {C:dark_edition}Negative{} Twisted Spoon{}",
+                    "Every held {C:attention}Consumable{} gives",
+                    "the effect it would apply on a card",
+                }
+            },
         },
         Blind = {
             bl_marcpoke_ppurist = {
@@ -309,6 +343,109 @@ return {
             }
         },
         Other = {
+            haunted_strange = {
+                name = "Failed to Haunt",
+                text = {
+                    "#1# didn't know",
+                    "what to do with {C:attention}#2#{}"
+                }
+            },
+            haunted_planet = {
+                name = "Haunted Planet",
+                text = {
+                    "Haunted {C:Planet}#2#{} gives",
+                    "{C:mult}+#4#{} Mult and",
+                    "{C:chips}+#3#{} chips"
+                }
+            },
+            --fool, emperor, lovers, strength, hangman, death, star, moon, sun, world?
+            haunted_c_magician = {
+                name = "Haunting Magician",
+                text = {
+                    "Held Magician gives",
+                    "{C:green}#3# in #4#{} chance",
+                    "for {C:mult}+20{} Mult",
+                }
+            },
+            haunted_c_high_priestess = {
+                name = "Haunting High Priestess",
+                text = {
+                    "Held High Priestess gives",
+                    "{C:mult}+2{} Mult and",
+                    "{C:chips}+25{} chips"
+                }
+            },
+            haunted_c_empress = {
+                name = "Haunting Empress",
+                text = {
+                    "Held Empress gives",
+                    "{C:mult}+4{} Mult"
+                }
+            },
+            haunted_c_heirophant = {
+                name = "Haunting Hierophant",
+                text = {
+                    "Held Hierophant gives",
+                    "{C:chips}+30{} chips"
+                }
+            },
+            haunted_c_chariot = {
+                name = "Haunting Chariot",
+                text = {
+                    "Held Chariot gives",
+                    "{X:red,C:white}X1.5{} Mult"
+                }
+            },
+            haunted_c_justice = {
+                name = "Haunting Justice",
+                text = {
+                    "Held Justice gives",
+                    "{X:red,C:white}X2{} Mult",
+                    "{C:green}#3# in #4#{} chance to",
+                    "destroy card",
+                }
+            },
+            haunted_c_hermit = {
+                name = "Haunting Hermit",
+                text = {
+                    "Held Hermit gives",
+                    "{C:money}$3{} at the",
+                    "end of round"
+                }
+            },
+            haunted_c_wheel_of_fortune = {
+                name = "Haunting Wheel of Fortune",
+                text = {
+                    "Held Wheel of Fortune gives",
+                    "{C:green}#3# in #4#{} chance for",
+                    "{C:chips}+50{} chips,",
+                    "{C:mult}+10{} Mult, or",
+                    "{X:red,C:white}X1.5{} Mult",                    
+                }
+            },
+            haunted_c_temperance = {
+                name = "Haunting Temperance",
+                text = {
+                    "Held Temperance gives",
+                    "{C:money}$3{} at the",
+                    "end of round"
+                }
+            },
+            haunted_c_devil = {
+                name = "Haunting Devil",
+                text = {
+                    "Held Devil gives",
+                    "{C:money}$3{} at the",
+                    "end of round"
+                }
+            },
+            haunted_c_tower = {
+                name = "Haunting Tower",
+                text = {
+                    "Held Tower gives",
+                    "{C:chips}+50{} chips"
+                }
+            },
             moms_shopping_list = {
                 name = "Mom's Shopping List",
                 text = {
