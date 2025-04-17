@@ -402,7 +402,7 @@ return {
                     "Held Justice gives",
                     "{X:red,C:white}X2{} Mult",
                     "{C:green}#3# in #4#{} chance to",
-                    "destroy card",
+                    "destroy Justice card",
                 }
             },
             haunted_c_hermit = {
@@ -444,6 +444,49 @@ return {
                 text = {
                     "Held Tower gives",
                     "{C:chips}+50{} chips"
+                }
+            },
+            haunted_c_talisman = {
+                name = "Haunting Talisman",
+                text = {
+                    "Held Talisman gives",
+                    "{C:money}$3{} at the",
+                    "end of round"
+                }
+            },
+            haunted_c_aura = {
+                name = "Haunting Aura",
+                text = {
+                    "Held Aura gives",
+                    "{C:chips}+50{} chips,",
+                    "{C:mult}+10{} Mult, or",
+                    "{X:red,C:white}X1.5{} Mult",                    
+                }
+            },
+            haunted_c_sigil = {
+                name = "Haunting Sigil",
+                text = {
+                    "Held Sigil gives",
+                    "{X:red,C:white}X2{} Mult",
+                    "if played hand",
+                    "contains a {C:attention}Flush{}"
+                }
+            },
+            haunted_c_ouija = {
+                name = "Haunting Ouija",
+                text = {
+                    "Held Ouija gives",
+                    "{X:red,C:white}X2{} Mult",
+                    "if played hand",
+                    "contains a {C:attention}Four of a Kind{}"
+                }
+            },
+            haunted_c_deja_vu = {
+                name = "Haunting Deja Vu",
+                text = {
+                    "Held Deja Vu causes",
+                    "the leftmost scoring card",
+                    "to be retriggered once",
                 }
             },
             moms_shopping_list = {
