@@ -214,6 +214,108 @@ local sinistea = {
     --   end, 
 }
 
+local mutant_polteageist = {
+    name = "mutant_polteageist", 
+    pos = {x = 6, y = 3},
+    config = {extra = {mult = 3}},
+    loc_vars = function(self, info_queue, center)
+        type_tooltip(self, info_queue, center)
+        if G.consumeables and #G.consumeables.cards > 0 then
+            local item_key = G.consumeables.cards[1].config.center.key
+            local item_name = G.consumeables.cards[1].ability.name
+            local item_set = G.consumeables.cards[1].ability.set
+            local sinistea_return = consumable_trigger_effect(G.consumeables.cards[1], center, nil)
+            if item_set == "Planet" then
+                info_queue[#info_queue+1] = {
+                    set = "Other", key = "haunted_planet",
+                    vars = {"Sinistea", item_name, sinistea_return.chip_mod, sinistea_return.mult_mod}}
+            else
+                if sinistea_return.itworks or sinistea_return.Xmult_mod or sinistea_return.mult_mod
+                or sinistea_return.chip_mod or sinistea_return.dollars or sinistea_return.repetitions then
+                    info_queue[#info_queue+1] = {
+                        set = "Other", key = "haunted_" .. item_key,
+                        vars = {"Sinistea", item_name, G.GAME.probabilities.normal, sinistea_return.odds or 1}}
+                else
+                    info_queue[#info_queue+1] = {
+                        set = "Other", key = "haunted_strange", 
+                        vars = {"Sinistea", item_name, G.GAME.probabilities.normal, sinistea_return.odds or 1}}
+                end
+            end
+        end
+        local effect = "Nothing"
+        return {vars = {center.ability.extra.mult}}
+    end,
+    rarity = "Legendary",
+    cost = 10,
+    stage = "Basic",
+    ptype = "Psychic",
+    atlas = "marcPoke8",
+    aux_poke = true,
+    no_collection = true,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.setting_blind then
+            G.consumeables.config.card_limit = math.floor(card.ability.extra.mult)
+        end
+        if context.repetition and context.cardarea == G.play then
+            for x = 1, math.min(#G.consumeables.cards, math.floor(card.ability.extra.mult)) do
+                local sinistea_return = consumable_trigger_effect(G.consumeables.cards[x], card, context)
+                if sinistea_return.repetitions then return sinistea_return end
+            end
+            -- if (context.other_card == context.scoring_hand[1]) or (context.other_card == context.scoring_hand[2]) then
+            --   return {
+            --       message = localize('k_again_ex'),
+            --       repetitions = card.ability.extra.retriggers,
+            --       card = card
+            --   }
+            -- end
+        end
+        if context.other_consumeable and context.other_consumeable.rank <= math.floor(card.ability.extra.mult) then
+            local item_set = context.other_consumeable.ability.set
+            local sinistea_return = consumable_trigger_effect(context.other_consumeable, card, context)
+            sinistea_return.colour = G.C.MULT
+            sinistea_return.message = context.other_consumeable.ability.name.."!"
+            --let's ignore money rewards at this time
+            sinistea_return.dollars = nil
+            --print(sinistea_return)
+            --print(sinistea_return)
+            if sinistea_return.afterwards then
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.3,
+                    func = sinistea_return.afterwards(context.other_consumeable, card)
+                }))
+            end
+            if sinistea_return.chip_mod or sinistea_return.mult_mod or sinistea_return.Xmult_mod then 
+                return sinistea_return
+            end
+            -- print(sinistea_return)
+            -- if sinistea_return.afterwards then
+            --     print("killing something")
+            --     sinistea_return.afterwards(context.other_consumeable, card)
+            -- end
+            -- if context.other_consumeable.ability.name == "twisted_spoon" then
+            --   Xmult = card.ability.extra.Xmult_multi2
+            -- else
+            --   Xmult = card.ability.extra.Xmult_multi
+            -- end
+            -- return {
+            --   message = localize{type = 'variable', key = 'a_xmult', vars = {Xmult}}, 
+            --   colour = G.C.XMULT,
+            --   Xmult_mod = Xmult
+            -- }
+        end
+    end,
+    calc_dollar_bonus = function(self, card)
+        for x = 1, math.min(#G.consumeables.cards, card.ability.extra.mult) do
+            local item_set = G.consumeables.cards[x].ability.set
+            local sinistea_return = consumable_trigger_effect(G.consumeables.cards[x], card, nil)
+            if sinistea_return.dollars then
+                return ease_poke_dollars(card, "", sinistea_return.dollars, true)
+            end
+        end
+    end,
+}
 
 consumable_trigger_effect = function (item, card, context)
     local econ_reward = 3
@@ -227,7 +329,7 @@ consumable_trigger_effect = function (item, card, context)
         }
     end
     if name == "The Magician" then
-        local result = {}
+        local result = {odds = 5, mult_mod = 0}
         if pseudorandom('sinistea_mult') < G.GAME.probabilities.normal/5 then result.mult_mod = 20 end
         --if pseudorandom('sinistea_money') < G.GAME.probabilities.normal/15 then result.dollars = 3 end
         return result
@@ -274,5 +376,5 @@ consumable_trigger_effect = function (item, card, context)
 end
 
 return {name = "Marcpoke Jokers", 
-list = {shuppet, banette, sinistea},
+list = {shuppet, banette, sinistea, mutant_polteageist},
 }

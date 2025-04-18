@@ -13,6 +13,7 @@ return {
             c_marcpoke_graveyard_shift = "Graveyard Shift",
             c_marcpoke_onsen = "Onsen",
             c_marcpoke_unsuitable = "Unsuitable",
+            c_marcpoke_porcelain_mayhem = "Porcelain Mayhem",
         },
         
         v_text = {
@@ -310,6 +311,19 @@ return {
                     "{C:attention}Holding {C:dark_edition}Negative{} Twisted Spoon{}",
                     "Every held {C:attention}Consumable{} gives",
                     "the effect it would apply on a card",
+                }
+            },
+            j_marcpoke_mutant_polteageist = {
+                name = 'Mutant Polteageist',
+                text = {
+                    "A rare, powerful Polteageist",
+                    "{br:2}text needs to be here to work",
+                    "Increases the number of consumable",
+                    "slots to match its power",
+                    "{br:2}text needs to be here to work",
+                    "The first {C:mult}#1#{} {C:attention}Consumables{}",
+                    "(rounded down) give",
+                    "the effect they would apply on a card",
                 }
             },
         },

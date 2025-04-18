@@ -134,6 +134,65 @@ local unsuitable = {
       type = 'Challenge Deck',
     },
 }
+local porcelain_mayhem = {
+    object_type = "Challenge",
+    key = "porcelain_mayhem",
+    rules = {
+        custom = {
+            {id = 'no_shop_jokers'},
+        },
+        modifiers = {
+            {id = 'joker_slots', value = 1},
+        }
+    },
+    consumeables = {
+        
+    },
+    vouchers = {
+        {id = 'v_crystal_ball'}
+    },
+    jokers = {
+      {id = "j_marcpoke_mutant_polteageist", eternal = true},
+    },
+    restrictions = {
+        banned_cards = {
+            {id = 'c_judgement'},
+            {id = 'c_poke_pokeball'},
+            {id = 'c_poke_greatball'},
+            {id = 'c_poke_ultraball'},
+            {id = 'c_poke_masterball'},
+            {id = 'c_wraith'},
+            {id = 'c_soul'},
+            {id = 'v_blank'},
+            {id = 'v_antimatter'},
+            {id = 'p_buffoon_normal_1', ids = {
+                'p_buffoon_normal_1','p_buffoon_normal_2','p_buffoon_jumbo_1','p_buffoon_mega_1',
+            }},
+        },
+        banned_tags = {
+            {id = 'tag_rare'},
+            {id = 'tag_uncommon'},
+            {id = 'tag_holo'},
+            {id = 'tag_polychrome'},
+            {id = 'tag_negative'},
+            {id = 'tag_foil'},
+            {id = 'tag_buffoon'},
+            {id = 'tag_top_up'},
+            {id = 'tag_poke_shiny_tag'},
+            {id = 'tag_poke_stage_one_tag'},
+            {id = 'tag_poke_safari_tag'}
+        },
+        banned_other = {
+            {id = 'bl_final_heart', type = 'blind'},
+            {id = 'bl_final_leaf', type = 'blind'},
+            {id = 'bl_marcpoke_ppurist', type = 'blind'},
+            {id = 'bl_poke_cgoose', type = 'blind'},
+        }
+    },
+    deck = {
+      type = 'Challenge Deck',
+    },
+}
 return {name = "Challenges", 
-        list = {convention_concern, graveyard_shift, onsen, unsuitable}
+        list = {convention_concern, graveyard_shift, onsen, unsuitable, porcelain_mayhem}
 }
