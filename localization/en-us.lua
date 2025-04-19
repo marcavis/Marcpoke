@@ -317,6 +317,7 @@ return {
                 name = 'Mutant Polteageist',
                 text = {
                     "A rare, powerful Polteageist",
+                    "that can be energized",
                     "{br:2}text needs to be here to work",
                     "Increases the number of consumable",
                     "slots to match its power",
@@ -477,6 +478,24 @@ return {
                     "{X:red,C:white}X1.5{} Mult",                    
                 }
             },
+            haunted_c_poke_upgrade = {
+                name = "Haunting Upgrade",
+                text = {
+                    "Held Upgrade gives",
+                    "{C:chips}+50{} chips,",
+                    "{C:mult}+10{} Mult, or",
+                    "{X:red,C:white}X1.5{} Mult",                    
+                }
+            },
+            haunted_c_poke_dubiousdisc = {
+                name = "Haunting Dubious Disc",
+                text = {
+                    "Held Dubious Disc gives",
+                    "{C:chips}+50{} chips,",
+                    "{C:mult}+10{} Mult, or",
+                    "{X:red,C:white}X1.5{} Mult",                    
+                }
+            },
             haunted_c_sigil = {
                 name = "Haunting Sigil",
                 text = {
@@ -495,12 +514,88 @@ return {
                     "contains a {C:attention}Four of a Kind{}"
                 }
             },
+            haunted_c_immolate = {
+                name = "Haunting Immolate",
+                text = {
+                    "Held Immolate gives",
+                    "{C:money}$3{} at the",
+                    "end of round"
+                }
+            },
             haunted_c_deja_vu = {
                 name = "Haunting Deja Vu",
                 text = {
                     "Held Deja Vu causes",
                     "the leftmost scoring card",
                     "to be retriggered once",
+                }
+            },
+            haunted_c_hex = {
+                name = "Haunting Hex",
+                text = {
+                    "Held Hex gives",
+                    "{X:red,C:white}X1.5{} Mult"
+                }
+            },
+            haunted_c_poke_metalcoat = {
+                name = "Haunting Metal Coat",
+                text = {
+                    "Held Metal Coat gives",
+                    "{X:red,C:white}X1.5{} Mult"
+                }
+            },
+            haunted_c_poke_waterstone = {
+                name = "Haunting Water Stone",
+                text = {
+                    "Held Water Stone gives",
+                    "{C:chips}+30{} chips"
+                }
+            },
+            haunted_c_poke_leafstone = {
+                name = "Haunting Leaf Stone",
+                text = {
+                    "Held Magician gives",
+                    "{C:green}#3# in #4#{} chance",
+                    "for {C:mult}+20{} Mult",
+                }
+            },
+            haunted_c_poke_firestone = {
+                name = "Haunting Fire Stone",
+                text = {
+                    "Held Fire Stone gives",
+                    "{C:red}+8{} Mult"
+                }
+            },
+            haunted_c_poke_thunderstone = {
+                name = "Haunting Thunder Stone",
+                text = {
+                    "Held Thunder Stone gives",
+                    "{C:money}$3{} at the",
+                    "end of round"
+                }
+            },
+            haunted_c_poke_icestone = {
+                name = "Haunting Ice Stone",
+                text = {
+                    "Held Ice Stone gives",
+                    "{X:red,C:white}X2{} Mult",
+                    "{C:green}#3# in #4#{} chance to",
+                    "destroy Ice Stone card",
+                }
+            },
+            haunted_c_poke_leftovers = {
+                name = "Haunting Leftovers",
+                text = {
+                    "Held Leftovers give",
+                    "{C:money}$2{} at the",
+                    "end of round"
+                }
+            },
+            haunted_steel = {
+                name = "Haunted Item",
+                text = {
+                    "Held {C:attention}#2#{} gives",
+                    "{X:red,C:white}X1.5{} Mult"
                 }
             },
             moms_shopping_list = {
