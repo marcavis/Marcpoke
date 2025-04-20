@@ -585,6 +585,22 @@ return {
                     "destroy Ice Stone card",
                 }
             },
+            haunted_c_poke_shinystone = {
+                name = "Haunting Shiny Stone",
+                text = {
+                    "Held Shiny Stone gives",
+                    "{C:money}$3{} at the",
+                    "end of round"
+                }
+            },
+            haunted_c_poke_duskstone = {
+                name = "Haunting Dusk Stone",
+                text = {
+                    "Held Dusk Stone gives",
+                    "{C:money}$3{} at the",
+                    "end of round"
+                }
+            },
             haunted_c_poke_leftovers = {
                 name = "Haunting Leftovers",
                 text = {
