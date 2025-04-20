@@ -1,0 +1,21 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Johto Mom taking a fraction of payout
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.area and self.ability.couponed and (self.area == G.shop_jokers or self.area == G.shop_booster) then self.cost = 0 end
+'''
+position = "after"
+payload = '''
+if G.GAME.modifiers.marcpoke_playing_cards_free then
+    if self.ability.set == "Enhanced" or self.ability.set == "Default" or self.ability.set == "Booster" then
+        self.sell_cost = 0
+    end
+end
+'''
+match_indent = true

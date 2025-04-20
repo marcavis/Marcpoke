@@ -57,7 +57,6 @@ local graveyard_shift = {
         banned_tags = {
         },
         banned_other = {
-            {id = 'bl_marcpoke_ppurist', type = 'blind'},
         }
     },
     deck = {
@@ -87,7 +86,7 @@ local onsen = {
         banned_tags = {
         },
         banned_other = {
-            {id = 'bl_marcpoke_ppurist', type = 'blind'},
+
         }
     },
     deck = {
@@ -123,7 +122,6 @@ local unsuitable = {
         banned_other = {
             {id = 'bl_final_heart', type = 'blind'},
             {id = 'bl_final_leaf', type = 'blind'},
-            {id = 'bl_marcpoke_ppurist', type = 'blind'},
             {id = 'bl_head', type = 'blind'},
             {id = 'bl_window', type = 'blind'},
             {id = 'bl_goad', type = 'blind'},
@@ -185,7 +183,6 @@ local porcelain_mayhem = {
         banned_other = {
             {id = 'bl_final_heart', type = 'blind'},
             {id = 'bl_final_leaf', type = 'blind'},
-            {id = 'bl_marcpoke_ppurist', type = 'blind'},
             {id = 'bl_poke_cgoose', type = 'blind'},
         }
     },
