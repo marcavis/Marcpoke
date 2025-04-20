@@ -8,6 +8,9 @@ local ppurist={
   key = "ppurist",
   dollars = 8,
   mult = 8,
+  in_pool = function(self)
+    return G.GAME.challenge == "c_marcpoke_convention_concern" and math.mod(G.GAME.round_resets.ante, 8) == 0
+  end,  
   boss = { showdown = true, min = 8, max = 80 },
   boss_colour = HEX("7A9616"),
   pos = { x = 0, y = 0 },
