@@ -265,10 +265,10 @@ clean_item_name = function(_card)
         return G.localization.descriptions.Item[_card.config.center.key].name
     end
     if G.localization.descriptions.Tarot[_card.config.center.key] then
-        return G.localization.descriptions.Item[_card.config.center.key].name
+        return G.localization.descriptions.Tarot[_card.config.center.key].name
     end
     if G.localization.descriptions.Spectral[_card.config.center.key] then
-        return G.localization.descriptions.Item[_card.config.center.key].name
+        return G.localization.descriptions.Spectral[_card.config.center.key].name
     end
 
     return _name
