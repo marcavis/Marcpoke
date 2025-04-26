@@ -160,10 +160,12 @@ local sinistea = {
         end
     end,
     calc_dollar_bonus = function(self, card)
-        local item_set = G.consumeables.cards[1].ability.set
-        local sinistea_return = consumable_trigger_effect(G.consumeables.cards[1], card, nil)
-        if sinistea_return.dollars then
-            return ease_poke_dollars(card, "", sinistea_return.dollars, true)
+        if #G.consumeables.cards > 0 then
+            local item_set = G.consumeables.cards[1].ability.set
+            local sinistea_return = consumable_trigger_effect(G.consumeables.cards[1], card, nil)
+            if sinistea_return.dollars then
+                return ease_poke_dollars(card, "", sinistea_return.dollars, true)
+            end
         end
     end,
     add_to_deck = function(self, card, from_debuff)
@@ -175,7 +177,101 @@ local sinistea = {
             end
         end
     end,
+}
 
+local polteageist = {
+    name = "polteageist", 
+    pos = {x = 6, y = 3},
+    config = {extra = {}},
+    loc_vars = function(self, info_queue, center)
+        type_tooltip(self, info_queue, center)
+        if G.consumeables and #G.consumeables.cards > 0 then
+            local item_key = G.consumeables.cards[1].config.center.key
+            local item_name = clean_item_name(G.consumeables.cards[1])
+            local item_set = G.consumeables.cards[1].ability.set
+            local sinistea_return = consumable_trigger_effect(G.consumeables.cards[1], center, nil)
+            if item_set == "Planet" then
+                info_queue[#info_queue+1] = {
+                    set = "Other", key = "haunted_planet",
+                    vars = {"Sinistea", item_name, sinistea_return.chip_mod, sinistea_return.mult_mod}}
+            else
+                if sinistea_return.itworks or sinistea_return.Xmult_mod or sinistea_return.mult_mod
+                or sinistea_return.chip_mod or sinistea_return.dollars or sinistea_return.repetitions then
+                    info_queue[#info_queue+1] = {
+                        set = "Other", key = "haunted_" .. item_key,
+                        vars = {"Sinistea", item_name, G.GAME.probabilities.normal, sinistea_return.odds or 1}}
+                else
+                    info_queue[#info_queue+1] = {
+                        set = "Other", key = "haunted_strange", 
+                        vars = {"Sinistea", item_name, G.GAME.probabilities.normal, sinistea_return.odds or 1}}
+                end
+            end
+        end
+        local alt_key = nil
+        if center.ability.extra.form == 1 then
+            alt_key = "j_marcpoke_sinistea2"
+        end
+        local effect = "Nothing"
+        return {vars = {effect}, key = alt_key}
+    end,
+    rarity = "poke_safari",
+    cost = 8,
+    stage = "One",
+    ptype = "Psychic",
+    atlas = "marcPoke8",
+    blueprint_compat = true,
+    set_ability = function(self, card, initial, delay_sprites)
+        if initial then
+            if pseudorandom('sinistea') < (1/4) then
+                card.ability.extra.form = 1
+                --self:set_sprites(card)
+            end
+        end
+    end,
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play then
+            local sinistea_return = consumable_trigger_effect(G.consumeables.cards[1], card, context)
+            if sinistea_return.repetitions then return sinistea_return end
+        end
+        if context.other_consumeable and context.other_consumeable.rank == 1 then
+            local item_set = context.other_consumeable.ability.set
+            local sinistea_return = consumable_trigger_effect(context.other_consumeable, card, context)
+            sinistea_return.colour = G.C.MULT
+            sinistea_return.message = clean_item_name(context.other_consumeable).."!"
+            --let's ignore money rewards at this time
+            sinistea_return.dollars = nil
+            --print(sinistea_return)
+            --print(sinistea_return)
+            if sinistea_return.afterwards then
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.3,
+                    func = sinistea_return.afterwards(context.other_consumeable, card)
+                }))
+            end
+            if sinistea_return.chip_mod or sinistea_return.mult_mod or sinistea_return.Xmult_mod then 
+                return sinistea_return
+            end
+        end
+    end,
+    calc_dollar_bonus = function(self, card)
+        if #G.consumeables.cards > 0 then
+            local item_set = G.consumeables.cards[1].ability.set
+            local sinistea_return = consumable_trigger_effect(G.consumeables.cards[1], card, nil)
+            if sinistea_return.dollars then
+                return ease_poke_dollars(card, "", sinistea_return.dollars, true)
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if card.ability.extra.form == 1 then
+            if not from_debuff then
+                card.ability.extra_value = card.ability.extra_value + 6
+                card:set_cost()
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = "Genuine Article!"})
+            end
+        end
+    end,
 }
 
 local mutant_polteageist = {
@@ -275,6 +371,7 @@ clean_item_name = function(_card)
 end
 
 consumable_trigger_effect = function (item, card, context)
+    if not item then return {} end
     local econ_reward = 3
     local set = item.ability.set
     local name = item.ability.name
@@ -345,5 +442,5 @@ consumable_trigger_effect = function (item, card, context)
 end
 
 return {name = "Marcpoke Jokers", 
-list = {shuppet, banette, sinistea, mutant_polteageist},
+list = {shuppet, banette, sinistea, polteageist, mutant_polteageist},
 }
