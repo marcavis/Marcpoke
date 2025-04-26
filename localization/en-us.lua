@@ -7,6 +7,7 @@ return {
         },
         dictionary = {
             poke_deenergized_ex = "Lost energy!",
+            poke_poison_gas_ex = "Poison Gas!",
         },
         challenge_names = {
             c_marcpoke_convention_concern = "Convention Concern",
@@ -329,6 +330,32 @@ return {
                     "the effect they would apply on a card",
                 }
             },
+            j_marcpoke_stunky = {
+                name = "Stunky",
+                text = {
+                    "{C:attention}Volatile Left{}",
+                    "Reduces the score requirement",
+                    "of the current blind by {C:attention}1%{}",
+                    "per {C:money}${} of sell value of the",
+                    "Joker to the right and debuffs it,",
+                    "limited to a {C:attention}#2#%{} reduction",
+                    "Currently: {C:attention}#1#%{} reduction",
+                    "{C:inactive}(Evolves after {C:attention}#3#{}{C:inactive} rounds)"
+                }
+            },
+            j_marcpoke_skuntank = {
+                name = "Skuntank",
+                text = {
+                    "{C:attention}Volatile Left{}",
+                    "Reduces the score requirement",
+                    "of the current blind by {C:attention}2%{}",
+                    "(or {C:attention}3%{} when debuffing a {X:fire,C:white}Fire{} type Joker)",
+                    "per {C:money}${} of sell value of the",
+                    "Joker to the right and debuffs it,",
+                    "limited to a {C:attention}#2#%{} reduction",
+                    "Currently: {C:attention}#1#%{} reduction",
+                }
+            }
         },
         Blind = {
             bl_marcpoke_ppurist = {

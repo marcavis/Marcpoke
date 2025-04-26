@@ -211,6 +211,7 @@ table.insert(family, {"maractus"})
 table.insert(family, {"cinderace"})
 table.insert(family, {"shuppet", "banette"})
 table.insert(family, {"scraggy", "scrafty"})
+table.insert(family, {"stunky", "skutank"})
 --table.insert(family, {"chikorita", "bayleef", "meganium"})
 
 
