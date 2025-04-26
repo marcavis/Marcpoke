@@ -104,7 +104,7 @@ local unsuitable = {
         }
     },
     consumeables = {
-        {id = 'c_jupiter'}
+        {id = 'c_lovers'}
     },
     vouchers = {
     },
