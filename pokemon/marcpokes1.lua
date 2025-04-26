@@ -184,8 +184,8 @@ local garbodor = {
       type_tooltip(self, info_queue, center)
       return {vars = {center.ability.extra.chips, (center.ability.extra.chips/100) * center.config.center:sumchips()}}
     end,
-    rarity = 2, 
-    cost = 4,
+    rarity = "poke_safari", 
+    cost = 8,
     ptype = "Dark",
     stage = "One", 
     atlas = "marcPoke5",
