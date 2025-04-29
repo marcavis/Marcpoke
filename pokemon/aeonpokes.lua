@@ -6,7 +6,7 @@ local stunky = {
         type_tooltip(self, info_queue, center)
         info_queue[#info_queue+1] = {set = 'Other', key = 'poke_volatile_'..center.ability.extra.volatile}
         local reduction = 0
-        if center.rank < G.jokers.config.card_count then
+        if G.jokers and center.rank < G.jokers.config.card_count then
             local next_poke_value = G.jokers.cards[center.rank + 1].sell_cost
             reduction = math.min(center.ability.extra.reduction_limit, next_poke_value)
         end
@@ -61,7 +61,7 @@ local skuntank = {
         type_tooltip(self, info_queue, center)
         info_queue[#info_queue+1] = {set = 'Other', key = 'poke_volatile_'..center.ability.extra.volatile}
         local reduction = 0
-        if center.rank < G.jokers.config.card_count then
+        if G.jokers and center.rank < G.jokers.config.card_count then
             local next_poke_value = G.jokers.cards[center.rank + 1].sell_cost
             local type_multiplier = G.jokers.cards[center.rank + 1].ability.extra.ptype == "Fire" and 3 or 2
             reduction = math.min(center.ability.extra.reduction_limit, next_poke_value * type_multiplier)
