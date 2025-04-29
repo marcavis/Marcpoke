@@ -1,0 +1,19 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 10
+
+#force booster pack to have 2 fewer cards
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = "local _size = self.ability.extra"
+position = "after"
+payload = '''
+if G.GAME.modifiers.marcpoke_ironmon_poor_boosters then _size = math.max(2, _size - 2) end
+'''
+match_indent = true
+
+
+
+        

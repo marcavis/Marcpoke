@@ -16,6 +16,7 @@ return {
             c_marcpoke_unsuitable = "Unsuitable",
             c_marcpoke_porcelain_mayhem = "Porcelain Mayhem",
             c_marcpoke_purple_goo = "Purple Goo",
+            c_marcpoke_ironmon = "Ironmon",
         },
         
         v_text = {
@@ -27,7 +28,9 @@ return {
             -- ch_c_marcpoke_all_aging_2 = {"({C:inactive}{C:attention}Holding Energy{}; Can't evolve or gain energy){}"},
             ch_c_marcpoke_all_aging_2 = {"({C:inactive}Can't evolve or gain energy){}"},
             ch_c_marcpoke_all_perishable={"All Jokers are {C:attention}Perishable{}"},
-            ch_c_marcpoke_playing_cards_free = {"Playing cards in the shop are free"}
+            ch_c_marcpoke_playing_cards_free = {"Playing cards in the shop are free"},
+            ch_c_marcpoke_ironmon_poor_boosters = {"Booster packs contain 2 fewer items (minimum 2)"},
+            --ch_c_marcpoke_ironmon_enforced_stickers = {"All jokers have at least one sticker"}
         }
     },
     descriptions = {  
