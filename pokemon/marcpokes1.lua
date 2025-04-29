@@ -530,6 +530,7 @@ local yungoos = {
     calculate = function(self, card, context)
         if context.setting_blind then
             reset_gumshoos_card(card)
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize(card.ability.extra.target_rank or "2", 'ranks').."s of "..localize(card.ability.extra.target_suit, 'suits_plural')})
         end
         if context.individual and context.cardarea == G.play then
             --Maybe it works even if the card is debuffed...
@@ -574,7 +575,7 @@ local gumshoos = {
     calculate = function(self, card, context)
         if context.setting_blind then
             reset_gumshoos_card(card)
-            --print(card)
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize(card.ability.extra.target_rank or "2", 'ranks').."s of "..localize(card.ability.extra.target_suit, 'suits_plural')})
         end
         if context.cardarea == G.jokers and context.scoring_hand then
             if context.joker_main and next(context.poker_hands['Flush']) then
