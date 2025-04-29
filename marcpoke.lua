@@ -20,6 +20,13 @@ SMODS.Atlas({
 }):register()
 
 SMODS.Atlas({
+  key = "marcpoke_mom",
+  path = "mom.png",
+  px = 71,
+  py = 95
+}):register()
+
+SMODS.Atlas({
   key = "regionals",
   path = "Regionals.png",
   path_prefix = SMODS.Mods["Pokermon"].path,
