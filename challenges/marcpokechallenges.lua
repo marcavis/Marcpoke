@@ -206,6 +206,9 @@ local ghost_house = {
     vouchers = {
         {id = 'v_hone'},
         {id = 'v_glow_up'},
+        {id = 'v_overstock_norm'},
+        {id = 'v_reroll_surplus'},
+        {id = 'v_reroll_glut'}
     },
     jokers = {
       {id = "j_poke_mega_gengar", edition = 'negative'},
@@ -229,8 +232,16 @@ local ghost_house = {
             }},
         },
         banned_tags = {
+            {id = 'tag_rare'},
+            {id = 'tag_uncommon'},
             {id = 'tag_holo'},
+            {id = 'tag_polychrome'},
             {id = 'tag_foil'},
+            {id = 'tag_buffoon'},
+            {id = 'tag_top_up'},
+            {id = 'tag_poke_shiny_tag'},
+            {id = 'tag_poke_stage_one_tag'},
+            {id = 'tag_poke_safari_tag'},
         },
         banned_other = {
         }
