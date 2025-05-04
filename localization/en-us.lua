@@ -358,6 +358,16 @@ return {
                     "limited to a {C:attention}#2#%{} reduction",
                     "Currently: {C:attention}#1#%{} reduction",
                 }
+            },
+            j_marcpoke_sigilyph = {
+                name = "Sigilyph",
+                text = {
+                    "Adds to base {C:chips}chips{} and {C:mult}mult{}",
+                    "the base values from all hands",
+                    "contained in the scoring hand",
+                    "{C:inactive}(E.g. a Three of a Kind also adds{}",
+                    "{C:inactive}chips and mult from Pair and High Card){}"
+                }
             }
         },
         Blind = {

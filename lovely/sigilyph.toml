@@ -1,0 +1,28 @@
+
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 10
+
+#force booster pack to have 2 fewer cards
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = "mult, hand_chips = mod_mult(mult), mod_chips(hand_chips)"
+position = "after"
+payload = '''
+local modify_scoring_value_effects = {}
+SMODS.calculate_context({full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, modify_scoring_values = true}, modify_scoring_value_effects)
+for _w, effect_dictionary in ipairs(modify_scoring_value_effects) do
+    if effect_dictionary.jokers then --print("WAOW", effect_dictionary.jokers.mult_mod) end
+        if effect_dictionary.jokers.mult_mod then mult = mult + effect_dictionary.jokers.mult_mod end
+        if effect_dictionary.jokers.chip_mod then hand_chips = hand_chips + effect_dictionary.jokers.chip_mod end
+    end
+end
+'''
+match_indent = true
+
+
+
+        
+        
