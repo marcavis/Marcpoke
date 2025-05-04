@@ -1,0 +1,212 @@
+
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 10
+
+#Rename button
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''
+function Card:sell_card()
+'''
+position = "before"
+payload = '''
+function Card:can_rename_card(context)
+    return true
+end
+function Card:rename_card ()
+    --G.CONTROLLER.locks.renaming_card = true
+    --stop_use()
+    print("Renaming...!")
+    self.ability.renamed_name = "Joe " .. pseudorandom_element({"Doe", "Schmoe", "Woe"}, pseudoseed('choice'))
+    local area = self.area
+end
+'''
+match_indent = true
+
+#Rename button on the left?
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''
+            self.children.use_button = UIBox{
+                definition = G.UIDEF.use_and_sell_buttons(self), 
+                config = {align=
+                        ((self.area == G.jokers) or (self.area == G.consumeables)) and "cr" or
+                        "bmi"
+                    , offset = 
+                        ((self.area == G.jokers) or (self.area == G.consumeables)) and {x=x_off - 0.4,y=0} or
+                        {x=0,y=0.65},
+                    parent =self}
+            }
+'''
+position = "after"
+payload = '''
+if self.ability.set == 'Joker' then
+  self.children.rename_button = UIBox{
+  definition = make_rename_button(self), 
+  --definition = G.UIDEF.use_and_sell_buttons(self),
+    config = {align=
+            (self.area == G.jokers) and "cl" or
+            "bmi"
+        , offset = 
+            (self.area == G.jokers) and {x=0.4,y=0},
+        parent =self}
+  }
+end
+'''
+match_indent = true
+
+#remove rename button after unhighlighting/using?
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''
+elseif self.children.use_button then
+  self.children.use_button:remove()
+  self.children.use_button = nil
+end
+'''
+position = "at"
+payload = '''
+elseif self.children.use_button or self.children.rename_button then
+  if self.children.use_button then
+    self.children.use_button:remove()
+    self.children.use_button = nil
+  end
+  if self.children.rename_button then
+    self.children.rename_button:remove()
+    self.children.rename_button = nil
+  end
+end
+'''
+match_indent = true
+
+#Rename button
+[[patches]]
+[patches.pattern]
+target = 'fakefunctions/UI_definitions.lua'
+pattern = '''
+local sell = nil
+'''
+position = "after"
+payload = '''
+local rename_button = nil
+'''
+match_indent = true
+
+#Rename button
+#[[patches]]
+#[patches.pattern]
+#target = 'fakefunctions/UI_definitions.lua'
+#pattern = '''
+#sell = {n=G.UIT.C, config={align = "cr"}, nodes={
+#'''
+#position = "before"
+#payload = '''
+#    rename_button = {n=G.UIT.C, config={align = "cl"}, nodes={
+#      {n=G.UIT.C, config={ref_table = card, align = "cr",padding = 0.1, r=0.08, minw = 1.25, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'rename_card', func = 'can_rename_card'}, nodes={
+#        {n=G.UIT.B, config = {w=0.1,h=0.6}},
+#        {n=G.UIT.C, config={align = "tm"}, nodes={
+#          {n=G.UIT.R, config={align = "cm", maxw = 1.25}, nodes={
+#            {n=G.UIT.T, config={text = "RENAME", colour = G.C.UI.TEXT_LIGHT, scale = 0.4, shadow = true}}
+#          }},
+#        }}
+#      }},
+#    }}
+#'''
+#match_indent = true
+
+
+#Rename button
+[[patches]]
+[patches.pattern]
+target = 'fakefunctions/UI_definitions.lua'
+pattern = '''
+{n=G.UIT.C, config={padding = 0.15, align = 'cl'}, nodes={
+'''
+position = "after"
+payload = '''
+{n=G.UIT.R, config={align = 'cr'}, nodes={
+    rename_button
+}},
+'''
+match_indent = true
+
+#Rename button
+[[patches]]
+[patches.pattern]
+target = 'functions/button_callbacks.lua'
+pattern = '''
+G.FUNCS.sell_card = function(e)
+'''
+position = "before"
+payload = '''
+G.FUNCS.can_rename_card = function(e)
+    e.config.colour = G.C.GREEN
+    e.config.button = 'rename_card'
+end
+  
+G.FUNCS.rename_card = function(e)
+    local card = e.config.ref_table
+    card:rename_card()
+end
+'''
+match_indent = true
+
+#Change name if this joker has been renamed
+#[[patches]]
+#[patches.pattern]
+#target = 'functions/common_events.lua'
+#pattern = '''
+#return full_UI_table
+#'''
+#position = "before"
+#payload = '''
+#--print(_c.ability)
+#print(full_UI_table.name)
+#print(full_UI_table.name[1])
+#print(full_UI_table.name.nodes)
+#if card and card.ability and card.ability.renamed_name then
+#  print(card.ability.renamed_name)
+#  full_UI_table.name = card.ability.renamed_name
+#end
+#'''
+#match_indent = true
+
+#Change name if this joker has been renamed
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''
+localize{type = 'descriptions', key = _c.key, set = _c.set, nodes = desc_nodes, vars = specific_vars or {}}
+'''
+position = "at"
+payload = '''
+print(card)
+if card.ability then print(card.ability) end
+if card and card.ability and card.ability.renamed_name then
+  print("hi mom")
+  localize{ref_table = G.PROFILES[G.SETTINGS.profile], ref_value = 'name', set = _c.set, nodes = desc_nodes, vars = specific_vars or {}}
+else
+  localize{type = 'descriptions', key = _c.key, set = _c.set, nodes = desc_nodes, vars = specific_vars or {}}
+end
+'''
+match_indent = true
+#
+
+#Change name if this joker has been renamed
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''
+localize{type = 'name', key = _c.key, set = _c.set, nodes = full_UI_table.name}
+'''
+position = "before"
+payload = '''
+  print("hi dad")
+  print(_c.key, _c.set)
+'''
+match_indent = true

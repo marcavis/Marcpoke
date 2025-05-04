@@ -1,4 +1,5 @@
 assert(SMODS.load_file("functions/marcpokefunctions.lua"))()
+assert(SMODS.load_file("functions/renameui.lua"))()
 
 default_poke_custom_prefix = "marcpoke"
 
