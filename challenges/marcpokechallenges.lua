@@ -190,6 +190,55 @@ local porcelain_mayhem = {
       type = 'Challenge Deck',
     },
 }
+local ghost_house = {
+    object_type = "Challenge",
+    key = "ghost_house",
+    rules = {
+        custom = {
+        },
+        modifiers = {
+            {id = 'joker_slots', value = 0},
+        }
+    },
+    consumeables = {
+        {id = 'c_black_hole'},
+    },
+    vouchers = {
+        {id = 'v_hone'},
+        {id = 'v_glow_up'},
+    },
+    jokers = {
+      {id = "j_poke_mega_gengar", edition = 'negative'},
+    },
+    restrictions = {
+        banned_cards = {
+            {id = 'c_ectoplasm'},
+            {id = 'c_ankh'},
+            {id = 'c_hex'},
+            {id = 'c_judgement'},
+            {id = 'c_poke_pokeball'},
+            {id = 'c_poke_greatball'},
+            {id = 'c_poke_ultraball'},
+            {id = 'c_poke_masterball'},
+            {id = 'c_wraith'},
+            {id = 'c_soul'},
+            {id = 'v_blank'},
+            {id = 'v_antimatter'},
+            {id = 'p_buffoon_normal_1', ids = {
+                'p_buffoon_normal_1','p_buffoon_normal_2','p_buffoon_jumbo_1','p_buffoon_mega_1',
+            }},
+        },
+        banned_tags = {
+            {id = 'tag_holo'},
+            {id = 'tag_foil'},
+        },
+        banned_other = {
+        }
+    },
+    deck = {
+      type = 'Challenge Deck',
+    },
+}
 return {name = "Challenges", 
-        list = {convention_concern, graveyard_shift, onsen, unsuitable, porcelain_mayhem}
+        list = {convention_concern, graveyard_shift, onsen, unsuitable, porcelain_mayhem, ghost_house}
 }

@@ -17,6 +17,7 @@ return {
             c_marcpoke_porcelain_mayhem = "Porcelain Mayhem",
             c_marcpoke_purple_goo = "Purple Goo",
             c_marcpoke_ironmon = "Ironmon",
+            c_marcpoke_ghost_house = "Ghost House",
         },
         
         v_text = {

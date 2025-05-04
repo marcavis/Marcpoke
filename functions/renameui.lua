@@ -1,3 +1,5 @@
+--Kek said: You can tweak the values through generate_ui,  could test it out on the fossils since they overwrite that. Also zorua changes the name, so that's another reference
+
 function make_rename_button(card)
     local rename_button = nil
     if card.area and card.area.config.type == 'joker' then
