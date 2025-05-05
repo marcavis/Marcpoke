@@ -202,6 +202,7 @@ local ghost_house = {
     },
     consumeables = {
         {id = 'c_black_hole'},
+        {id = 'c_black_hole'},
     },
     vouchers = {
         {id = 'v_hone'},
