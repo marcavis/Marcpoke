@@ -208,6 +208,7 @@ local ghost_house = {
         {id = 'v_hone'},
         {id = 'v_glow_up'},
         {id = 'v_overstock_norm'},
+        {id = 'v_overstock_plus'},
         {id = 'v_reroll_surplus'},
         {id = 'v_reroll_glut'}
     },
