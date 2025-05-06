@@ -20,7 +20,14 @@ function Card:rename_card ()
     --G.CONTROLLER.locks.renaming_card = true
     --stop_use()
     print("Renaming...!")
-    self.ability.renamed_name = "Joe " .. pseudorandom_element({"Doe", "Schmoe", "Woe"}, pseudoseed('choice'))
+    --self.ability.renamed = {text_parsed = "Joe " .. pseudorandom_element({"Doe", "Schmoe", "Woe"}, pseudoseed('choice'))}
+    self.ability.renamed = {}
+    for k, v in pairs(G.localization.descriptions.Joker[self.config.center.key]) do
+      self.ability.renamed[k] = v
+    end
+    local new_name = "Joe " .. pseudorandom_element({"Doe", "Schmoe", "Woe"}, pseudoseed('choice'))
+    self.ability.renamed.name = new_name
+    --self.ability.renamed.name_parsed[1][1].strings[1] = new_name
     local area = self.area
 end
 '''
@@ -177,24 +184,24 @@ match_indent = true
 #match_indent = true
 
 #Change name if this joker has been renamed
-[[patches]]
-[patches.pattern]
-target = 'functions/common_events.lua'
-pattern = '''
-localize{type = 'descriptions', key = _c.key, set = _c.set, nodes = desc_nodes, vars = specific_vars or {}}
-'''
-position = "at"
-payload = '''
-print(card)
-if card.ability then print(card.ability) end
-if card and card.ability and card.ability.renamed_name then
-  print("hi mom")
-  localize{ref_table = G.PROFILES[G.SETTINGS.profile], ref_value = 'name', set = _c.set, nodes = desc_nodes, vars = specific_vars or {}}
-else
-  localize{type = 'descriptions', key = _c.key, set = _c.set, nodes = desc_nodes, vars = specific_vars or {}}
-end
-'''
-match_indent = true
+#[[patches]]
+#[patches.pattern]
+#target = 'functions/common_events.lua'
+#pattern = '''
+#localize{type = 'descriptions', key = _c.key, set = _c.set, nodes = desc_nodes, vars = specific_vars or {}}
+#'''
+#position = "at"
+#payload = '''
+#print(card)
+#if card.ability then print(card.ability) end
+#if card and card.ability and card.ability.renamed_name then
+#  print("hi mom")
+#  localize{ref_table = G.PROFILES[G.SETTINGS.profile], ref_value = 'name', set = _c.set, nodes = desc_nodes, vars = specific_vars or {}}
+#else
+#  localize{type = 'descriptions', key = _c.key, set = _c.set, nodes = desc_nodes, vars = specific_vars or {}}
+#end
+#'''
+#match_indent = true
 #
 
 #Change name if this joker has been renamed
@@ -209,4 +216,36 @@ payload = '''
   print("hi dad")
   print(_c.key, _c.set)
 '''
+match_indent = true
+
+#Change name if this joker has been renamed
+[[patches]]
+[patches.pattern]
+target = 'functions/misc_functions.lua'
+pattern = '''
+  elseif args.type == 'name' then
+'''
+position = "before"
+payload = '''
+  elseif args.type == 'custom_name' then
+    loc_target = args.renamed
+'''
+match_indent = true
+
+
+[[patches]]
+[patches.pattern]
+target = 'functions/misc_functions.lua'
+pattern = "if args.type == 'name' or args.type == 'text' then return final_line end"
+position = "at"
+payload = "if args.type == 'name' or args.type == 'text' or args.type == 'custom_name' then return final_line end"
+match_indent = true
+
+
+[[patches]]
+[patches.pattern]
+target = 'functions/misc_functions.lua'
+pattern = "for _, lines in ipairs(args.type == 'unlocks' and loc_target.unlock_parsed or args.type == 'name' and loc_target.name_parsed or (args.type == 'text' or args.type == 'tutorial' or args.type == 'quips') and loc_target or loc_target.text_parsed) do"
+position = "at"
+payload = "for _, lines in ipairs(args.type == 'unlocks' and loc_target.unlock_parsed or (args.type == 'name' or args.type == 'custom_name') and loc_target.name_parsed or (args.type == 'text' or args.type == 'tutorial' or args.type == 'quips') and loc_target or loc_target.text_parsed) do"
 match_indent = true
