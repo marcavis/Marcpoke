@@ -8,7 +8,7 @@ local sigilyph = {
         type_tooltip(self, info_queue, center)
         return {vars = {}}
     end,
-    rarity = 3, 
+    rarity = "poke_safari", 
     cost = 8,
     ptype = "Psychic",
     stage = "Basic", 
@@ -44,5 +44,6 @@ local sigilyph = {
 
 return {
     name = "Marcpoke Jokers", 
-    list = {sigilyph},
+    -- list = {sigilyph},
+    list = {}
 }
