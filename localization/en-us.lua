@@ -375,8 +375,8 @@ return {
                 name = "Mutant Volcarona",
                 text = {
                     "At the end of the round,",
-                    "destroys all cards worth fewer than",
-                    "{C:chips}#3#{} chips, with the threshold",
+                    "destroys all cards worth {C:chips}#3#{} chips",
+                    "or fewer, with the threshold",
                     "increasing by 1 per round",
                     "{br:2}text needs to be here to work",
                     "Gains {C:mult}+#2#{} mult per card destroyed",
