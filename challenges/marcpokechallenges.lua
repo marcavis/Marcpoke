@@ -272,7 +272,7 @@ local volcanic_escape = {
     },
     jokers = {
       {id = "j_marcpoke_mutant_volcarona", eternal = true},
-      {id = "j_poke_jynx", eternal = true},
+    --   {id = "j_poke_jynx", eternal = true},
     },
     restrictions = {
         banned_cards = {
