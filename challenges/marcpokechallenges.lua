@@ -282,6 +282,7 @@ local volcanic_escape = {
             {id = 'c_poke_ultraball'},
             {id = 'c_poke_masterball'},
             {id = 'c_wraith'},
+            {id = 'c_ankh'},
             {id = 'c_soul'},
             {id = 'v_blank'},
             {id = 'v_antimatter'},
