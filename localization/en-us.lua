@@ -18,6 +18,7 @@ return {
             c_marcpoke_purple_goo = "Purple Goo",
             c_marcpoke_ironmon = "Ironmon",
             c_marcpoke_ghost_house = "Ghost House",
+            c_marcpoke_volcanic_escape = "Volcanic Escape",
         },
         
         v_text = {
@@ -368,6 +369,18 @@ return {
                     "contained in the scoring hand",
                     "{C:inactive}(E.g. a Three of a Kind also adds{}",
                     "{C:inactive}chips and mult from Pair and High Card){}"
+                }
+            },
+            j_marcpoke_mutant_volcarona = {
+                name = "Mutant Volcarona",
+                text = {
+                    "At the end of the round,",
+                    "destroys all cards worth fewer than",
+                    "{C:chips}#3#{} chips, with the threshold",
+                    "increasing by 1 per round",
+                    "{br:2}text needs to be here to work",
+                    "Gains {C:mult}+#2#{} mult per card destroyed",
+                    "Currently: {C:mult}#1#{} mult",
                 }
             }
         },
