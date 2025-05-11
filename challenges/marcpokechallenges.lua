@@ -260,7 +260,7 @@ local volcanic_escape = {
             {id = 'no_shop_jokers'},
         },
         modifiers = {
-            {id = 'joker_slots', value = 2},
+            {id = 'joker_slots', value = 1},
         }
     },
     consumeables = {
