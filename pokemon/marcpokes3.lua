@@ -342,12 +342,16 @@ local mutant_polteageist = {
         end
     end,
     calc_dollar_bonus = function(self, card)
+        local dollars_accrued = 0
         for x = 1, math.min(#G.consumeables.cards, card.ability.extra.mult) do
             local item_set = G.consumeables.cards[x].ability.set
             local sinistea_return = consumable_trigger_effect(G.consumeables.cards[x], card, nil)
             if sinistea_return.dollars then
-                return ease_poke_dollars(card, "", sinistea_return.dollars, true)
+                dollars_accrued = dollars_accrued + sinistea_return.dollars
             end
+        end
+        if dollars_accrued then
+            return ease_poke_dollars(card, "", dollars_accrued, true)
         end
     end,
 }

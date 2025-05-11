@@ -643,8 +643,9 @@ return {
                 name = "Haunting Shiny Stone",
                 text = {
                     "Held Shiny Stone gives",
-                    "{C:money}$3{} at the",
-                    "end of round"
+                    "{C:chips}+50{} chips,",
+                    "{C:mult}+10{} Mult, or",
+                    "{X:red,C:white}X1.5{} Mult",      
                 }
             },
             haunted_c_poke_duskstone = {
